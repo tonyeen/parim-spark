@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import net.parim.sns.modules.sys.entity.Dict;
+import net.parim.system.entity.Dict;
 
 /**
  * 生成方案Entity

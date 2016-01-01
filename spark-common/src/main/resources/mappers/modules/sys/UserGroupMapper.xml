@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.parim.sns.modules.sys.repository.UserGroupRepository">
+<mapper namespace="net.parim.system.repository.UserGroupRepository">
 	
-	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="net.parim.sns.modules.sys.entity.UserGroup">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="net.parim.system.entity.UserGroup">
 		<selectKey resultType="long" order="BEFORE" keyProperty="id">
 		select nextval('general') as "id"
 		</selectKey>
@@ -10,7 +10,7 @@
 		VALUES (#{id}, #{parent.id}, #{site.id}, #{name}, #{isRoot}, ${createdBy.id}, now(), #{lastUpdatedBy.id}, now(), #{customThemeId}, #{mobileThemeId})
 	</insert>
 	
-	<update id="update" parameterType="net.parim.sns.modules.sys.entity.UserGroup">
+	<update id="update" parameterType="net.parim.system.entity.UserGroup">
 		UPDATE `user_group`
 			`parent_id`=#{parent.id}, 
 			`site_id`=#{site.id}, 
@@ -32,7 +32,7 @@
 	</delete> -->
 	
 	
-	<select id="findOne" parameterType="long" resultType="net.parim.sns.modules.sys.entity.UserGroup">
+	<select id="findOne" parameterType="long" resultType="net.parim.system.entity.UserGroup">
 		select g.id as "id",
 			g.`parent_id` as "parent.id", 
 			g.`site_id` as "site.id", 
@@ -61,7 +61,7 @@
 			<!-- and (p.is_deleted=null or p.is_deleted=0) -->
 	</select>
 	
-	<select id="findAll" resultType="net.parim.sns.modules.sys.entity.UserGroup">
+	<select id="findAll" resultType="net.parim.system.entity.UserGroup">
 		select g.`parent_id` as "parent.id", 
 			g.`site_id` as "site.id", 
 			g.`name`, 
@@ -87,7 +87,7 @@
 		where s.is_deleted = 0 
 	</select>
 	
-	<select id="findAllRoots" resultType="net.parim.sns.modules.sys.entity.UserGroup">
+	<select id="findAllRoots" resultType="net.parim.system.entity.UserGroup">
 		select g.`parent_id` as "parent.id", 
 			g.`site_id` as "site.id", 
 			g.`name`, 
@@ -114,7 +114,7 @@
 			and s.is_deleted = 0 
 	</select>
 	
-	<select id="findAllChildren" resultType="net.parim.sns.modules.sys.entity.UserGroup">
+	<select id="findAllChildren" resultType="net.parim.system.entity.UserGroup">
 		select g.`parent_id` as "parent.id", 
 			g.`site_id` as "site.id", 
 			g.`name`, 
@@ -141,7 +141,7 @@
 			and s.is_deleted = 0 
 	</select>
 	
-	<select id="findAllParents" resultType="net.parim.sns.modules.sys.entity.UserGroup">
+	<select id="findAllParents" resultType="net.parim.system.entity.UserGroup">
 		
 	</select>
 </mapper>

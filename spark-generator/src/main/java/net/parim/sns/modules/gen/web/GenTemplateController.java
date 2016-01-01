@@ -7,8 +7,8 @@ import net.parim.common.utils.StringUtils;
 import net.parim.common.web.BaseController;
 import net.parim.sns.modules.gen.entity.GenTemplate;
 import net.parim.sns.modules.gen.service.GenTemplateService;
-import net.parim.sns.modules.sys.security.UserToken;
-import net.parim.sns.modules.sys.utils.UserUtils;
+import net.parim.system.security.UserToken;
+import net.parim.system.utils.UserUtils;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.parim.sns.modules.sys.repository.MenuRepository">
+<mapper namespace="net.parim.system.repository.MenuRepository">
 	
-	<insert id="insert" parameterType="net.parim.sns.modules.sys.entity.Menu">
+	<insert id="insert" parameterType="net.parim.system.entity.Menu">
 		insert into sys_menu(
 			parent_id,
 			parent_ids,
@@ -26,7 +26,7 @@
 		)
 	</insert>
 	
-	<update id="update" parameterType="net.parim.sns.modules.sys.entity.Menu">
+	<update id="update" parameterType="net.parim.system.entity.Menu">
 		update sys_menu set
 			parent_id = #{parent.id},
 			parent_ids = #{parentIds},
@@ -43,7 +43,7 @@
 		delete sys_menu where id=#{id} or parent_ids like '%,'||#{id}||',%' and id&lt;&gt;1
 	</delete>
 	
-	<select id="findOne" parameterType="long" resultType="net.parim.sns.modules.sys.entity.Menu">
+	<select id="findOne" parameterType="long" resultType="net.parim.system.entity.Menu">
 		select a.id,
 			a.parent_id as "parent.id",
 			a.parent_ids,
@@ -60,7 +60,7 @@
 		where a.id = #{id}
 	</select>
 	
-	<select id="findAll" resultType="net.parim.sns.modules.sys.entity.Menu">
+	<select id="findAll" resultType="net.parim.system.entity.Menu">
 		select id,
 			parent_id as "parent.id",
 			parent_ids,

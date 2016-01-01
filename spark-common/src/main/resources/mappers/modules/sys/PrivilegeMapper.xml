@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.parim.sns.modules.sys.repository.PrivilegeRepository">
+<mapper namespace="net.parim.system.repository.PrivilegeRepository">
 
-	<insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="net.parim.sns.modules.sys.entity.Privilege">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="net.parim.system.entity.Privilege">
 		INSERT INTO `admin_privilege` (
 			`identifier`,
 			`name`,
@@ -18,7 +18,7 @@
 			)
 	</insert>
 	
-	<update id="update" parameterType="net.parim.sns.modules.sys.entity.Privilege">
+	<update id="update" parameterType="net.parim.system.entity.Privilege">
 		update `admin_privilege` set
 			`identifier`=#{identifier},
 			`name`=#{name},
@@ -31,7 +31,7 @@
 		delete `admin_privilege` where id = #{id}
 	</delete>
 	
-	<select id="findOne" parameterType="long" resultType="net.parim.sns.modules.sys.entity.Privilege">
+	<select id="findOne" parameterType="long" resultType="net.parim.system.entity.Privilege">
 		select `id`,
 			`identifier`,
 			`name`,
@@ -41,7 +41,7 @@
 		where id = #{id}
 	</select>
 	
-	<select id="findAll" resultType="net.parim.sns.modules.sys.entity.Privilege">
+	<select id="findAll" resultType="net.parim.system.entity.Privilege">
 		select `id`,
 			`identifier`,
 			`name`,

@@ -11,7 +11,7 @@
 	<context:property-placeholder ignore-unresolvable="true" location="classpath:sns.properties" />
 	
 	<!-- 使用Annotation自动注册Bean,只扫描@Controller -->
-	<context:component-scan base-package="net.parim.sns" use-default-filters="false"><!-- base-package 如果多个，用“,”分隔 -->
+	<context:component-scan base-package="net.parim" use-default-filters="false"><!-- base-package 如果多个，用“,”分隔 -->
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	
@@ -97,7 +97,7 @@
 			<mvc:exclude-mapping path="${adminPath}/sys/menu/tree"/>
 			<mvc:exclude-mapping path="${adminPath}/sys/menu/treeData"/>
 			<mvc:exclude-mapping path="${adminPath}/oa/oaNotify/self/count"/>
-			<bean class="net.parim.sns.modules.sys.interceptor.LogInterceptor" />
+			<bean class="net.parim.system.interceptor.LogInterceptor" />
 		</mvc:interceptor> -->
 		<mvc:interceptor>
 	        <mvc:mapping path="/**" />
@@ -107,12 +107,12 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<mvc:exclude-mapping path="${adminPath}/**"/>
-			<bean class="net.parim.sns.modules.sys.interceptor.ThemeInterceptor"/>
+			<bean class="net.parim.system.interceptor.ThemeInterceptor"/>
 		</mvc:interceptor>
 		<!-- 手机视图拦截器 -->
 		<!-- <mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<bean class="net.parim.sns.modules.sys.interceptor.MobileInterceptor" />
+			<bean class="net.parim.system.interceptor.MobileInterceptor" />
 		</mvc:interceptor> -->
 	</mvc:interceptors>
 	

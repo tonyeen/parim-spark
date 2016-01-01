@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.parim.sns.modules.sys.repository.RoleRepository">
+<mapper namespace="net.parim.system.repository.RoleRepository">
 
-	<insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="net.parim.sns.modules.sys.entity.Role">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="net.parim.system.entity.Role">
 		INSERT INTO `admin_role` (
 			`name`,
 			`site_id`,
@@ -26,7 +26,7 @@
 			)
 	</insert>
 	
-	<update id="update" parameterType="net.parim.sns.modules.sys.entity.Role">
+	<update id="update" parameterType="net.parim.system.entity.Role">
 		update `admin_role` set
 			`name`=#{name},
 			<!-- `site_id`=#{site.id}, -->
@@ -41,7 +41,7 @@
 		delete `admin_role` where id = #{id}
 	</delete>
 	
-	<select id="findOne" parameterType="long" resultType="net.parim.sns.modules.sys.entity.Role">
+	<select id="findOne" parameterType="long" resultType="net.parim.system.entity.Role">
 		select r.`id`,
 			r.`name`,
 			r.`site_id` as "site.id",
@@ -65,7 +65,7 @@
 		where r.id = #{id}
 	</select>
 	
-	<select id="findAll" resultType="net.parim.sns.modules.sys.entity.Role">
+	<select id="findAll" resultType="net.parim.system.entity.Role">
 		select r.`id`,
 			r.`name`,
 			r.`site_id` as "site.id",

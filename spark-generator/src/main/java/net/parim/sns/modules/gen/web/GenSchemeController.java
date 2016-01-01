@@ -9,8 +9,8 @@ import net.parim.sns.modules.gen.entity.GenScheme;
 import net.parim.sns.modules.gen.service.GenSchemeService;
 import net.parim.sns.modules.gen.service.GenTableService;
 import net.parim.sns.modules.gen.util.GenUtils;
-import net.parim.sns.modules.sys.security.UserToken;
-import net.parim.sns.modules.sys.utils.UserUtils;
+import net.parim.system.security.UserToken;
+import net.parim.system.utils.UserUtils;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

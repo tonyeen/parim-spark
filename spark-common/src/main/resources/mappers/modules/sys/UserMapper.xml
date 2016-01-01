@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.parim.sns.modules.sys.repository.UserRepository">
+<mapper namespace="net.parim.system.repository.UserRepository">
 
-	<insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="net.parim.sns.modules.sys.entity.User">
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="net.parim.system.entity.User">
 		<selectKey resultType="long" order="BEFORE" keyProperty="id">
 		select nextval('general') as "id"
 		</selectKey>
@@ -47,7 +47,7 @@
 			)
 	</insert>
 	
-	<update id="update" parameterType="net.parim.sns.modules.sys.entity.User">
+	<update id="update" parameterType="net.parim.system.entity.User">
 		update `ila_user` set
 			`id`=#{id},
 			`email`=#{email},
@@ -71,7 +71,7 @@
 		delete `sns_user` where id = #{id}
 	</delete>
 	
-	<select id="findOne" parameterType="long" resultType="net.parim.sns.modules.sys.entity.User">
+	<select id="findOne" parameterType="long" resultType="net.parim.system.entity.User">
 		select u.`id`,
 			u.`email`,
 			u.`user_group_id` as "userGroup.id",
@@ -105,7 +105,7 @@
 		where u.id = #{id}
 	</select>
 	
-	<select id="findAll" resultType="net.parim.sns.modules.sys.entity.User">
+	<select id="findAll" resultType="net.parim.system.entity.User">
 		select u.id,
 			u.username,
 			u.site_id as "site.id",
@@ -127,7 +127,7 @@
 		</where>
 	</select>
 	
-	<select id="findUserByUsername" parameterType="string" resultType="net.parim.sns.modules.sys.entity.User">
+	<select id="findUserByUsername" parameterType="string" resultType="net.parim.system.entity.User">
 		select id, username, password, email from `sns_user` where username = #{username}
 	</select>
 	

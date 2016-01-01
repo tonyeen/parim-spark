@@ -28,7 +28,7 @@
  	<!-- MyBatis begin -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="typeAliasesPackage" value="net.parim.sns"/>
+        <property name="typeAliasesPackage" value="net.parim"/>
         <property name="typeAliasesSuperType" value="net.parim.common.persistence.BaseEntity"/>
         <property name="mapperLocations" value="classpath:/mappers/**/*.xml"/>
 		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
@@ -37,7 +37,7 @@
     <!-- 扫描basePackage下所有以@MyBatisDao注解的接口 -->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-        <property name="basePackage" value="net.parim.sns"/>
+        <property name="basePackage" value="net.parim"/>
         <property name="annotationClass" value="net.parim.common.persistence.annotation.MyBatisReponsitory"/>
     </bean>
     

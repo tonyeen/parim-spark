@@ -24,10 +24,10 @@ import net.parim.sns.modules.gen.entity.GenScheme;
 import net.parim.sns.modules.gen.entity.GenTable;
 import net.parim.sns.modules.gen.entity.GenTableColumn;
 import net.parim.sns.modules.gen.entity.GenTemplate;
-//import net.parim.sns.modules.sys.entity.Area;
-import net.parim.sns.modules.sys.entity.Office;
-import net.parim.sns.modules.sys.entity.User;
-import net.parim.sns.modules.sys.utils.UserUtils;
+//import net.parim.system.entity.Area;
+import net.parim.system.entity.Office;
+import net.parim.system.entity.User;
+import net.parim.system.utils.UserUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

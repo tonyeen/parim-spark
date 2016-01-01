@@ -283,26 +283,19 @@ project("spark-common") {
                 }
             }
             component {
-	            file{
+                classesDeployPath "/"
+	            /*file{
 	            	beforeMerged { wtpComponent ->
 			        	resources.findAll{ it instanceof WbResource }.each {
-			        		println(it.deployPath+">>>>>>>>>>>>>>>>>>>>>>>>>>>>---------1")
 			        		it.deployPath = "/"
-			        		println(it.deployPath+">>>>>>>>>>>>>>>>>>>>>>>>>>>>1")
 			        	}
-			        	println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>2")
 			        }
 	            	whenMerged { wtpComponent ->
 			        	resources.findAll{ it instanceof WbResource }.each {
-			        		println(it.deployPath+">>>>>>>>>>>>>>>>>>>>>>>>>>>>======3")
 			        		it.deployPath = "/"
-			        		println(it.deployPath+">>>>>>>>>>>>>>>>>>>>>>>>>>>>3")
 			        	}
-			        	println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>4")
 			        }
-			        println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>5")
-		        }
-		        println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>6")
+		        }*/
             }
         }
     }
@@ -335,6 +328,9 @@ apply plugin: 'eclipse-wtp'
                     }
                 }
             }
+            component {
+                classesDeployPath "/"
+            }
         }
     }
 }
@@ -362,6 +358,9 @@ project("spark-system") {
                         }
                     }
                 }
+            }
+            component {
+                classesDeployPath "/"
             }
         }
     }
@@ -391,6 +390,9 @@ apply plugin: 'eclipse-wtp'
                         }
                     }
                 }
+            }
+            component {
+                classesDeployPath "/"
             }
         }
     }
@@ -423,6 +425,9 @@ project("spark-core") {
                     }
                 }
             }
+            component {
+                classesDeployPath "/"
+            }
         }
     }
 }
@@ -449,6 +454,9 @@ apply plugin: 'eclipse-wtp'
                         }
                     }
                 }
+            }
+            component {
+                classesDeployPath "/"
             }
         }
     }

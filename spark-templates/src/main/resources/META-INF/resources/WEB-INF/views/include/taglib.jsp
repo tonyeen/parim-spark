@@ -10,5 +10,3 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <c:set var="ctxAdmin" value="${pageContext.request.contextPath}/admin"/>
 <c:set var="ctxStatic" value="${pageContext.request.contextPath}/static"/>
-
-<%@ include file="/WEB-INF/1.jsp" %>
