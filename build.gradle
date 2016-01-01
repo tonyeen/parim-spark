@@ -1,0 +1,445 @@
+import org.gradle.plugins.ide.eclipse.model.Facet
+
+buildscript {
+    repositories {
+        maven { url "https://repo.spring.io/plugins-release" }
+    }
+    dependencies {
+        classpath("org.springframework.build.gradle:propdeps-plugin:0.0.7")
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.1'
+    }
+}
+
+ext {
+    linkHomePage = ""
+    linkApiPage = ""
+    moduleProjects = subprojects.findAll {
+        //!it.name.equals('spark-build-src') && !it.name.equals('spark-bom')
+    }
+}
+
+configure(allprojects) { project ->
+    group = "net.parim.spark"
+    version = qualifyVersionIfNecessary(version)
+
+    ext.springVersion        = "4.4.0.realese"
+
+    //utils
+    ext.hamcrestVersion      = "1.3"
+    ext.junitVersion         = "4.12"
+
+    ext.gradleScriptDir = "${rootProject.projectDir}/gradle"
+    
+    //变量
+	ext {
+		//main version setting
+	    springVersion = '4.2.4.RELEASE'
+	    springDataVersion = ''
+		mybatisVersion = '3.2.8'
+		mybatisSpringVersion = '1.2.2'
+		druidVersion = '1.0.11'
+		ehcacheVersion = '2.6.9'
+		ehcacheWebVersion = '2.0.4'
+		shiroVersion = '1.2.3'
+		sitemeshVersion = '2.4.2'
+		
+		// jdbc driver setting
+		mysqlDriverVersion = '5.1.30'
+		oracleDriverVersion = '10.2.0.4.0'
+		
+		//tools version setting
+		slf4jVersion = '1.7.7'
+		commonsLang3Version = '3.3.2'
+		commonsIoVersion = '2.4'
+		commonsCodecVersion = '1.9'
+		commonsFileuploadVersion = '1.3.1'
+		commonsBeanutilsVersion = '1.9.1'
+		jacksonVersion = '2.2.3'
+		xstreamVersion = '1.4.7'
+		guavaVersion = '17.0'
+		dozerVersion = '5.5.1'
+		poiVersion = '3.9'
+		freemarkerVersion = '2.3.20'
+	}
+
+    apply plugin: "propdeps"
+    apply plugin: "java"
+    //apply plugin: 'eclipse-wtp'
+    apply from: "${gradleScriptDir}/ide.gradle"
+
+    configurations {
+        //文件修改嗅探器和javaAPI生成器，可以根据修改实时生成javaAPI，
+        //方便文档维护和查阅
+        //sniffer
+        //javaApiSignature
+    }
+
+    compileJava.options*.compilerArgs = [
+        "-Xlint:serial", "-Xlint:varargs", "-Xlint:cast", "-Xlint:classfile",
+        "-Xlint:dep-ann", "-Xlint:divzero", "-Xlint:empty", "-Xlint:finally",
+        "-Xlint:overrides", "-Xlint:path", "-Xlint:processing", "-Xlint:static",
+        "-Xlint:try", "-Xlint:fallthrough", "-Xlint:rawtypes", "-Xlint:deprecation",
+        "-Xlint:unchecked", "-Xlint:-options"
+        //, "-Werror" //编译警告级别，启用后，有警告时编译不通过
+    ]
+    [compileJava,compileTestJava,javadoc]*.options*.encoding = "UTF-8"
+
+    compileTestJava.options*.compilerArgs = [
+        "-Xlint:serial", "-Xlint:-varargs", "-Xlint:cast", "-Xlint:classfile",
+        "-Xlint:dep-ann", "-Xlint:divzero", "-Xlint:empty", "-Xlint:finally",
+        "-Xlint:overrides", "-Xlint:path", "-Xlint:processing", "-Xlint:static",
+        "-Xlint:try", "-Xlint:-fallthrough", "-Xlint:-rawtypes", "-Xlint:-deprecation",
+        "-Xlint:-unchecked", "-Xlint:-options"]
+
+    compileJava {
+        sourceCompatibility = 1.6
+        targetCompatibility = 1.6
+    }
+
+    compileTestJava {
+        sourceCompatibility = 1.7
+        targetCompatibility = 1.7
+        options.compilerArgs += "-parameters"
+    }
+
+    test {
+        systemProperty("java.awt.headless", "true")
+        systemProperty("testGroups", project.properties.get("testGroups"))
+        scanForTestClasses = false
+        include(["**/*Tests.class", "**/*Test.class"])
+        // Since we set scanForTestClasses to false, we need to filter out inner
+        // classes with the "$" pattern; otherwise, using -Dtest.single=MyTests to
+        // run MyTests by itself will fail if MyTests contains any inner classes.
+        exclude(["**/Abstract*.class", '**/*$*'])
+    }
+
+    repositories {
+        maven { url "http://repo.parim.net/libs-release" }
+        maven { url "http://repo.parim.net/milestone" }
+        maven { url "http://repo.parim.net/snapshot" }
+        
+        mavenCentral() // 中央库
+		maven {url 'http://central.maven.org/maven2/'}
+		maven {url 'http://maven.oschina.net/content/groups/public/'}	// 国内库地址
+		maven {url 'http://download.java.net/maven/2/'}
+		maven {url 'http://repo.spring.io/release/'}
+		maven {url 'http://repo.maven.apache.org/maven2'}
+		maven {url 'http://repo1.maven.org/maven2/'}
+		maven {url 'https://maven.alfresco.com/nexus/content/groups/public'}
+		maven {url 'https://app.camunda.com/nexus/content/groups/public'}
+		maven {url 'http://git.oschina.net/thinkgem/repos/raw/master'}
+		maven {url 'https://raw.github.com/thinkgem/repository/master'}
+    }
+
+    dependencies {
+    
+		compile fileTree(dir: 'lib', exclude:'', include: '*.jar')
+
+        testCompile("junit:junit:${junitVersion}") {
+            exclude group:'org.hamcrest', module:'hamcrest-core'
+        }
+        testCompile("org.mockito:mockito-core:1.10.19") {
+            exclude group:'org.hamcrest', module:'hamcrest-core'
+        }
+        testCompile("org.hamcrest:hamcrest-all:${hamcrestVersion}")
+
+        //sniffer("org.codehaus.mojo:animal-sniffer-ant-tasks:${snifferVersion}")
+        //javaApiSignature("org.codehaus.mojo.signature:java16:1.1@signature")  // API level from JDK 6 update 18
+    }
+}
+
+/*
+configure(subprojects - project(":")){
+
+}*/
+
+project("spark-common") {
+    description = "Spark Common"
+    
+    apply plugin: 'war'
+    
+    dependencies {
+        compile (
+            //spring
+            //compile "org.springframework:spring-context:${springVersion}"
+            "org.springframework:spring-webmvc:${springVersion}", //此时不用配spring-context依赖关系
+            //"org.springframework:spring-test:${springVersion}",
+            "org.springframework:spring-orm:${springVersion}",  //ORM 对象关系映射
+            "org.springframework:spring-oxm:${springVersion}",
+            "org.springframework:spring-context-support:${springVersion}",
+            'org.springframework.data:spring-data-commons:1.11.1.RELEASE', //spring data core
+            
+            'org.hibernate:hibernate-validator:5.1.2.Final',    //JSR303 Bean Validator
+            
+            //PERSISTENCE
+            //MyBatis
+            "org.mybatis:mybatis:${mybatisVersion}",
+            "org.mybatis:mybatis-spring:${mybatisSpringVersion}",
+            //connection pool
+            "com.alibaba:druid:${druidVersion}",
+            //jdbc driver
+            "mysql:mysql-connector-java:${mysqlDriverVersion}", //mysql 驱动
+            //"com.oracle:ojdbc14:${oracleDriverVersion}",
+            
+            //WEB
+            //"opensymphony:sitemesh:${sitemeshVersion}",
+            "taglibs:standard:1.1.2",
+            "javax.servlet:jstl:1.2", //'javax.servlet.jsp.jstl:jstl:1.2',
+            
+            //CACHE
+            "net.sf.ehcache:ehcache-core:${ehcacheVersion}",
+            "net.sf.ehcache:ehcache-web:${ehcacheWebVersion}",
+            "redis.clients:jedis:2.5.1",
+            
+            //SECURITY
+            "org.apache.shiro:shiro-core:${shiroVersion}",
+            "org.apache.shiro:shiro-spring:${shiroVersion}",
+            "org.apache.shiro:shiro-cas:${shiroVersion}",
+            "org.apache.shiro:shiro-web:${shiroVersion}",
+            "org.apache.shiro:shiro-ehcache:${shiroVersion}",
+    
+            
+            //日志记录 LOGGING
+            'log4j:log4j:1.2.14',
+            "org.slf4j:slf4j-api:${slf4jVersion}",
+            "org.slf4j:slf4j-log4j12:${slf4jVersion}",
+            "org.slf4j:jcl-over-slf4j:${slf4jVersion}", //common-logging 实际调用slf4j
+            "org.slf4j:jul-to-slf4j:${slf4jVersion}",   //java.util.logging 实际调用slf4j
+                
+            
+            //GENERAL UTILS
+            //commons
+            "org.apache.commons:commons-lang3:${commonsLang3Version}",
+            "commons-io:commons-io:${commonsIoVersion}",
+            "commons-codec:commons-codec:${commonsCodecVersion}",
+            "commons-fileupload:commons-fileupload:${commonsFileuploadVersion}",
+            "commons-beanutils:commons-beanutils:${commonsBeanutilsVersion}",
+            "org.apache.commons:commons-email:1.4",
+            //google java lib
+            "com.google.guava:guava:${guavaVersion}",
+            //json
+            //compile "com.fasterxml.jackson.core:jackson-databind:2.6.1"
+            "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
+            "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
+            "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}",
+            "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:${jacksonVersion}",
+            //xstream xml
+            "com.thoughtworks.xstream:xstream:${xstreamVersion}",
+            //pojo copy
+            "net.sf.dozer:dozer:${dozerVersion}",
+            //freemarker engine
+            "org.freemarker:freemarker:${freemarkerVersion}",
+            //email
+            "javax.mail:mail:1.4.7",
+            "javax.activation:activation:1.1.1",
+            //poi office
+            "org.apache.poi:poi:${poiVersion}",
+            "org.apache.poi:poi-ooxml:${poiVersion}",
+            "org.apache.poi:poi-ooxml-schemas:${poiVersion}",
+            //image util
+            "com.drewnoakes:metadata-extractor:2.6.2",
+            //条形码、二维码生成
+            "com.google.zxing:core:2.2",
+            "com.google.zxing:javase:2.2",
+            //中文分词
+            "org.wltea:analyzer:2012_u6",
+            //ant core for use ant-zip
+            "org.apache.ant:ant:1.9.4",
+            
+            //User Agent
+            "bitwalker:UserAgentUtils:1.13"
+        )
+        
+        providedCompile "javax.servlet.jsp:jsp-api:2.2.1-b03"  
+        providedCompile "javax.servlet:javax.servlet-api:3.1.0" // 编译期
+    }
+}
+
+project("spark-templates") {
+    description = "Spark Templates"
+
+    dependencies {
+        //compile(project(":spark-core"))
+        //comlile(files(project(":spark-core").libsDir))
+        compile "opensymphony:sitemesh:${sitemeshVersion}"
+    }
+}
+
+project("spark-system") {
+    description = "Spark System"
+    
+    dependencies {
+        compile(project(":spark-templates"))
+        compile(project(":spark-common"))
+    }
+}
+
+project("spark-generator") {
+    description = "Spark Generator"
+
+    dependencies {
+        compile(project(":spark-templates"))
+        compile(project(":spark-common"))
+        compile(project(":spark-system"))
+    }
+}
+
+project("spark-core") {
+    description = "Spark Core"
+    
+    apply plugin: 'war'
+    apply plugin: 'eclipse-wtp'
+    
+    dependencies {
+        compile(project(":spark-system"))
+        compile(project(":spark-generator"))
+    }
+    
+    // 设置 Project Facets
+    eclipse {
+        wtp {
+            facet {
+                file{
+                    whenMerged { wtpFacet ->
+                        facets.findAll{f -> f.name == 'jst.web' }.each {
+                            it.version='3.0'
+                        }
+                        facets.findAll{f -> f.name == 'jst.java' }.each {
+                            it.version='1.7'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+project("spark-prefecture") {
+    description = "Spark Prefecture"
+
+    dependencies {
+        compile(project(":spark-core"))
+    }
+}
+
+/*
+project("spark-sns-comment") {
+    description = "Spark SNS Comment"
+
+    dependencies {
+        compile(project(":spark-core"))
+        //comlile(files(project(":spark-core").libsDir))
+    }
+}
+
+project("spark-sns-forum") {
+    description = "Spark SNS Forum"
+
+    dependencies {
+        compile(project(":spark-core"))
+        //comlile(files(project(":spark-core").libsDir))
+    }
+}
+*/
+
+project("spark-web") {
+    description = "Spark Web"
+    
+    apply plugin: 'war'
+    apply plugin: 'eclipse-wtp'
+    apply plugin: 'jetty'
+    apply plugin: 'com.bmuschko.tomcat'
+
+    dependencies {
+        compile(project(":spark-core"))
+        
+        compile (
+            
+        )
+        
+        
+
+        providedCompile "javax.servlet.jsp:jsp-api:2.2.1-b03"  
+        providedCompile "javax.servlet:javax.servlet-api:3.1.0" // 编译期
+        
+        //testCompile "org.springframework:spring-test:${springVersion}"
+        //testCompile "junit:junit:4.11" 
+        compile "org.springframework:spring-test:${springVersion}"
+        compile "junit:junit:4.11"
+        
+        def tomcatVersion = '7.0.59'
+        tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+              "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+    }
+    
+    // 设置 Project Facets
+    eclipse {
+        wtp {
+            facet {
+                //facet name: 'jst.web', type: Facet.FacetType.fixed
+                //facet name: 'wst.jsdt.web', type: Facet.FacetType.fixed
+                //facet name: 'jst.java', type: Facet.FacetType.fixed
+                //facet name: 'jst.web', version: '3.0'
+                //facet name: 'jst.java', version: '1.7'
+                //facet name: 'wst.jsdt.web', version: '1.0'
+                
+                file{
+                    whenMerged { wtpFacet ->
+                        facets.findAll{f -> f.name == 'jst.web' }.each {
+                            it.version='3.0'
+                        }
+                        facets.findAll{f -> f.name == 'jst.java' }.each {
+                            it.version='1.7'
+                        }
+                        //facet name: 'jst.web', version: '3.0'
+                        //facet name: 'jst.java', version: '1.7'
+                    }
+                }
+            }
+            /*component {
+                file {
+                    whenMerged { wtpComponent ->
+                      
+                    }
+                }
+            }*/
+        }
+        //设置eclipse的编译目录,默认为bin目录,web工程改为如下
+        //classpath {
+            //defaultOutputDir = file("build/classes")
+        //}
+    }
+    
+    jettyRun{  
+        webAppSourceDirectory file("$projectDir/src/main/webapp/")  
+        httpPort 8080
+        contextPath project.name
+        scanIntervalSeconds 0  
+        reload "automatic"
+    }
+    
+    tomcat {
+        httpPort = 8080
+        httpsPort = 8091
+        enableSSL = true
+    }
+}
+
+/*
+ * Support publication of artifacts versioned by topic branch.
+ * CI builds supply `-P BRANCH_NAME=<TOPIC>` to gradle at build time.
+ * If <TOPIC> starts with 'SPR-', change version
+ *     from BUILD-SNAPSHOT => <TOPIC>-SNAPSHOT
+ *     e.g. 3.2.1.BUILD-SNAPSHOT => 3.2.1.SPR-1234-SNAPSHOT
+ */
+def qualifyVersionIfNecessary(version) {
+    if (rootProject.hasProperty("BRANCH_NAME")) {
+        def qualifier = rootProject.getProperty("BRANCH_NAME")
+        if (qualifier.startsWith("SPR-")) {
+            return version.replace('BUILD', qualifier)
+        }
+    }
+    return version
+}
+

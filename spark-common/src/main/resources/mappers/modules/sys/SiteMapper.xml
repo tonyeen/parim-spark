@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.parim.sns.modules.sys.repository.SiteRepository">
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="net.parim.sns.modules.sys.entity.Site">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+		select nextval('general') as "id"
+		</selectKey>
+		insert into `site` ( `id`, `created_by`, `last_update_date`, `theme`, `create_date`, `parent_id`, `short_name`, `description`, `name`, `last_updated_by`) 
+		values (#{id}, #{createdBy.id}, now(), #{theme}, now(), #{parent.id}, #{shortName}, #{description}, #{name}, #{lastUpdatedBy.id})
+	</insert>
+	
+	<update id="update" parameterType="net.parim.sns.modules.sys.entity.Site">
+		update `site` set `last_update_date`=now(), `theme`=#{theme}, `parent_id`=#{parent.id}, `short_name`=#{shortName}, `description`=#{description}, `name`=#{name}, `last_updated_by`=#{lastUpdatedBy.id} where `id`=#{id}
+	</update>
+	
+	<!-- <update id="delete" parameterType="long">
+		update site set is_deleted=1 where id=#{id} and id&lt;&gt;1
+	</update> -->
+	<delete id="delete" parameterType="long">
+		delete from site where id=#{id} and id&lt;&gt;1
+	</delete>
+	
+	<select id="findOne" parameterType="long" resultType="net.parim.sns.modules.sys.entity.Site">
+		select s.`created_by` as "createdBy.id", 
+			s.`last_update_date`, 
+			s.`theme`, 
+			s.`id`, 
+			s.`create_date`, 
+			s.`is_deleted`, 
+			s.`parent_id` as "parent.id", 
+			s.`short_name`, 
+			s.`description`, 
+			s.`name`, 
+			s.`last_updated_by` as "lastUpdatedBy.id",
+			p.name as "parent.name",
+			uc.username as "createdBy.username",
+			uc.first_name as "createdBy.firstName",
+			uc.last_name as "createdBy.lastName",
+			ul.username as "lastUpdatedBy.username",
+			ul.first_name as "lastUpdatedBy.firstName",
+			ul.last_name as "lastUpdatedBy.lastName"
+		from site s left join site p on p.id = s.parent_id
+			left join ila_user uc on uc.id = s.created_by
+			left join ila_user ul on ul.id = s.last_updated_by
+		where s.id = #{id} 
+			and s.is_deleted = 0 
+			<!-- and (p.is_deleted=null or p.is_deleted=0) -->
+	</select>
+	
+	<select id="findAll" resultType="net.parim.sns.modules.sys.entity.Site">
+		select s.`created_by` as "createdBy.id", 
+			s.`last_update_date`, 
+			s.`theme`, 
+			s.`id`, 
+			s.`create_date`, 
+			s.`is_deleted`, 
+			s.`parent_id` as "parent.id", 
+			s.`short_name`, 
+			s.`description`, 
+			s.`name`, 
+			s.`last_updated_by` as "lastUpdatedBy.id",
+			p.`name` as "parent.name",
+			uc.username as "createdBy.username",
+			uc.first_name as "createdBy.firstName",
+			uc.last_name as "createdBy.lastName",
+			ul.username as "lastUpdatedBy.username",
+			ul.first_name as "lastUpdatedBy.firstName",
+			ul.last_name as "lastUpdatedBy.lastName"
+		from site s left join site p on p.id = s.parent_id
+			left join ila_user uc on uc.id = s.created_by
+			left join ila_user ul on ul.id = s.last_updated_by
+		where s.is_deleted = 0
+	</select>
+	
+	<select id="findAllRoots" resultType="net.parim.sns.modules.sys.entity.Site">
+		select s.`created_by` as "createdBy.id", 
+			s.`last_update_date`, 
+			s.`theme`, 
+			s.`id`, 
+			s.`create_date`, 
+			s.`is_deleted`, 
+			s.`parent_id` as "parent.id", 
+			s.`short_name`, 
+			s.`description`, 
+			s.`name`, 
+			s.`last_updated_by` as "lastUpdatedBy.id",
+			uc.username as "createdBy.username",
+			uc.first_name as "createdBy.firstName",
+			uc.last_name as "createdBy.lastName",
+			ul.username as "lastUpdatedBy.username",
+			ul.first_name as "lastUpdatedBy.firstName",
+			ul.last_name as "lastUpdatedBy.lastName"
+		from site s
+			left join ila_user uc on uc.id = s.created_by
+			left join ila_user ul on ul.id = s.last_updated_by
+		where s.id = 1
+			and s.is_deleted = 0
+	</select>
+	
+	<select id="findAllChildren" resultType="net.parim.sns.modules.sys.entity.Site">
+		select s.`created_by` as "createdBy.id", 
+			s.`last_update_date`, 
+			s.`theme`, 
+			s.`id`, 
+			s.`create_date`, 
+			s.`is_deleted`, 
+			s.`parent_id` as "parent.id", 
+			s.`short_name`, 
+			s.`description`, 
+			s.`name`, 
+			s.`last_updated_by` as "lastUpdatedBy.id",
+			p.name as "parent.name",
+			uc.username as "createdBy.username",
+			uc.first_name as "createdBy.firstName",
+			uc.last_name as "createdBy.lastName",
+			ul.username as "lastUpdatedBy.username",
+			ul.first_name as "lastUpdatedBy.firstName",
+			ul.last_name as "lastUpdatedBy.lastName"
+		from site s left join site p on p.id = s.parent_id
+			left join ila_user uc on uc.id = s.created_by
+			left join ila_user ul on ul.id = s.last_updated_by
+		where s.parent_id = #{id}
+			and s.is_deleted = 0
+	</select>
+	
+	<select id="findAllParents" resultType="net.parim.sns.modules.sys.entity.Site">
+		
+	</select>
+</mapper>
