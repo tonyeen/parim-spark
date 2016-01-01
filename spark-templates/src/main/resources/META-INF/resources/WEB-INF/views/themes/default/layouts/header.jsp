@@ -1,4 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <div class="header">
 	<h1>移动网大三期</h1>
 	<ul>

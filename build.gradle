@@ -1,4 +1,5 @@
 import org.gradle.plugins.ide.eclipse.model.Facet
+import org.gradle.plugins.ide.eclipse.model.WbResource
 
 buildscript {
     repositories {
@@ -64,8 +65,9 @@ configure(allprojects) { project ->
 
     apply plugin: "propdeps"
     apply plugin: "java"
+    apply plugin: "war"
     //apply plugin: 'eclipse-wtp'
-    apply from: "${gradleScriptDir}/ide.gradle"
+    apply from: "${gradleScriptDir}/ide2.gradle"
 
     configurations {
         //文件修改嗅探器和javaAPI生成器，可以根据修改实时生成javaAPI，
@@ -132,6 +134,12 @@ configure(allprojects) { project ->
     }
 
     dependencies {
+    	compile(
+    		//WEB
+            //"opensymphony:sitemesh:${sitemeshVersion}",
+            "taglibs:standard:1.1.2",
+            "javax.servlet:jstl:1.2" //'javax.servlet.jsp.jstl:jstl:1.2',
+        )
     
 		compile fileTree(dir: 'lib', exclude:'', include: '*.jar')
 
@@ -145,7 +153,11 @@ configure(allprojects) { project ->
 
         //sniffer("org.codehaus.mojo:animal-sniffer-ant-tasks:${snifferVersion}")
         //javaApiSignature("org.codehaus.mojo.signature:java16:1.1@signature")  // API level from JDK 6 update 18
+        
+        providedCompile "javax.servlet.jsp:jsp-api:2.2.1-b03"  
+        providedCompile "javax.servlet:javax.servlet-api:3.1.0" // 编译期
     }
+    
 }
 
 /*
@@ -157,7 +169,7 @@ project("spark-common") {
     description = "Spark Common"
     
     apply plugin: 'war'
-    
+    apply plugin: 'eclipse-wtp'
     dependencies {
         compile (
             //spring
@@ -253,34 +265,134 @@ project("spark-common") {
         providedCompile "javax.servlet.jsp:jsp-api:2.2.1-b03"  
         providedCompile "javax.servlet:javax.servlet-api:3.1.0" // 编译期
     }
+    
+    // 设置 Project Facets
+    eclipse {
+        wtp {
+            facet {
+                file{
+                    whenMerged { wtpFacet ->
+                        facets.findAll{f -> f.name == 'jst.web' }.each {
+                            it.name = "jst.webfragment"
+                            it.version='3.0'
+                        }
+                        facets.findAll{f -> f.name == 'jst.java' }.each {
+                            it.version='1.7'
+                        }
+                    }
+                }
+            }
+            component {
+	            file{
+	            	beforeMerged { wtpComponent ->
+			        	resources.findAll{ it instanceof WbResource }.each {
+			        		println(it.deployPath+">>>>>>>>>>>>>>>>>>>>>>>>>>>>---------1")
+			        		it.deployPath = "/"
+			        		println(it.deployPath+">>>>>>>>>>>>>>>>>>>>>>>>>>>>1")
+			        	}
+			        	println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>2")
+			        }
+	            	whenMerged { wtpComponent ->
+			        	resources.findAll{ it instanceof WbResource }.each {
+			        		println(it.deployPath+">>>>>>>>>>>>>>>>>>>>>>>>>>>>======3")
+			        		it.deployPath = "/"
+			        		println(it.deployPath+">>>>>>>>>>>>>>>>>>>>>>>>>>>>3")
+			        	}
+			        	println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>4")
+			        }
+			        println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>5")
+		        }
+		        println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>6")
+            }
+        }
+    }
+    
 }
 
 project("spark-templates") {
     description = "Spark Templates"
-
+apply plugin: 'eclipse-wtp'
     dependencies {
+    	compile(project(":spark-common"))
         //compile(project(":spark-core"))
         //comlile(files(project(":spark-core").libsDir))
         compile "opensymphony:sitemesh:${sitemeshVersion}"
+    }
+    
+    // 设置 Project Facets
+    eclipse {
+        wtp {
+            facet {
+                file{
+                    whenMerged { wtpFacet ->
+                        facets.findAll{f -> f.name == 'jst.web' }.each {
+                        	it.name = "jst.webfragment"
+                            it.version='3.0'
+                        }
+                        facets.findAll{f -> f.name == 'jst.java' }.each {
+                            it.version='1.7'
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
 project("spark-system") {
     description = "Spark System"
-    
+    apply plugin: 'eclipse-wtp'
     dependencies {
         compile(project(":spark-templates"))
         compile(project(":spark-common"))
+    }
+    
+    // 设置 Project Facets
+    eclipse {
+        wtp {
+            facet {
+                file{
+                    whenMerged { wtpFacet ->
+                        facets.findAll{f -> f.name == 'jst.web' }.each {
+                            it.name = "jst.webfragment"
+                            it.version='3.0'
+                        }
+                        facets.findAll{f -> f.name == 'jst.java' }.each {
+                            it.version='1.7'
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
 project("spark-generator") {
     description = "Spark Generator"
-
+apply plugin: 'eclipse-wtp'
     dependencies {
         compile(project(":spark-templates"))
         compile(project(":spark-common"))
         compile(project(":spark-system"))
+    }
+    
+    // 设置 Project Facets
+    eclipse {
+        wtp {
+            facet {
+                file{
+                    whenMerged { wtpFacet ->
+                        facets.findAll{f -> f.name == 'jst.web' }.each {
+                            it.name = "jst.webfragment"
+                            it.version='3.0'
+                        }
+                        facets.findAll{f -> f.name == 'jst.java' }.each {
+                            it.version='1.7'
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -302,6 +414,7 @@ project("spark-core") {
                 file{
                     whenMerged { wtpFacet ->
                         facets.findAll{f -> f.name == 'jst.web' }.each {
+                            it.name = "jst.webfragment"
                             it.version='3.0'
                         }
                         facets.findAll{f -> f.name == 'jst.java' }.each {
@@ -316,9 +429,28 @@ project("spark-core") {
 
 project("spark-prefecture") {
     description = "Spark Prefecture"
-
+apply plugin: 'eclipse-wtp'
     dependencies {
         compile(project(":spark-core"))
+    }
+    
+    // 设置 Project Facets
+    eclipse {
+        wtp {
+            facet {
+                file{
+                    whenMerged { wtpFacet ->
+                        facets.findAll{f -> f.name == 'jst.web' }.each {
+                            it.name = "jst.webfragment"
+                            it.version='3.0'
+                        }
+                        facets.findAll{f -> f.name == 'jst.java' }.each {
+                            it.version='1.7'
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
