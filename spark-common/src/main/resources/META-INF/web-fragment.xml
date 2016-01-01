@@ -3,7 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-fragment_3_0.xsd">
 	<display-name>spark-common</display-name>
-	<name>spark-common</name>
+	<name>sparkCommon</name>
 	
 	<!-- Context ConfigLocation -->
     <context-param>
