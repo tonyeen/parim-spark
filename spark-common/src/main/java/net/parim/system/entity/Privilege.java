@@ -7,6 +7,7 @@ public class Privilege extends DataEntity<Privilege> {
 	private String name;
 	private String targets;
 	private String userType;
+	private Type type;
 	
 	public String getIdentifier() {
 		return identifier;
@@ -31,5 +32,17 @@ public class Privilege extends DataEntity<Privilege> {
 	}
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+	
+	public enum Type{
+		system,
+		resource
+	}
+
+	public Type getType() {
+		return type;
+	}
+	public void setType(Type type) {
+		this.type = type;
 	}
 }

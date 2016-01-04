@@ -1,5 +1,8 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%-- <%@ include file="/WEB-INF/views/include/taglib.jsp"%> --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctxAdmin" value="${pageContext.request.contextPath}/admin"/>
+
 <%@ attribute name="id" type="java.lang.String" required="true" description="编号"%>
 <%@ attribute name="type" type="java.lang.String" required="false" description="类型"%>
 <%@ attribute name="name" type="java.lang.String" required="true" description="隐藏域名称（ID）"%>
@@ -26,11 +29,12 @@
 <%@ attribute name="hideBtn" type="java.lang.Boolean" required="false" description="是否显示按钮"%>
 <%@ attribute name="disabled" type="java.lang.String" required="false" description="是否限制选择，如果限制，设置为disabled"%>
 <%@ attribute name="dataMsgRequired" type="java.lang.String" required="false" description=""%>
+<%@ attribute name="required" type="java.lang.Boolean" required="false" description="是否是必填项验证"%>
 <div class="input-group">
 	<input id="${id}Id" name="${name}" class="${cssClass}" type="hidden" value="${value}"/>
 	<input id="${id}Type" name="${type }" class="${cssClass}" type="hidden" value="${value}"/>
 	<input id="${id}Name" name="${labelName}" ${allowInput?'':'readonly="readonly"'} type="text" value="${labelValue}" data-msg-required="${dataMsgRequired}"
-		class="form-control ${cssClass}" style="${cssStyle}"/>
+		class="form-control ${cssClass}" style="${cssStyle}" ${not empty required && required ? 'required':'' }/>
 		<a id="${id}Button" href="javascript:void(0)" class="input-group-addon ${disabled} ${hideBtn ? 'hide' : ''}" >
 			<i class="fa fa-camera-retro"></i>
 		</a>

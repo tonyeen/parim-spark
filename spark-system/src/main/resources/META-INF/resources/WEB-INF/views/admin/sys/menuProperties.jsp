@@ -41,14 +41,16 @@
 				<div class="form-group">
 					<label class="col-sm-4 control-label">上级菜单:</label>
 					<div class="col-sm-4 controls">
-		                <sys:treeselect id="menu" name="parent.id" value="${menu.parent.id}" labelName="parent.name" labelValue="${menu.parent.name}"
-							title="菜单" url="${ctxAdmin }/sys/menu/treeData" simpleData="true" extId="${menu.id}" cssClass="required"/>
+		                <sys:treeselect id="menu" name="parent.id" value="${empty menu.parent.id? 1:menu.parent.id}" labelName="parent.name" labelValue="${menu.parent.name}"
+							title="菜单" url="${ctxAdmin }/sys/menu/treeData" simpleData="true" extId="${menu.id}" cssClass="required" required="true"/>
+							<span class="error ${empty ERR_parentName ? 'hide':'' }">${ERR_parentName }</span>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-4 control-label"><font color="red">*</font> 名称:</label>
 					<div class="col-sm-4 controls">
-						<form:input path="name" htmlEscape="false" maxlength="50" class="form-control required input-xlarge"/>
+						<form:input path="name" htmlEscape="false" maxlength="50" class="form-control required input-xlarge" required="true"/>
+						<span class="error ${empty ERR_name ? 'hide':'' }">${ERR_name }</span>
 						<span class="help-inline"></span>
 					</div>
 				</div>
@@ -56,6 +58,7 @@
 					<label class="col-sm-4 control-label">链接:</label>
 					<div class="col-sm-8 controls">
 						<form:input path="url" htmlEscape="false" maxlength="2000" class="input-xxlarge"/>
+						<span class="error ${empty ERR_url ? 'hide':'' }">${ERR_url }</span>
 						<span class="help-inline">点击菜单跳转的页面</span>
 					</div>
 				</div>
@@ -69,12 +72,14 @@
 				<div class="form-group">
 					<label class="col-sm-4 control-label">图标:</label>
 					<div class="col-sm-8 controls">
+					<sys:iconselect id="icon" name="icon" value="${menu.icon}"/>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-4 control-label">排序:</label>
 					<div class="col-sm-8 controls">
-						<form:input path="sort" htmlEscape="false" maxlength="50" class="required digits input-small"/>
+						<form:input path="sort" value="${empty sort ? 10 : sort }" htmlEscape="false" maxlength="50" class="required digits input-small"/>
+						<span class="error ${empty ERR_sort ? 'hide':'' }">${ERR_sort }</span>
 						<span class="help-inline">排列顺序，升序。</span>
 					</div>
 				</div>
@@ -101,11 +106,26 @@
 				<div class="form-actions col-sm-offset-4">
 					<shiro:hasPermission name="sys:menu:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
 					<input type="submit" class="btn btn-primary" value="保存">
+					<c:if test="${not empty menu.id}">
+					   <a class="btn btn-danger" href="${ctxAdmin }/sys/menu/delete/${menu.id }">删除</a>
+					</c:if>
+					
 					<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 				</div>
 			</form:form>
 		</div>
 	</div>
-</div>			
+</div>
+<script type="text/javascript">
+(function($){
+	function validForm(){
+		$("#inputForm").validate();
+	}
+	
+	$(function(){
+		validForm();
+	});
+})(jQuery);
+</script>			
 </body>
 </html>

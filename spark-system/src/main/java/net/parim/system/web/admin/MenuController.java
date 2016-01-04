@@ -4,11 +4,15 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,12 +23,13 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import net.parim.common.utils.StringUtils;
+import net.parim.common.web.BaseController;
 import net.parim.system.entity.Menu;
 import net.parim.system.service.SystemService;
 
 @Controller
 @RequestMapping(value="${adminPath}/sys/menu")
-public class MenuController {
+public class MenuController extends BaseController {
 
 	@Value("${adminPath}")
 	private String adminPath;
@@ -32,7 +37,7 @@ public class MenuController {
 	@Autowired
 	SystemService systemService;
 	
-	
+	@RequiresPermissions("system:menu:view")
 	@RequestMapping(value="/")
 	public String list(Model model){
 		List<Menu> menus = systemService.findAllMenu();
@@ -41,12 +46,14 @@ public class MenuController {
 		return "admin/sys/menuList";
 	}
 	
+	@RequiresPermissions("system:menu:edit")
 	@RequestMapping(value="/properties")
 	public String properties(Model model){
 		model.addAttribute(new Menu());
 		return "admin/sys/menuProperties";
 	}
 	
+	@RequiresPermissions("system:menu:edit")
 	@RequestMapping(value="/properties/{id}")
 	public String properties(@PathVariable Long id, Model model){
 		Menu menu = systemService.findMenuById(id);
@@ -55,23 +62,43 @@ public class MenuController {
 		return "admin/sys/menuProperties";
 	}
 	
+	@RequiresPermissions("system:menu:edit")
+	@RequestMapping(value="/addsub/{id}")
+	public String addSub(@PathVariable Long id, Model model){
+		Menu menu = new Menu();
+		Menu parent = systemService.findMenuById(id);
+		menu.setParent(parent);
+		model.addAttribute(menu);
+		
+		return "admin/sys/menuProperties";
+	}
+	
+	@RequiresPermissions("system:menu:edit")
 	@RequestMapping(value="/save")
-	public String save(Menu menu, Model model, RedirectAttributes redirectAttributes){
+	public String save(@Valid Menu menu, BindingResult result, Model model, RedirectAttributes redirectAttributes){
+		if(result.hasErrors()){
+			addBindingError(model, result);
+			return "admin/sys/menuProperties";
+		}
+		
+		LocaleContextHolder.getLocale();
 		
 		systemService.saveMenu(menu);
-		//addMessage(redirectAttributes, "保存菜单'" + menu.getName() + "'成功");
-		model.addAttribute("message", "保存菜单'" + menu.getName() + "'成功");
+		addSuccess(redirectAttributes, "menu.save.success", menu.getName());
 		
 		return "redirect:" + adminPath + "/sys/menu/";
 	}
 	
-	@RequestMapping(value="/delete/${id}")
-	public String delete(@PathVariable Long id){
-		Menu menu = new Menu();
-		menu.setId(id);
+	@RequiresPermissions("system:menu:delete")
+	@RequestMapping(value="/delete/{id}")
+	public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes){
+		Menu menu = systemService.findMenuById(id);
+		//menu.setId(id);
 		systemService.removeMenu(menu);
 		
-		return "redirect:/sys/menu/";
+		addSuccess(redirectAttributes, "menu.delete.success", menu.getName());
+		
+		return "redirect:" + adminPath + "/sys/menu/";
 	}
 	
 	/**

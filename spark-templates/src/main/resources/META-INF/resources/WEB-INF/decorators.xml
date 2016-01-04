@@ -6,9 +6,9 @@
 		<pattern>/cxf/*</pattern>
 		<pattern>/api/*</pattern>
 		<pattern>/javasimon/*</pattern>
-		<pattern>/admin/login</pattern>
+		<!-- <pattern>/admin/login</pattern> -->
 		<pattern>/admin/*/select/*</pattern>
-		<pattern>/*log*</pattern>
+		<!-- <pattern>/*log*</pattern> -->
 		<pattern>/admin/*/inc/*</pattern>
 		<pattern>/*/inc/*</pattern>
 		<pattern>/front/peoplecenter/showSigleMessage/*</pattern>

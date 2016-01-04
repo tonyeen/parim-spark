@@ -12,10 +12,10 @@ ext {
     linkHomePage = ""
     linkApiPage = ""
     moduleProjects = subprojects.findAll {
-        //!it.name.equals('spark-build-src') && !it.name.equals('spark-bom')
+        !it.name.equals('bin') && !it.name.equals('build')&& !it.name.equals('gradle')&& !it.name.equals('src')
     }
     webappProjects = ['spark-web']
-    webfragmentProjects = ['spark-common','spark-templates','spark-system','spark-core','spark-generator']
+    webfragmentProjects = ['spark-common','spark-templates','spark-system','spark-core','spark-generator','spark-prefecture']
 }
 
 configure(allprojects) { project ->
@@ -142,6 +142,7 @@ configure(allprojects) { project ->
     
 		compile fileTree(dir: 'lib', exclude:'', include: '*.jar')
 
+        testCompile "org.springframework:spring-test:${springVersion}"
         testCompile("junit:junit:${junitVersion}") {
             exclude group:'org.hamcrest', module:'hamcrest-core'
         }
@@ -186,6 +187,7 @@ project("spark-common") {
             //MyBatis
             "org.mybatis:mybatis:${mybatisVersion}",
             "org.mybatis:mybatis-spring:${mybatisSpringVersion}",
+            "cglib:cglib:3.2.0",
             //connection pool
             "com.alibaba:druid:${druidVersion}",
             //jdbc driver

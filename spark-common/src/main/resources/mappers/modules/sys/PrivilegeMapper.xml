@@ -7,14 +7,16 @@
 			`identifier`,
 			`name`,
 			`targets`,
-			`user_type`
+			`user_type`,
+			type
 		)
 		VALUES
 			(
 				#{identifier},
 				#{name},
 				#{targets},
-				#{userType}
+				#{userType},
+				#{type}
 			)
 	</insert>
 	
@@ -23,7 +25,8 @@
 			`identifier`=#{identifier},
 			`name`=#{name},
 			`targets`=#{targets},
-			`userType`=#{userType}
+			`userType`=#{userType},
+			type=#{type}
 		where id = #{id}
 	</update>
 	
@@ -36,7 +39,8 @@
 			`identifier`,
 			`name`,
 			`targets`,
-			`user_type`
+			`user_type`,
+			type
 		from `admin_privilege`
 		where id = #{id}
 	</select>
@@ -46,7 +50,7 @@
 			`identifier`,
 			`name`,
 			`targets`,
-			`user_type`
+			`user_type`,type
 		from `admin_privilege`
 		<where>
 			1=1

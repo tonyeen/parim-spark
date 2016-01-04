@@ -1,16 +1,25 @@
 package net.parim.system.entity;
 
+import javax.validation.constraints.DecimalMin;
+
 import net.parim.common.persistence.BaseEntity;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class Menu extends BaseEntity<Menu> {
 	private Menu parent;
 	private String parentIds;
+	@NotBlank(message="{menu.name.not.be.blank}")
+	@Length(min=2, max=6, message="{menu.name.length.between}")
 	private String name;
+	@DecimalMin(value="0", message="{menu.sort.not.be.empty}")
 	private Integer sort;
+	//@URL(message="")
 	private String url;
 	private String target;
 	private String icon;
-	private Boolean isShow;
+	private Boolean isShow = true;
 	private String permission;
 	
 	public Menu getParent() {

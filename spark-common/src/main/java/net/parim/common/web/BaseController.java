@@ -5,7 +5,12 @@ package net.parim.common.web;
 
 import java.beans.PropertyEditorSupport;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolationException;
@@ -14,17 +19,41 @@ import javax.validation.ValidationException;
 
 //import net.parim.common.beanvalidator.BeanValidators;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import net.parim.common.mapper.JsonMapper;
+import net.parim.common.message.Message;
+import net.parim.common.message.Message.Type;
 import net.parim.common.utils.DateUtils;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
+import org.springframework.context.NoSuchMessageException;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.BindingResultUtils;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -59,6 +88,9 @@ public abstract class BaseController {
 	 */
 	@Value("${urlSuffix}")
 	protected String urlSuffix;
+	
+	@Autowired
+	MessageSource messageSource;
 	
 	/**
 	 * 验证Bean实例对象
@@ -113,28 +145,97 @@ public abstract class BaseController {
 		//BeanValidators.validateWithException(validator, object, groups);
 	}
 	
+	protected String getMessage(String code, Object[] args){
+		String message;
+		try{
+			message = messageSource.getMessage(code, args, getLocale());
+		}catch(NoSuchMessageException e){
+			logger.warn(e.getMessage());
+			message = code;
+		}
+		return message;
+	}
+	
+	protected Locale getLocale(){
+		return LocaleContextHolder.getLocale();
+	}
+	
 	/**
 	 * 添加Model消息
 	 * @param message
 	 */
-	protected void addMessage(Model model, String... messages) {
-		StringBuilder sb = new StringBuilder();
-		for (String message : messages){
-			sb.append(message).append(messages.length>1?"<br/>":"");
-		}
-		model.addAttribute("message", sb.toString());
+	protected void addMessage(Model model, String code, String... args) {
+		Message message = new Message(getMessage(code, args));
+		model.addAttribute("message", message);
 	}
 	
 	/**
 	 * 添加Flash消息
 	 * @param message
 	 */
-	protected void addMessage(RedirectAttributes redirectAttributes, String... messages) {
-		StringBuilder sb = new StringBuilder();
-		for (String message : messages){
-			sb.append(message).append(messages.length>1?"<br/>":"");
+	protected void addMessage(RedirectAttributes redirectAttributes, String code, String... args) {
+		Message message = new Message(getMessage(code, args));
+		redirectAttributes.addFlashAttribute("message",message);
+	}
+	
+	protected void addSuccess(Model model, String code, String... args){
+		Message message = new Message("<br/>", Type.success, getMessage(code, args));
+		model.addAttribute("message", message);
+	}
+	
+	protected void addSuccess(RedirectAttributes redirectAttributes, String code, String... args) {
+		Message message = new Message("<br/>", Type.success, getMessage(code, args));
+		redirectAttributes.addFlashAttribute("message",message);
+	}
+	
+	protected void addError(Model model, String code, String... args){
+		Message message = new Message("<br/>", Type.error, getMessage(code, args));
+		model.addAttribute("message", message);
+	}
+	
+	protected void addError(RedirectAttributes redirectAttributes, String code, String... args){
+		Message message = new Message("<br/>", Type.error, getMessage(code, args));
+		redirectAttributes.addFlashAttribute("message",message);
+	}
+	
+	protected void addError(Model model, Message message){
+		message.setType(Type.error);
+		message.setSeparator("<br/>");
+		model.addAttribute("message", message);
+	}
+	
+	protected void addError(RedirectAttributes redirectAttributes, Message message){
+		message.setType(Type.error);
+		message.setSeparator("<br/>");
+		redirectAttributes.addAttribute("message", message);
+	}
+	
+	protected void addBindingError(Model model, BindingResult result){
+		List<String> errors = getErrorMessages(result);
+		addError(model, new Message(errors.toArray(new String[errors.size()])));
+		model.addAllAttributes(getFieldErrorMessages(result));
+	}
+	
+	protected void addBindingError(RedirectAttributes redirectAttributes, BindingResult result){
+		List<String> errors = getErrorMessages(result);
+		addError(redirectAttributes, new Message(errors.toArray(new String[errors.size()])));
+		redirectAttributes.addAllAttributes(getFieldErrorMessages(result));
+	}
+	
+	protected List<String> getErrorMessages(BindingResult result){
+		List<String> errors = new ArrayList<String>();
+		for(FieldError error : result.getFieldErrors()){
+			errors.add(error.getField() + ":" + error.getDefaultMessage());
 		}
-		redirectAttributes.addFlashAttribute("message", sb.toString());
+		return errors;
+	}
+	
+	protected Map<String, Message> getFieldErrorMessages(BindingResult result){
+		Map<String, Message> fieldErrors = new HashMap<String, Message>(); 
+		for(FieldError error : result.getFieldErrors()){
+			fieldErrors.put("ERR_"+error.getField(), new Message(error.getDefaultMessage()));
+		}
+		return fieldErrors;
 	}
 	
 	/**

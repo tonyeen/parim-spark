@@ -19,6 +19,8 @@
     <script src="${ctxStatic }/venders/jquery/jquery-1.8.3.min.js" type="text/javascript"></script>
     
     <link href="${ctxStatic }/venders/jquery-jbox/2.3/Skins/Bootstrap/jbox.min.css" rel="stylesheet" />
+    <script src="${ctxStatic }/venders/jquery-jbox/2.3/jquery.jBox-2.3.js" type="text/javascript"></script>
+    
     <style type="text/css">
 		.topbar-btn.active{background-color: #0086b3;}
 	</style>
@@ -47,6 +49,15 @@
 	</div>
 	<%@include file="/WEB-INF/layouts/admin/footer.jsp" %>
 	
+	<c:if test="${not empty message }">
+	<div id="_backMessageBox" class="hide">
+	   ${message }
+	</div>
+	<script>
+	   
+	</script>
+	</c:if>
+	
 	<c:set var="selectedMenu" scope="request"> 
 		<sitemesh:getProperty property='meta.menu' />
 	</c:set>
@@ -59,6 +70,6 @@
 	
     <script src="${ctx }/static/admin/scripts/main.js"></script>
     
-	<script src="${ctxStatic }/venders/jquery-jbox/2.3/jquery.jBox-2.3.js" type="text/javascript"></script>
+	
 </body>
 </html>

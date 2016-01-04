@@ -11,7 +11,7 @@
 	欢迎游客访问，<a href="${ctx }/login">登录</a>  
 	</shiro:guest>
 	<shiro:user>  
-	欢迎[<shiro:principal/>]登录，<a href="${ctx }/logout">退出</a>  
+	欢迎[<shiro:principal property="username"/>]登录，<a href="${ctx }/logout">退出</a>  
 	</shiro:user>
 	</p>
 </div>

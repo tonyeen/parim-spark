@@ -14,4 +14,6 @@ public interface PermissionTargetRepository extends BaseRepository<PermissionTar
 	public List<PermissionTarget> findRoots(User user, List<ObjectType> objectTypes);
 	
 	public List<PermissionTarget> findChildren(PermissionTarget permissionTarget, List<ObjectType> objectTypes);
+	
+	public List<PermissionTarget> findAllChildren(Long parentId);
 }

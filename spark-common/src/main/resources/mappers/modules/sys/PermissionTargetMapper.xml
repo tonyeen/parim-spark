@@ -42,5 +42,18 @@
 	  and X.child_object_type in ('S','O')
 	  and X.distance=1
 	</select>
+	
+	<select id="findAllChildren" parameterType="long" resultType="net.parim.system.entity.PermissionTarget">
+	SELECT x.child_id AS ID, 
+	    X.child_object_type AS "objectType",
+        X.child_count AS CHILD_COUNT, 
+        '' AS NAME, 
+        x.parent_id AS PARENT_ID,
+        '0' as is_deleted
+    FROM TREE_XREF X
+    WHERE X.parent_id=#{id}
+      and X.tree_type='P' 
+      and X.child_object_type &lt;&gt; 'U'
+	</select>
 
 </mapper>

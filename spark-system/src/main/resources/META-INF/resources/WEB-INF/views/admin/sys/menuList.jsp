@@ -39,7 +39,6 @@
           <div class="console-global-notice-list">
             <!-- TODO: 由通知模块实时填充 -->
             <!-- 单个通知的样式模板暂时还没有采集到，留后补充 -->
-            ${message }
           </div>
           <div class="console-title console-title-border clearfix">
             <div class="pull-left">
@@ -58,6 +57,8 @@
     </div>
     <div class="row">
     	<div class="col-sm-12">
+    	    <%-- <div class="alert alert-success ${empty message ? 'hide' : '' }">${message }</div> --%>
+    	    <sys:message type="${message.type }" content="${message }"/>
     		<table id="treeTable" class="table table-hover">
 				<thead>
 					<tr>
@@ -93,9 +94,12 @@
 				<td><a href="${ctxAdmin }/sys/menu/properties/{{row.id}}">{{row.name}}</a></td>
 				<td>{{row.url}}</td>
 				<td>{{row.sort}}</td>
-				<td>{{row.isShow}}</td>
+				<td>{{row.isShow?"是"："否"}}</td>
 				<td>{{row.permission}}</td>
-				<td class="text-right">修改 ｜ 删除 ｜ 添加下级菜单</td>
+				<td class="text-right">
+                   <a href="${ctxAdmin }/sys/menu/properties/{{row.id}}">修改</a> ｜ 
+                   <a href="${ctxAdmin }/sys/menu/delete/{{row.id}}">删除</a> ｜
+                   <a href="${ctxAdmin }/sys/menu/addsub/{{row.id}}">添加下级菜单</a></td>
 			</tr>
 			</script>
     	</div>

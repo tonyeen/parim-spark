@@ -21,7 +21,7 @@
 				/login = authc
 				${adminPath}/logout = logout
 				/logout = logout
-				${adminPath}/** = anon
+				${adminPath}/** = authc
 			</value>
 		</constructor-arg>
 	</bean>

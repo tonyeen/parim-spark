@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.parim.system.repository.RoleRepository">
 
+    <resultMap type="net.parim.system.entity.Role" id="roleMap">
+       <collection column="id" property="privileges" javaType="ArrayList" select="selectPrivilegesByRoleId" />
+    </resultMap>
+
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="net.parim.system.entity.Role">
 		INSERT INTO `admin_role` (
 			`name`,
@@ -41,7 +45,7 @@
 		delete `admin_role` where id = #{id}
 	</delete>
 	
-	<select id="findOne" parameterType="long" resultType="net.parim.system.entity.Role">
+	<select id="findOne" parameterType="long" resultMap="roleMap">
 		select r.`id`,
 			r.`name`,
 			r.`site_id` as "site.id",
@@ -65,7 +69,7 @@
 		where r.id = #{id}
 	</select>
 	
-	<select id="findAll" resultType="net.parim.system.entity.Role">
+	<select id="findAll" resultMap="roleMap">
 		select r.`id`,
 			r.`name`,
 			r.`site_id` as "site.id",
@@ -92,6 +96,18 @@
 				and r.name like concat('%',#{name},'%')
 			</if>
 		</where>
+	</select>
+	
+	<select id="selectPrivilegesByRoleId" parameterType="long" resultType="net.parim.system.entity.Privilege">
+	   select p.`id`,
+            p.`identifier`,
+            p.`name`,
+            p.`targets`,
+            p.`user_type`,
+            p.type
+        from `admin_privilege` p, admin_role_xref r
+        where p.id = r.privilege_id
+            and r.role_id = #{id}
 	</select>
 	
 </mapper>

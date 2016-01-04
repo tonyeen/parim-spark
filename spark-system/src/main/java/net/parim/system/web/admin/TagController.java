@@ -23,5 +23,10 @@ public class TagController {
 		model.addAttribute("simpleData", request.getParameter("simpleData"));	// 过滤栏目模型（仅针对CMS的Category树）
 		return "admin/sys/tagTreeselect";
 	}
-
+	
+	@RequestMapping(value = "/iconselect")
+	public String iconselect(HttpServletRequest request, Model model) {
+		model.addAttribute("value", request.getParameter("value"));
+		return "admin/sys/tagIconselect";
+	}
 }

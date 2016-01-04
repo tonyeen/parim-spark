@@ -39,7 +39,7 @@ public class SystemService {
 	}
 	
 	public void removeMenu(Menu menu){
-		menuRepository.delete(menu.getId());
+		menuRepository.delete(menu);
 		// 更新缓存
 	}
 

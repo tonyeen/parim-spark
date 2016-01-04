@@ -16,6 +16,8 @@ public interface CurdRepository<E extends BaseEntity<?>> extends BaseRepository<
 	
 	public E findOne(Long id);
 	
+	public E findOne(E entity);
+	
 	public List<E> findAll();
 	
 	public List<E> findAll(E entity);
