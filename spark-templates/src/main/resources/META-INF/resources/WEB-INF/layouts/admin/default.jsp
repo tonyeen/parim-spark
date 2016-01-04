@@ -64,6 +64,9 @@
 	<script type="text/javascript">
 		var SELECTED_MENU="${selectedMenu }";
 		$(function(){
+			if(SELECTED_MENU==""){
+				$(".topbar-home-link").addClass("active");
+			}
 			setActiveMenu(SELECTED_MENU);
 		});
 	</script>

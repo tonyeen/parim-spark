@@ -5,6 +5,8 @@
 	<display-name>spark-templates</display-name>
 	<name>sparkTemplates</name>
 	
+	<before><others/></before>
+	
 	<!-- SiteMesh -->
 	<filter>
 		<filter-name>sitemeshFilter</filter-name>

@@ -25,7 +25,7 @@
 			`identifier`=#{identifier},
 			`name`=#{name},
 			`targets`=#{targets},
-			`userType`=#{userType},
+			`user_type`=#{userType},
 			type=#{type}
 		where id = #{id}
 	</update>

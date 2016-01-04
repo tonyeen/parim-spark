@@ -78,7 +78,7 @@
 				<div class="form-group">
 					<label class="col-sm-4 control-label">排序:</label>
 					<div class="col-sm-8 controls">
-						<form:input path="sort" value="${empty sort ? 10 : sort }" htmlEscape="false" maxlength="50" class="required digits input-small"/>
+						<form:input path="sort" value="${empty menu.sort ? 10 : menu.sort }" htmlEscape="false" maxlength="50" class="required digits input-small"/>
 						<span class="error ${empty ERR_sort ? 'hide':'' }">${ERR_sort }</span>
 						<span class="help-inline">排列顺序，升序。</span>
 					</div>
@@ -104,12 +104,12 @@
 					</div>
 				</div> --%>
 				<div class="form-actions col-sm-offset-4">
-					<shiro:hasPermission name="sys:menu:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
-					<input type="submit" class="btn btn-primary" value="保存">
+					<shiro:hasPermission name="system:menu:edit"><input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>&nbsp;</shiro:hasPermission>
+					<shiro:hasPermission name="system:menu:delete">
 					<c:if test="${not empty menu.id}">
 					   <a class="btn btn-danger" href="${ctxAdmin }/sys/menu/delete/${menu.id }">删除</a>
 					</c:if>
-					
+					</shiro:hasPermission>
 					<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 				</div>
 			</form:form>

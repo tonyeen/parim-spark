@@ -38,10 +38,10 @@
     </div>
 
     <div class="topbar-info topbar-right"><!-- navbar-right 解决最后一个dropdown定位超出屏幕外的问题 -->
-      <div class="dropdown user-info topbar-info-item">
+      <div class="dropdown user-info topbar-info-item hide">
         <a href="#" class="topbar-btn">消息 <span class="badge">37</span></a>
       </div>
-      <div class="dropdown user-info topbar-info-item">
+      <div class="dropdown user-info topbar-info-item hide">
         <a href="#" class="dropdown-toggle topbar-btn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">帮助 <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="#">Action</a></li>
@@ -51,16 +51,16 @@
           <li><a href="#">Separated link</a></li>
         </ul>
       </div>
+      <shiro:user>
       <div class="dropdown user-info topbar-info-item">
-        <a href="#" class="dropdown-toggle topbar-btn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">tonyeen@foxmail.com <span class="caret"></span></a>
+        <a href="#" class="dropdown-toggle topbar-btn" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><shiro:principal property="email"/> <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
+          <li><a href="#">个人信息</a></li>
           <li role="separator" class="divider"></li>
-          <li><a href="#">Separated link</a></li>
+          <li><a href="${ctx }/logout">退出</a></li>
         </ul>
       </div>
+      </shiro:user>
     </div>
   </div>
 </div>

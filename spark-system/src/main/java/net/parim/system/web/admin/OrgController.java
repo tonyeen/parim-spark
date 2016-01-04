@@ -79,7 +79,7 @@ public class OrgController {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
 		List<UserGroup> orgs = userGroupService.findAll();//orgService.findChildren(extId);
 		for(UserGroup org : orgs){
-			Map<String, Object> map = new HashMap<>();
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("id", org.getId());
 			map.put("pid", org.getParent().getId());
 			map.put("name", org.getName());

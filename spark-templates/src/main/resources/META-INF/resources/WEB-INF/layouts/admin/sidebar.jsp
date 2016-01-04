@@ -3,12 +3,13 @@
 <div class="sidebar-content">
   <div class="sidebar-inner">
     <div class="sidebar-fold icon-fold glyphicon glyphicon-menu-hamburger"><!--Fold/Unfold--></div>
+    <c:set var="mainMenu">${empty mainMenu?"45":mainMenu }</c:set>
     <c:forEach items="${fns:getMenuList() }" var="menu" varStatus="status">
-    <c:if test="${menu.parent.id eq '1' && menu.isShow eq true && menu.id eq mainMenu}">
+    <c:if test="${menu.parent.id eq '1' && menu.id eq mainMenu}"><%--&& menu.isShow eq true --%>
     	<c:forEach items="${fns:getMenuList() }" var="menu2" varStatus="status2">
-    	<c:if test="${menu2.parent.id eq menu.id && menu2.isShow eq true}">
+    	<c:if test="${menu2.parent.id eq menu.id }"><%--&&  menu2.isShow eq true --%>
 		    <div id="menu-${menu2.id }" data-parent="menu-${menu.id }" class="sidebar-nav sidebar-nav-${menu2.id } main-nav">
-		      <div class="sidebar-title">
+		      <div class="sidebar-title ${menu2.isShow?'':'hide' }">
 		        <div class="sidebar-title-inner">
 		          <span class="sidebar-title-icon icon-arrow-down caret"></span> <!-- glyphicon glyphicon-triangle-bottom -->
 		          <span class="sidebar-title-text">${menu2.name }</span>
