@@ -9,7 +9,7 @@
 <script type="text/javascript">top.$.jBox.closeTip();</script>
 <c:if test="${not empty content}">
 	<c:if test="${not empty type}"><c:set var="ctype" value="${type}"/></c:if><c:if test="${empty type}"><c:set var="ctype" value="${fn:indexOf(content,'失败') eq -1?'success':'error'}"/></c:if>
-	<div id="theMessageBox" class="alert alert-${ctype} hide"><button data-dismiss="alert" class="close">×</button>${content}</div> 
+	<div id="theMessageBox" class="alert alert-${ctype eq 'error'? 'danger': ctype} hide"><button data-dismiss="alert" class="close">×</button>${content}</div> 
 	<script type="text/javascript">
 	   $(function(){if(!top.$.jBox.tip.mess){top.$.jBox.tip.mess=1;top.$.jBox.tip("${content}","${ctype}",{persistent:true,opacity:0});$("#theMessageBox").removeClass("hide").show();}});</script>
 </c:if>

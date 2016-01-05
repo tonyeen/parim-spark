@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+	<name>dao</name>
+	<filePath>src/main/java/${packageName}/${moduleName}/repository/${subModuleName}</filePath>
+	<fileName>${ClassName}Repository.java</fileName>
+	<content><![CDATA[
+package ${packageName}.${moduleName}.repository<#if subModuleName != "">.${subModuleName}</#if>;
+
+import net.parim.common.persistence.CurdRepository;
+import net.parim.common.persistence.annotation.MyBatisRepository;
+import ${packageName}.${moduleName}.entity<#if subModuleName != "">.${subModuleName}</#if>.${ClassName};
+
+/**
+ * ${functionName}DAO接口
+ * @author ${functionAuthor}
+ * @version ${functionVersion}
+ */
+@MyBatisRepository
+public interface ${ClassName}Repository extends CurdRepository<${ClassName}> {
+	
+}]]>
+	</content>
+</template>

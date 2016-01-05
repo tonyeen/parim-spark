@@ -4,10 +4,10 @@ import java.util.List;
 
 import net.parim.common.persistence.BaseRepository;
 import net.parim.common.persistence.CurdRepository;
-import net.parim.common.persistence.annotation.MyBatisReponsitory;
+import net.parim.common.persistence.annotation.MyBatisRepository;
 import net.parim.sns.modules.prefecture.entity.Prefecture;
 
-@MyBatisReponsitory
+@MyBatisRepository
 public interface PrefectureRepository extends CurdRepository<Prefecture> {
 	/**
 	 * 精选专题

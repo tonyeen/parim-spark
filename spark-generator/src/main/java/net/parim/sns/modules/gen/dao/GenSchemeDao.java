@@ -6,7 +6,7 @@ package net.parim.sns.modules.gen.dao;
 import org.springframework.data.repository.CrudRepository;
 
 import net.parim.common.persistence.CurdRepository;
-import net.parim.common.persistence.annotation.MyBatisReponsitory;
+import net.parim.common.persistence.annotation.MyBatisRepository;
 import net.parim.sns.modules.gen.entity.GenScheme;
 
 /**
@@ -14,7 +14,7 @@ import net.parim.sns.modules.gen.entity.GenScheme;
  * @author ThinkGem
  * @version 2013-10-15
  */
-@MyBatisReponsitory
+@MyBatisRepository
 public interface GenSchemeDao extends CurdRepository<GenScheme> {
 	
 }

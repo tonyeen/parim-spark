@@ -2,14 +2,16 @@ package net.parim.common.persistence;
 
 import java.util.Date;
 
+import net.parim.system.entity.User;
+
 public class DataEntity<E> extends BaseEntity<E> {
 	private static final long serialVersionUID = 8019120436306066356L;
 	
 	public static final String DEL_FLAG_NORMAL = "0";
 	public static final String DEL_FLAG_DELETE = "1";
 
-	protected OperateUser createdBy;
-	protected OperateUser lastUpdatedBy;
+	protected User createdBy;
+	protected User lastUpdatedBy;
 	protected Date createDate;
 	protected Date lastUpdateDate;
 	protected Boolean isDeleted;
@@ -26,16 +28,20 @@ public class DataEntity<E> extends BaseEntity<E> {
 		super(Long.parseLong(id));
 	}
 	
-	public OperateUser getCreatedBy() {
+	public boolean getIsNewRecord(){
+		return id==null||id<=0;
+	}
+	
+	public User getCreatedBy() {
 		return createdBy;
 	}
-	public void setCreatedBy(OperateUser createdBy) {
+	public void setCreatedBy(User createdBy) {
 		this.createdBy = createdBy;
 	}
-	public OperateUser getLastUpdatedBy() {
+	public User getLastUpdatedBy() {
 		return lastUpdatedBy;
 	}
-	public void setLastUpdatedBy(OperateUser lastUpdatedBy) {
+	public void setLastUpdatedBy(User lastUpdatedBy) {
 		this.lastUpdatedBy = lastUpdatedBy;
 	}
 	public Date getCreateDate() {

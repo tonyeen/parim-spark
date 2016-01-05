@@ -33,30 +33,31 @@
       <div class="error">
 
       </div>
-      <div class="row">
+      <div class="">
         <div class="col-md-12">
           <form class="form-horizontal" role="form" action="${ctx }/login" method="post">
             <div class="form-group">
-              <label for="username" class="col-md-3 control-label text-right">用户名：</label>
-              <div class="col-md-9">
+              <label for="username" class="sr-only control-label text-right">用户名：</label>
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                 <input type="text" id="username" name="username" class="form-control" placeholder="请输入用户名"/>
               </div>
             </div>
             <div class="form-group">
-              <label for="password" class="col-md-3 control-label text-right">密码：</label>
-              <div class="col-md-9">
+              <label for="password" class="sr-only control-label text-right">密码：</label>
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                 <input type="password" id="password" name="password" class="form-control" placeholder="密码长度不小于8位"/>
               </div>
             </div>
             <div class="form-group">
-              <div class="col-md-offset-3 col-md-9">
-                <input type="checkbox"/>
-                记住登录
+              <div class="">
+                <label><input type="checkbox" class=""/>记住登录</label>
               </div>
             </div>
             <div class="form-group">
-              <div class="col-md-offset-3 col-md-9">
-                <button type="submit" class="btn btn-primary col-md-12">登录</button>
+              <div class="">
+                <button type="submit" class="btn btn-primary btn-block btn-lg">登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</button>
               </div>
             </div>
           </form>

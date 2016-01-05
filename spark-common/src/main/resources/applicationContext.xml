@@ -30,7 +30,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="typeAliasesPackage" value="net.parim"/>
         <property name="typeAliasesSuperType" value="net.parim.common.persistence.BaseEntity"/>
-        <property name="mapperLocations" value="classpath:/mappers/**/*.xml"/>
+        <property name="mapperLocations" value="classpath*:/mappers/**/*.xml"/>
 		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
     </bean>
     
@@ -38,7 +38,7 @@
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
         <property name="basePackage" value="net.parim"/>
-        <property name="annotationClass" value="net.parim.common.persistence.annotation.MyBatisReponsitory"/>
+        <property name="annotationClass" value="net.parim.common.persistence.annotation.MyBatisRepository"/>
     </bean>
     
     <!-- 定义事务 -->

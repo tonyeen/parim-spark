@@ -3,12 +3,12 @@ package net.parim.system.repository;
 import java.util.List;
 
 import net.parim.common.persistence.BaseRepository;
-import net.parim.common.persistence.annotation.MyBatisReponsitory;
+import net.parim.common.persistence.annotation.MyBatisRepository;
 import net.parim.system.entity.PermissionTarget;
 import net.parim.system.entity.User;
 import net.parim.system.entity.PermissionTarget.ObjectType;
 
-@MyBatisReponsitory
+@MyBatisRepository
 public interface PermissionTargetRepository extends BaseRepository<PermissionTarget> {
 	
 	public List<PermissionTarget> findRoots(User user, List<ObjectType> objectTypes);

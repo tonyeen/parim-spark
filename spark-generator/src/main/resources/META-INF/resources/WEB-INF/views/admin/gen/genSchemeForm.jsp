@@ -4,6 +4,8 @@
 <head>
 	<title>生成方案管理</title>
 	<meta name="decorator" content="default"/>
+	<meta name="main-menu" content="25"/>
+    <meta name="menu" content="menu-29"/>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#name").focus();

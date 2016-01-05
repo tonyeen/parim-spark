@@ -65,7 +65,7 @@ public class GenSchemeController extends BaseController {
 	@RequestMapping(value = "form")
 	public String form(GenScheme genScheme, Model model) {
 		if (StringUtils.isBlank(genScheme.getPackageName())){
-			genScheme.setPackageName("net.parim.sns.modules");
+			genScheme.setPackageName("net.parim.modules");
 		}
 //		if (StringUtils.isBlank(genScheme.getFunctionAuthor())){
 //			genScheme.setFunctionAuthor(UserUtils.getUser().getName());
@@ -85,6 +85,13 @@ public class GenSchemeController extends BaseController {
 		
 		String result = genSchemeService.save(genScheme);
 		addMessage(redirectAttributes, "操作生成方案'" + genScheme.getName() + "'成功<br/>"+result);
+		
+		// 跳转到生成方案代码
+		if ("1".equals(genScheme.getFlag())){
+			redirectAttributes.addAttribute(genScheme);
+			return "redirect:" + adminPath + "/gen/genScheme/generate/step1";
+		}
+		
 		return "redirect:" + adminPath + "/gen/genScheme/?repage";
 	}
 	
@@ -95,5 +102,27 @@ public class GenSchemeController extends BaseController {
 		addMessage(redirectAttributes, "删除生成方案成功");
 		return "redirect:" + adminPath + "/gen/genScheme/?repage";
 	}
-
+	
+	@RequestMapping(value = "generate/step1")
+	public String generateStep1(GenScheme genScheme, Model model){
+		model.addAttribute("genScheme", genScheme);
+		return "admin/gen/generateStep1";
+	}
+	
+	@RequestMapping(value = "generate/step2")
+	public String generateStep2(GenScheme genScheme, @RequestParam(value="projectDir") String projectDir, Model model, RedirectAttributes redirectAttributes){
+		if(null==projectDir || "".equals(projectDir.trim())){
+			addError(redirectAttributes, "generator.select.project-dir.error");
+			redirectAttributes.addFlashAttribute("genScheme", genScheme);
+			return "redirect:" + adminPath + "/gen/genScheme/generate/step1";
+		}
+		
+		genScheme.setProjectDir(projectDir);
+		String result = genSchemeService.generateCode(genScheme);
+		
+		addMessage(model, result);
+		
+		model.addAttribute("genScheme", genScheme);
+		return "admin/gen/generateStep2";
+	}
 }

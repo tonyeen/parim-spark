@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Target(ElementType.TYPE)
 @Documented
 @Component
-public @interface MyBatisReponsitory {
+public @interface MyBatisRepository {
 	
 	/**
 	 * The value may indicate a suggestion for a logical component name,

@@ -61,9 +61,9 @@ public class GenSchemeService extends BaseService {
 			genSchemeDao.update(genScheme);
 		}
 		// 生成代码
-		if ("1".equals(genScheme.getFlag())){
+		/*if ("1".equals(genScheme.getFlag())){
 			return generateCode(genScheme);
-		}
+		}*/
 		return "";
 	}
 	
@@ -72,7 +72,7 @@ public class GenSchemeService extends BaseService {
 		genSchemeDao.delete(genScheme);
 	}
 	
-	private String generateCode(GenScheme genScheme){
+	public String generateCode(GenScheme genScheme){
 
 		StringBuilder result = new StringBuilder();
 		
@@ -101,7 +101,7 @@ public class GenSchemeService extends BaseService {
 			genScheme.setGenTable(childTable);
 			Map<String, Object> childTableModel = GenUtils.getDataModel(genScheme);
 			for (GenTemplate tpl : childTableTemplateList){
-				result.append(GenUtils.generateToFile(tpl, childTableModel, genScheme.getReplaceFile()));
+				result.append(GenUtils.generateToFile(tpl, childTableModel, genScheme.getReplaceFile(), genScheme.getProjectDir()));
 			}
 		}
 		
@@ -109,7 +109,7 @@ public class GenSchemeService extends BaseService {
 		genScheme.setGenTable(genTable);
 		Map<String, Object> model = GenUtils.getDataModel(genScheme);
 		for (GenTemplate tpl : templateList){
-			result.append(GenUtils.generateToFile(tpl, model, genScheme.getReplaceFile()));
+			result.append(GenUtils.generateToFile(tpl, model, genScheme.getReplaceFile(), genScheme.getProjectDir()));
 		}
 		return result.toString();
 	}

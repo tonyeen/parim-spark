@@ -4,7 +4,7 @@
 package net.parim.sns.modules.gen.dao;
 
 import net.parim.common.persistence.CurdRepository;
-import net.parim.common.persistence.annotation.MyBatisReponsitory;
+import net.parim.common.persistence.annotation.MyBatisRepository;
 import net.parim.sns.modules.gen.entity.GenTemplate;
 
 /**
@@ -12,7 +12,7 @@ import net.parim.sns.modules.gen.entity.GenTemplate;
  * @author ThinkGem
  * @version 2013-10-15
  */
-@MyBatisReponsitory
+@MyBatisRepository
 public interface GenTemplateDao extends CurdRepository<GenTemplate> {
 	
 }

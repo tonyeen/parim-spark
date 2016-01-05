@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.parim.sns.modules.testhh.repository.IlaUserRepository">
+    
+	<sql id="ilaUserColumns">
+		a.id AS "id",
+		a.email AS "email",
+		a.user_group_id AS "userGroup.id",
+		a.username AS "username",
+		a.password AS "password",
+		a.salt AS "salt",
+		a.first_name AS "firstName",
+		a.last_name AS "lastName",
+		a.familiar_name AS "familiarName",
+		a.site_id AS "siteId",
+		a.start_date AS "startDate",
+		a.end_date AS "endDate",
+		a.allow_update AS "allowUpdate",
+		a.total_session_count AS "totalSessionCount",
+		a.total_session_time AS "totalSessionTime",
+		a.created_by AS "createdBy.id",
+		a.create_date AS "createDate",
+		a.last_updated_by AS "lastUpdatedBy.id",
+		a.last_update_date AS "lastUpdateDate"
+	</sql>
+	
+	<sql id="ilaUserJoins">
+	</sql>
+    
+	<select id="get" resultType="IlaUser">
+		SELECT 
+			<include refid="ilaUserColumns"/>
+		FROM ila_user a
+		<include refid="ilaUserJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findAll" resultType="IlaUser">
+		SELECT 
+			<include refid="ilaUserColumns"/>
+		FROM ila_user a
+		<include refid="ilaUserJoins"/>
+		<where>
+			
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="IlaUser">
+		SELECT 
+			<include refid="ilaUserColumns"/>
+		FROM ila_user a
+		<include refid="ilaUserJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO ila_user(
+			id,
+			email,
+			user_group_id,
+			username,
+			password,
+			salt,
+			first_name,
+			last_name,
+			familiar_name,
+			site_id,
+			start_date,
+			end_date,
+			allow_update,
+			total_session_count,
+			total_session_time,
+			created_by,
+			create_date,
+			last_updated_by,
+			last_update_date
+		) VALUES (
+			#{id},
+			#{email},
+			#{userGroup.id},
+			#{username},
+			#{password},
+			#{salt},
+			#{firstName},
+			#{lastName},
+			#{familiarName},
+			#{siteId},
+			#{startDate},
+			#{endDate},
+			#{allowUpdate},
+			#{totalSessionCount},
+			#{totalSessionTime},
+			#{createdBy.id},
+			#{createDate},
+			#{lastUpdatedBy.id},
+			#{lastUpdateDate}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE ila_user SET 	
+			email = #{email},
+			user_group_id = #{userGroup.id},
+			username = #{username},
+			password = #{password},
+			salt = #{salt},
+			first_name = #{firstName},
+			last_name = #{lastName},
+			familiar_name = #{familiarName},
+			site_id = #{siteId},
+			start_date = #{startDate},
+			end_date = #{endDate},
+			allow_update = #{allowUpdate},
+			total_session_count = #{totalSessionCount},
+			total_session_time = #{totalSessionTime},
+			created_by = #{createdBy.id},
+			last_updated_by = #{lastUpdatedBy.id},
+			last_update_date = #{lastUpdateDate}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM ila_user
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

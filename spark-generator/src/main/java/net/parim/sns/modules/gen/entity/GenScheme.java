@@ -28,6 +28,8 @@ public class GenScheme extends DataEntity<GenScheme> {
 	private String flag; 	// 0：保存方案； 1：保存方案并生成代码
 	
 	private Boolean replaceFile;	// 是否替换现有文件    0：不替换；1：替换文件
+	
+	private String projectDir;
 
 	public GenScheme() {
 		super();
@@ -119,11 +121,19 @@ public class GenScheme extends DataEntity<GenScheme> {
 	}
 
 	public Boolean getReplaceFile() {
-		return replaceFile;
+		return replaceFile==null?false:replaceFile;
 	}
 
 	public void setReplaceFile(Boolean replaceFile) {
 		this.replaceFile = replaceFile;
+	}
+
+	public String getProjectDir() {
+		return projectDir;
+	}
+
+	public void setProjectDir(String projectDir) {
+		this.projectDir = projectDir;
 	}
 	
 }

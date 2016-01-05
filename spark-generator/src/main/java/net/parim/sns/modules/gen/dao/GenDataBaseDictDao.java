@@ -6,7 +6,7 @@ package net.parim.sns.modules.gen.dao;
 import java.util.List;
 
 import net.parim.common.persistence.CurdRepository;
-import net.parim.common.persistence.annotation.MyBatisReponsitory;
+import net.parim.common.persistence.annotation.MyBatisRepository;
 import net.parim.sns.modules.gen.entity.GenTable;
 import net.parim.sns.modules.gen.entity.GenTableColumn;
 
@@ -16,7 +16,7 @@ import net.parim.sns.modules.gen.entity.GenTableColumn;
  * @author ThinkGem
  * @version 2013-10-15
  */
-@MyBatisReponsitory
+@MyBatisRepository
 public interface GenDataBaseDictDao extends CurdRepository<GenTableColumn> {
 
 	/**

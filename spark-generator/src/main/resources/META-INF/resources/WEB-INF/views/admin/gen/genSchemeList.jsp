@@ -42,6 +42,7 @@
 				<%-- <shiro:hasPermission name="gen:genScheme:edit"> --%><td>
     				<a href="${ctxAdmin}/gen/genScheme/form?id=${genScheme.id}">修改</a>
 					<a href="${ctxAdmin}/gen/genScheme/delete?id=${genScheme.id}" onclick="return confirmx('确认要删除该生成方案吗？', this.href)">删除</a>
+				    <a href="${ctxAdmin}/gen/genScheme/generate/step1?id=${genScheme.id}">生成代码</a>
 				</td><%-- </shiro:hasPermission> --%>
 			</tr>
 		</c:forEach>
