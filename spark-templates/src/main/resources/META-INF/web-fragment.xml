@@ -5,7 +5,9 @@
 	<display-name>spark-templates</display-name>
 	<name>sparkTemplates</name>
 	
-	<before><others/></before>
+	<ordering>
+		<before><name>sparkCommon</name></before>
+	</ordering>
 	
 	<!-- SiteMesh -->
 	<filter>

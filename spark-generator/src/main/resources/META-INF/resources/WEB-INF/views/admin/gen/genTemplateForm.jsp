@@ -26,6 +26,7 @@
 	</script>
 </head>
 <body>
+<div class="console-container">
 	<ul class="nav nav-tabs">
 		<li><a href="${ctxAdmin}/gen/genTemplate/">代码模板列表</a></li>
 		<li class="active"><a href="${ctxAdmin}/gen/genTemplate/form?id=${genTemplate.id}">代码模板<shiro:hasPermission name="gen:genTemplate:edit">${not empty genTemplate.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="gen:genTemplate:edit">查看</shiro:lacksPermission></a></li>
@@ -169,5 +170,6 @@
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
 	</form:form>
+</div>	
 </body>
 </html>

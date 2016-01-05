@@ -31,7 +31,7 @@ public class DataEntity<E> extends BaseEntity<E> {
 	public boolean getIsNewRecord(){
 		return id==null||id<=0;
 	}
-	
+
 	public User getCreatedBy() {
 		return createdBy;
 	}

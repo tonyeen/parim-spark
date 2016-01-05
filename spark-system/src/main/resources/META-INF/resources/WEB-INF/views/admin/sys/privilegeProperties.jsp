@@ -37,34 +37,36 @@
     			<div class="form-group">
     				<label class="control-label col-sm-3"><span class="red">*</span> 权限名称</label>
     				<div class="col-sm-9 row">
-    					<form:input path="name" class="col-lg-5 col-sm-5"/>
+    					<form:input path="name" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
     			<div class="form-group">
     				<label class="control-label col-sm-3"><span class="red">*</span> 权限代码</label>
     				<div class="col-sm-9 row">
-    					<form:input path="identifier" class="col-lg-5 col-sm-5"/>
+    					<form:input path="identifier" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
     			<div class="form-group">
     				<label class="control-label col-sm-3"><span class="red">*</span> 对象代码</label>
     				<div class="col-sm-9 row">
-    					<form:input path="targets" class="col-lg-5 col-sm-5"/>
+    					<form:input path="targets" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
     			<div class="form-group hide">
     				<label class="control-label col-sm-3"><span class="red">*</span> 用户类型</label>
     				<div class="col-sm-9 row">
-    					<form:hidden path="userType" class="col-lg-5 col-sm-5"/>
+    					<form:hidden path="userType" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
     			
     			<div class="form-group">
     				<button type="submit" class="btn btn-primary col-sm-offset-3">保存</button>
+    				<a href="javascript: void(0);" class="btn btn-default">保存并添加下一条</a>
+    				<a href="javascript: void(0);" class="btn btn-default">取消</a>
     			</div>
     		</form:form>
     	</div>

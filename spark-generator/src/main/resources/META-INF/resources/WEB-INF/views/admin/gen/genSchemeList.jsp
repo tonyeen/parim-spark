@@ -19,6 +19,7 @@
 	</script>
 </head>
 <body>
+<div class="console-container">
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctxAdmin}/gen/genScheme/">生成方案列表</a></li>
 		<%-- <shiro:hasPermission name="gen:genScheme:edit"> --%><li><a href="${ctxAdmin}/gen/genScheme/form">生成方案添加</a></li><%-- </shiro:hasPermission> --%>
@@ -48,5 +49,6 @@
 		</c:forEach>
 		</tbody>
 	</table>
+</div>
 </body>
 </html>

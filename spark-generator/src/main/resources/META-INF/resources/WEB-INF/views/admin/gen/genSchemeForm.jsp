@@ -28,6 +28,7 @@
 	</script>
 </head>
 <body>
+<div class="console-container">
 	<ul class="nav nav-tabs">
 		<li><a href="${ctxAdmin}/gen/genScheme/">生成方案列表</a></li>
 		<li class="active"><a href="${ctxAdmin}/gen/genScheme/form?id=${genScheme.id}">生成方案<shiro:hasPermission name="gen:genScheme:edit">${not empty genScheme.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="gen:genScheme:edit">查看</shiro:lacksPermission></a></li>
@@ -124,5 +125,6 @@
 			<input id="btnCancel" class="btn" type="button" value="返 回" onclick="history.go(-1)"/>
 		</div>
 	</form:form>
+</div>
 </body>
 </html>

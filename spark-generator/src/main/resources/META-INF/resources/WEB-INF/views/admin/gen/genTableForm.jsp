@@ -33,6 +33,7 @@
 	</script>
 </head>
 <body>
+<div class="console-container">
 	<ul class="nav nav-tabs">
 		<li><a href="${ctxAdmin}/gen/genTable/">业务表列表</a></li>
 		<li class="active"><a href="${ctxAdmin}/gen/genTable/form?id=${genTable.id}&name=${genTable.name}">业务表<shiro:hasPermission name="gen:genTable:edit">${not empty genTable.id?'修改':'添加'}</shiro:hasPermission><shiro:lacksPermission name="gen:genTable:edit">查看</shiro:lacksPermission></a></li>
@@ -187,5 +188,6 @@
 			</form:form>
 		</c:otherwise>
 	</c:choose>
+</div>
 </body>
 </html>

@@ -19,6 +19,7 @@
 	</script>
 </head>
 <body>
+<div class="console-container">
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctxAdmin}/gen/genTable/">业务表列表</a></li>
 		<%-- <shiro:hasPermission name="gen:genTable:edit"> --%><li><a href="${ctxAdmin}/gen/genTable/form">业务表添加</a></li><%-- </shiro:hasPermission> --%>
@@ -49,6 +50,6 @@
 		</c:forEach>
 		</tbody>
 	</table>
-	
+</div>	
 </body>
 </html>

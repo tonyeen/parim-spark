@@ -91,7 +91,7 @@
 			</table>
 			<script type="text/template" id="treeTableTpl">
 			<tr id="{{row.id}}" pId="{{pid}}">
-				<td><a href="${ctxAdmin }/sys/menu/properties/{{row.id}}">{{row.name}}</a></td>
+				<td><a href="${ctxAdmin }/sys/menu/properties/{{row.id}}"><i class="{{row.icon}}"></i> {{row.name}}</a></td>
 				<td>{{row.url}}</td>
 				<td>{{row.sort}}</td>
 				<td>{{row.isShow?"是"："否"}}</td>

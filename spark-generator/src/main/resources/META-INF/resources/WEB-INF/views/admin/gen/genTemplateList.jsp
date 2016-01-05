@@ -17,6 +17,7 @@
 	</script>
 </head>
 <body>
+<div class="console-container">
 	<ul class="nav nav-tabs">
 		<li class="active"><a href="${ctxAdmin}/gen/genTemplate/">代码模板列表</a></li>
 		<shiro:hasPermission name="gen:genTemplate:edit"><li><a href="${ctxAdmin}/gen/genTemplate/form">代码模板添加</a></li></shiro:hasPermission>
@@ -52,5 +53,6 @@
 		</tbody>
 	</table>
 	<div class="pagination">${page}</div>
+</div>	
 </body>
 </html>
