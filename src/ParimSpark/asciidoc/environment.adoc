@@ -1,0 +1,20 @@
+[[environment]]
+= 开发环境
+
+本项目是Java Web项目，为了方便协作，建议您根据以下工具列表搭建开发环境：
+
+* JDK 1.7
+* Eclipse luna (4.4) sr2
+* Tomcat 7.0
+* Git
+* [可选] Gradle 2.6+
+* [可选] Navicat Premium、PL/SQL
+
+== 开发环境说明
+
+== 开发环境安装手册
+include::environment/jdk-setup.adoc[leveloffset=+2]
+include::environment/gradle-setup.adoc[leveloffset=+2]
+include::environment/eclipse-setup.adoc[leveloffset=+2]
+
+== 开发环境使用帮助文档

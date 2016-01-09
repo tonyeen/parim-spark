@@ -1,0 +1,14 @@
+[[conventions]]
+= 编码规范
+
+[partintro]
+--
+这是通铭教育公司软件工程开发编码规范和项目管理规范
+
+* <<oracle-java-code-conventions>>
+* <<html-code-style>>
+--
+
+
+include::conventions/oracle-java-code-conventions.adoc[leveloffset=+1]
+include::conventions/html-code-style.adoc[leveloffset=+1]

@@ -1,0 +1,53 @@
+[[home]]
+= 通铭教育开发帮助文档
+作者列表
+
+:doc-root: http://docs.parim.net
+
+:doc-conventions: {doc-root}/conventions
+
+:api-spring-framework: {doc-root}/spring-framework/docs/{spring-version}/javadoc-api/org/springframework
+:wiki-spring-framework: https://github.com/spring-projects/spring-framework/wiki
+
+:doc-spring-security: {doc-root}/spring-security/site/docs/current/reference
+:doc-spring-amqp: {doc-root}/spring-amqp/docs/current/reference
+:doc-spring-boot: {doc-root}/spring-boot/docs/current/reference
+:doc-spring-gemfire: {doc-root}/spring-gemfire/docs/current/reference
+
+[partintro]
+--
+* {doc-root}[Home]
+* {doc-conventions}[Conventions]
+
+* <<conventions>>
+
+--
+
+include::conventions.adoc[leveloffset=+1]
+=== 公司编码规范总则
+=== 公司项目管理规范
+=== 公司J2EE项目代码编码规范
+=== 公司HTML编码规范
+=== 公司项目代码版本管理规范
+=== 公司代码审核标准
+
+
+== 协议和标准
+=== link:http://http.org[HTTP协议]
+=== link:http://html.org[HTML5标准]
+=== link:http://ddd.fff[AICC课件标准]
+=== link:http://dfd.fd[Scorm1.2课件标准]
+=== link:dd[公司遵守的开源协议与项目代码开源范围]
+
+
+include::environment.adoc[leveloffset=+1]
+
+
+== 项目开发
+=== 新产品架构设计
+=== 新产品项目开发手册
+=== 功能需求文档
+=== 数据库设计
+=== 代码设计
+=== 部署与测试操作手册（规范）
+=== 版本发布手册
