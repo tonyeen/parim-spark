@@ -1,5 +1,5 @@
 [[spring-core]]
-= Core Technologies 
+= Core Technologies
 
 [partintro]
 --
@@ -39,4 +39,3 @@ include::core-expressions.adoc[leveloffset=+1]
 include::core-aop.adoc[leveloffset=+1]
 
 include::core-aop-api.adoc[leveloffset=+1]
-
