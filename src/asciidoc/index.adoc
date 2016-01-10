@@ -1,6 +1,7 @@
 [[home]]
 = 通铭教育开发帮助文档
 作者列表
+:doctype: book
 
 :doc-root: http://docs.parim.net
 
@@ -14,7 +15,7 @@
 :doc-spring-boot: {doc-root}/spring-boot/docs/current/reference
 :doc-spring-gemfire: {doc-root}/spring-gemfire/docs/current/reference
 
-[partintro]
+-[partintro]
 --
 * {doc-root}[Home]
 * {doc-conventions}[Conventions]

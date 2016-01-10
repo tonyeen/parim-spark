@@ -1,5 +1,6 @@
 [[environment]]
 = 开发环境
+:doctype: book
 
 本项目是Java Web项目，为了方便协作，建议您根据以下工具列表搭建开发环境：
 

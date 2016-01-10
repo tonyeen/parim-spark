@@ -4,6 +4,8 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.build.gradle:propdeps-plugin:0.0.7")
+        classpath("org.asciidoctor:asciidoctor-gradle-plugin:1.5.2")
+    		classpath("io.spring.gradle:docbook-reference-plugin:0.3.1")
         classpath 'com.bmuschko:gradle-tomcat-plugin:2.1'
     }
 }
@@ -29,7 +31,7 @@ configure(allprojects) { project ->
     ext.junitVersion         = "4.12"
 
     ext.gradleScriptDir = "${rootProject.projectDir}/gradle"
-    
+
     //变量
 	ext {
 		//main version setting
@@ -42,11 +44,11 @@ configure(allprojects) { project ->
 		ehcacheWebVersion = '2.0.4'
 		shiroVersion = '1.2.3'
 		sitemeshVersion = '2.4.2'
-		
+
 		// jdbc driver setting
 		mysqlDriverVersion = '5.1.30'
 		oracleDriverVersion = '10.2.0.4.0'
-		
+
 		//tools version setting
 		slf4jVersion = '1.7.7'
 		commonsLang3Version = '3.3.2'
@@ -118,7 +120,7 @@ configure(allprojects) { project ->
         maven { url "http://repo.parim.net/libs-release" }
         maven { url "http://repo.parim.net/milestone" }
         maven { url "http://repo.parim.net/snapshot" }
-        
+
         mavenCentral() // 中央库
 		maven {url 'http://central.maven.org/maven2/'}
 		maven {url 'http://maven.oschina.net/content/groups/public/'}	// 国内库地址
@@ -139,7 +141,7 @@ configure(allprojects) { project ->
             "taglibs:standard:1.1.2",
             "javax.servlet:jstl:1.2" //'javax.servlet.jsp.jstl:jstl:1.2',
         )
-    
+
 		compile fileTree(dir: 'lib', exclude:'', include: '*.jar')
 
         testCompile "org.springframework:spring-test:${springVersion}"
@@ -153,11 +155,11 @@ configure(allprojects) { project ->
 
         //sniffer("org.codehaus.mojo:animal-sniffer-ant-tasks:${snifferVersion}")
         //javaApiSignature("org.codehaus.mojo.signature:java16:1.1@signature")  // API level from JDK 6 update 18
-        
-        providedCompile "javax.servlet.jsp:jsp-api:2.2.1-b03"  
+
+        providedCompile "javax.servlet.jsp:jsp-api:2.2.1-b03"
         providedCompile "javax.servlet:javax.servlet-api:3.1.0" // 编译期
     }
-    
+
 }
 
 /*
@@ -167,7 +169,7 @@ configure(subprojects - project(":")){
 
 project("spark-common") {
     description = "Spark Common"
-    
+
     apply plugin: 'war'
     //apply plugin: 'eclipse-wtp'
     dependencies {
@@ -180,9 +182,9 @@ project("spark-common") {
             "org.springframework:spring-oxm:${springVersion}",
             "org.springframework:spring-context-support:${springVersion}",
             'org.springframework.data:spring-data-commons:1.11.1.RELEASE', //spring data core
-            
+
             'org.hibernate:hibernate-validator:5.1.2.Final',    //JSR303 Bean Validator
-            
+
             //PERSISTENCE
             //MyBatis
             "org.mybatis:mybatis:${mybatisVersion}",
@@ -193,33 +195,33 @@ project("spark-common") {
             //jdbc driver
             "mysql:mysql-connector-java:${mysqlDriverVersion}", //mysql 驱动
             //"com.oracle:ojdbc14:${oracleDriverVersion}",
-            
+
             //WEB
             //"opensymphony:sitemesh:${sitemeshVersion}",
             "taglibs:standard:1.1.2",
             "javax.servlet:jstl:1.2", //'javax.servlet.jsp.jstl:jstl:1.2',
-            
+
             //CACHE
             "net.sf.ehcache:ehcache-core:${ehcacheVersion}",
             "net.sf.ehcache:ehcache-web:${ehcacheWebVersion}",
             "redis.clients:jedis:2.5.1",
-            
+
             //SECURITY
             "org.apache.shiro:shiro-core:${shiroVersion}",
             "org.apache.shiro:shiro-spring:${shiroVersion}",
             "org.apache.shiro:shiro-cas:${shiroVersion}",
             "org.apache.shiro:shiro-web:${shiroVersion}",
             "org.apache.shiro:shiro-ehcache:${shiroVersion}",
-    
-            
+
+
             //日志记录 LOGGING
             'log4j:log4j:1.2.14',
             "org.slf4j:slf4j-api:${slf4jVersion}",
             "org.slf4j:slf4j-log4j12:${slf4jVersion}",
             "org.slf4j:jcl-over-slf4j:${slf4jVersion}", //common-logging 实际调用slf4j
             "org.slf4j:jul-to-slf4j:${slf4jVersion}",   //java.util.logging 实际调用slf4j
-                
-            
+
+
             //GENERAL UTILS
             //commons
             "org.apache.commons:commons-lang3:${commonsLang3Version}",
@@ -258,15 +260,15 @@ project("spark-common") {
             "org.wltea:analyzer:2012_u6",
             //ant core for use ant-zip
             "org.apache.ant:ant:1.9.4",
-            
+
             //User Agent
             "bitwalker:UserAgentUtils:1.13"
         )
-        
-        providedCompile "javax.servlet.jsp:jsp-api:2.2.1-b03"  
+
+        providedCompile "javax.servlet.jsp:jsp-api:2.2.1-b03"
         providedCompile "javax.servlet:javax.servlet-api:3.1.0" // 编译期
     }
-    
+
     //tasks['eclipse'].dependsOn(eclipseWstWebFregment)
 
 }
@@ -280,7 +282,7 @@ project("spark-templates") {
         //comlile(files(project(":spark-core").libsDir))
         compile "opensymphony:sitemesh:${sitemeshVersion}"
     }
-    
+
     // 设置 Project Facets
     //tasks['eclipse'].dependsOn(eclipseWstWebFregment)
 }
@@ -292,7 +294,7 @@ project("spark-system") {
         compile(project(":spark-templates"))
         compile(project(":spark-common"))
     }
-    
+
     // 设置 Project Facets
     //tasks['eclipse'].dependsOn(eclipseWstWebFregment)
 }
@@ -305,22 +307,22 @@ project("spark-generator") {
         compile(project(":spark-common"))
         compile(project(":spark-system"))
     }
-    
+
     // 设置 Project Facets
     //tasks['eclipse'].dependsOn(eclipseWstWebFregment)
 }
 
 project("spark-core") {
     description = "Spark Core"
-    
+
     apply plugin: 'war'
     //apply plugin: 'eclipse-wtp'
-    
+
     dependencies {
         compile(project(":spark-system"))
         compile(project(":spark-generator"))
     }
-    
+
     // 设置 Project Facets
     //tasks['eclipse'].dependsOn(eclipseWstWebFregment)
 }
@@ -331,7 +333,7 @@ project("spark-prefecture") {
     dependencies {
         compile(project(":spark-core"))
     }
-    
+
     // 设置 Project Facets
     //tasks['eclipse'].dependsOn(eclipseWstWebFregment)
 }
@@ -358,7 +360,7 @@ project("spark-sns-forum") {
 
 project("spark-web") {
     description = "Spark Web"
-    
+
     apply plugin: 'war'
     //apply plugin: 'eclipse-wtp'
     apply plugin: 'jetty'
@@ -366,43 +368,105 @@ project("spark-web") {
 
     dependencies {
         compile(project(":spark-core"))
-        
-        compile (
-            
-        )
-        
-        
 
-        providedCompile "javax.servlet.jsp:jsp-api:2.2.1-b03"  
+        compile (
+
+        )
+
+
+
+        providedCompile "javax.servlet.jsp:jsp-api:2.2.1-b03"
         providedCompile "javax.servlet:javax.servlet-api:3.1.0" // 编译期
-        
+
         //testCompile "org.springframework:spring-test:${springVersion}"
-        //testCompile "junit:junit:4.11" 
+        //testCompile "junit:junit:4.11"
         compile "org.springframework:spring-test:${springVersion}"
         compile "junit:junit:4.11"
-        
+
         def tomcatVersion = '7.0.59'
         tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
             "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
               "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
     }
-    
+
     // 设置 Project Facets
     //tasks['eclipse'].dependsOn(eclipseWstWebApp)
-    
-    jettyRun{  
-        webAppSourceDirectory file("$projectDir/src/main/webapp/")  
+
+    jettyRun{
+        webAppSourceDirectory file("$projectDir/src/main/webapp/")
         httpPort 8080
         contextPath project.name
-        scanIntervalSeconds 0  
+        scanIntervalSeconds 0
         reload "automatic"
     }
-    
+
     tomcat {
         httpPort = 8080
         httpsPort = 8091
         enableSSL = true
     }
+}
+
+configure(rootProject){
+  description "Parim Spark"
+
+  apply plugin: "org.asciidoctor.convert"
+	apply plugin: "docbook-reference"
+
+  asciidoctor {
+		sourceDir project.file('src/asciidoc')
+		separateOutputDirs = false
+		backends = ['docbook']
+		options doctype: 'book', eruby: 'erubis'
+		attributes 	'spring-version': project.version,
+					'revnumber' : project.version,
+					'docinfo' : ""
+
+    FileTree tree = fileTree(sourceDir)
+    tree.include "**/*.png"
+    println relativePath(outputDir)
+    tree.each {File file ->
+      copy{
+        from file
+        into relativePath(outputDir)+"/images"
+      }
+    }
+	}
+
+  reference {
+		sourceDir = asciidoctor.outputDir
+		pdfFilename = "parim-spark-reference.pdf"
+		epubFilename = "parim-spark-reference.epub"
+		expandPlaceholders = ""
+	}
+
+  afterEvaluate {
+		tasks.findAll { it.name.startsWith("reference") }.each{ it.dependsOn.add("asciidoctor") }
+	}
+
+  // don't publish the default jar for the root project
+	configurations.archives.artifacts.clear()
+
+  task docsZip(type: Zip, dependsOn: 'reference') {
+		group = "Distribution"
+		baseName = "parim-spark"
+		classifier = "docs"
+		description = "Builds -${classifier} archive containing api and reference " +
+			"for deployment at http://static.springframework.org/spring-framework/docs."
+
+		from("src/dist") {
+			include "changelog.txt"
+		}
+
+		/*from (api) {
+			into "javadoc-api"
+		}*/
+
+		from (reference) {
+			into "parim-spark-reference"
+		}
+	}
+
 }
 
 /*
@@ -421,4 +485,3 @@ def qualifyVersionIfNecessary(version) {
     }
     return version
 }
-
