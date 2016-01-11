@@ -4,7 +4,9 @@
 原文地址： http://www.cesclub.com/bw/jishuzhongxin/xiangmuyanfaguanli/2012/1002/42434.html
 Oracle官方Java编码规范（英文版）： http://www.oracle.com/technetwork/java/codeconvtoc-136057.html
 
+[[ojcc-introduction]]
 == 介绍(Introduction)
+[[ojcc-why-have-code-conventions]]
 === 为什么要有编码规范（Why Have Code Conventions）
 编码规范对于程序员而言尤为首要，有以下几个原因：
 
@@ -15,14 +17,19 @@ Oracle官方Java编码规范（英文版）： http://www.oracle.com/technetwork
 
 为了履行规范，每个软件开辟人员必须一致遵守编码规范。
 
+
+[[ojcc-acknowlegments]]
 === 版权声明（Acknowledgments）
 本文档反应的是Sun MicroSystems公司，Java说话规范中的编码标准项目组。首要供献者包含：Peter King，Patrick Naughton，Mike DeMoney，Jonni Kanerva，Kathy Walrath以及Scott Hommel。
 本文档现由Scott Hommel维护，有关评论定见请发至shommel@eng.sun.com
 
 
+[[ojcc-file-name]]
 == 文件名（File Names）
 这项目组列出了常用的文件名及后缀。
 
+
+[[ojcc-file-suffixes]]
 === 文件后缀（File Suffixes）
 Java程序应用下列文件后缀：
 [width="50%",options="header"]
@@ -32,6 +39,8 @@ Java程序应用下列文件后缀：
 |Java字节码文件 |.class
 |=======
 
+
+[[ojcc-common-file-names]]
 === 常用文件名（Common File Names）
 常用的文件名包含：
 [cols="2,8",options="header"]
@@ -42,21 +51,25 @@ Java程序应用下列文件后缀：
 |=======
 
 
+
+[[ojcc-file-organization]]
 == 文件组织（File Organization）
 一个文件由被空行分别而成的段落以及标识每个段落的可选注释共同构成。跨越2000行的程序难以浏览，应当尽量避免。
-"<<_java_java_source_file_example,Java源文件示例>>"提供了一个合理组织的Java程序范例。
+"<<ojcc-java-java-source-file-example,Java源文件示例>>"提供了一个合理组织的Java程序范例。
 
 
+[[ojcc-java-source-files]]
 === Java源文件（Java Source Files）
 每个Java源文件都包含一个单一的公共类或接口。若私有类和接口与一个公共类相接洽关系，可以将它们和公共类放入同一个源文件。公共类必须是这个文件中的第一个类或接口。
 
 Java源文件还遵守以下规矩：
 
-- 开首注释（参考"<<__beginning_comments,首行注释>>"）
+- 开首注释（参考"<<ojcc-beginning-comments,首行注释>>"）
 - 包和引入语句（参考"包和引入语句"）
 - 类和接口声明（参考"类和接口声明"）
 
-[[__beginning_comments]]
+
+[[ojcc-beginning-comments]]
 ==== 首行注释（Beginning Comments）
 所有的源文件都应当在文件开始有一个C语言风格的注释，包含类名、版本信息、日期和版权声明：
 [source,java,indent=0]
@@ -73,6 +86,8 @@ Java源文件还遵守以下规矩：
  */
 ----
 
+
+[[ojcc-package-and-import-statements]]
 ==== 包和引入语句（Package and Import Statements）
 在多半Java源文件中，第一个非注释行是包语句。在它之后可以跟引入语句。例如：
 [source,java,indent=0]
@@ -83,12 +98,13 @@ package java.awt;
 import java.awt.peer.CanvasPeer;
 ----
 
+[[ojcc-class-and-interface-declarations-case]]
 ==== 类和接口声明（Class and Interface Declarations）
-下表描述了类和接口声明的各个项目组以及它们呈现的先后次序。参考"<<_java_java_source_file_example,Java源文件示例>>"中一个包含注释的例子。
+下表描述了类和接口声明的各个项目组以及它们呈现的先后次序。参考"<<ojcc-java-java-source-file-example,Java源文件示例>>"中一个包含注释的例子。
 [cols="1,4,8",options="header"]
 |======
 ||类/接口声明的各项目组|注解
-|1|类/接口文档注释（`/**……*/`）|该注释中所需包含的信息，参考"<<__documentation_comments,文档注释>>"
+|1|类/接口文档注释（`/**……*/`）|该注释中所需包含的信息，参考" <<ojcc-documentation-comments,文档注释>> "
 |2|类或接口的声明|
 |3|类/接口的注释（`/*……*/`）若是有须要的话|该注释应包含任何有关全部类或接口的信息，而这些信息又不合适作为类/接口文档注释。
 |4|类的（静态）变量|先是类的公共变量，随后是维护变量，再后是包一级此外变量（没有访问控制修饰符，access modifier），最后是私有变量。
@@ -97,14 +113,20 @@ import java.awt.peer.CanvasPeer;
 |7|方法|这些方法应当按功能，而非感化域或调用权限，分组。例如，一个私有的类方法可以置于两个公有的实例方法之间。其目标是为了更便于浏览和理解代码。
 |======
 
+
+[[ojcc-indentation]]
 == 缩进排版（Indentation）
 缩进排版一般使用4个空格作为一个缩进单位。缩进的确切申明并未具体指定（空格 vs. 制表符）。一个制表符确切是8个空格（而非4个）。
 
+
+[[ojcc-line-length]]
 === 行长度（Line Length）
 尽量避免一行的长度跨越80个字符，因为很多终端（特别是一些较老的终端）和对象处理方式不同，不便于阅读。
 
 *注意：*用于文档中的例子应当应用更短的行长，长度一般不跨越70个字符。
 
+
+[[ojcc-wrapping-lines]]
 === 换行（Wrapping Lines）
 当一个表达式无法容纳在一行内时，可以根据如下一般规矩断开之：
 
@@ -195,6 +217,7 @@ alpha = (aLongBooleanExpression)
 ----
 
 
+[[ojcc-comments]]
 == 注释（Comments）
 Java程序有两类注释：编码注释（implementation comments）和文档注释（document comments）。编码注释是那些在C++中见过的，应用`/*...*/`和`//`界定的注释。文档注释（被称为"doc comments"）是Java独有的，并由`/**...*/`界定。文档注释可以经由过程javadoc对象转换成HTML文件。
 
@@ -208,9 +231,13 @@ Java程序有两类注释：编码注释（implementation comments）和文档�
 
 注释不该写在用星号或其他字符画出来的大框里。注释不该包含诸如制表符和回退符之类的特别字符。
 
+
+[[ojcc-implementation-comment-formats]]
 === 编码注释的结构（Implementation Comment Formats）
 程序可以有4种编码注释的风格：块（block）、单行（single-line）、尾端（trailing）和行末（end-of-line）。
 
+
+[[ojcc-block-comments]]
 ==== 块注释（Block Comments）
 块注释一般用于提供对文件，方法，数据组织和算法的描述。块注释被置于每个文件的开端处以及每个方法之前。它们也可以被用于其他地方，比如方法内部。在函数和方法内部的块注释应当和它们所描述的代码具有一样的缩进结构。
 
@@ -237,11 +264,13 @@ Java程序有两类注释：编码注释（implementation comments）和文档�
   */
 ----
 
-*注意：*若是你不应用indent(1)，就不必在代码中应用`/*-`，这样就能为他人可能对你的代码运行`indent(1)`作让步。参考"<<__documentation_comments,文档注释>>"
+*注意：*若是你不应用indent(1)，就不必在代码中应用`/*-`，这样就能为他人可能对你的代码运行`indent(1)`作让步。参考"<<ojcc-documentation-comments,文档注释>>"
 
+
+[[ojcc-single-line-comments]]
 ==== 单行注释（Single-Line Comments）
 
-短注释可以显示在一行内，并与其后的代码具有一样的缩进层级。若是一个注释不能在一行内写完，就该采取块注释（参考"<<__block_comments,块注释>>"）。单行注释之前应当有一个空行。以下是一个Java代码中单行注释的例子：
+短注释可以显示在一行内，并与其后的代码具有一样的缩进层级。若是一个注释不能在一行内写完，就该采取块注释（参考"<<ojcc-block-comments,块注释>>"）。单行注释之前应当有一个空行。以下是一个Java代码中单行注释的例子：
 [source,java,indent=0]
 [subs="verbatim,quotes"]
 ----
@@ -253,6 +282,7 @@ if （condition） {
 ----
 
 
+[[ojcc-trailing-comments]]
 ==== 尾端注释（Trailing Comments）
 
 极短的注释可以与它们所要描述的代码位于同一行，而且应当有足够的空白来分隔代码和注释。如有多个短注释呈现于大段代码中，它们应当具有雷同的缩进。
@@ -268,6 +298,8 @@ if (a == 2) {
 }
 ----
 
+
+[[ojcc-end-of-line-comments]]
 ==== 行末注释（End-Of-Line Comments）
 注释界定符"`//`"，可以注释掉整行或者一行中的一项目组。它一般不用于连起多行的注释文本；然而，它可以用来注释掉连起多行的代码段。以下是所有三种风格的例子：
 [source,java,indent=0]
@@ -292,8 +324,10 @@ else {
 //}
 ----
 
+
+[[ojcc-documentation-comments]]
 === 文档注释（Documentation Comments）
-*注意：*此处描述的注释组织示例，参考"<<_java_java_source_file_example,Java源文件示例>>"
+*注意：*此处描述的注释组织示例，参考"<<ojcc-java-java-source-file-example,Java源文件示例>>"
 
 若想理解更多，参考"How to Write Doc Comments for Javadoc"，此中包含了有关文档注释标识表记标帜的信息（`@return`， `@param`， `@see`）：
 
@@ -319,6 +353,7 @@ public classExample { ...
 文档注释不应该放在一个方法或构造器的定义块中，因为Java会将位于文档注释之后的第一个声明与其相关联。
 
 
+[[ojcc-declarations]]
 == 声明（Declarations）
 === 每行声明变量的数量（Number Per Line）
 推荐一行一个声明，因为这样有利于写注释。亦即，
@@ -349,9 +384,13 @@ int          size;          // size of table
 Object       currentEntry;  // currently ed table entry
 ----
 
+
+[[ojcc-initialization]]
 === 初始化（Initialization）
 尽量在声明局部变量的同时初始化。唯一不这么做的来由是变量的初始值依附于某些先前产生的运行值。
 
+
+[[ojcc-placement]]
 === 组织（Placement）
 只在代码块的开端处声明变量。（一个块是指任何被包含在大括号"`{`"和"`}`"中心的代码。）不要在初次用到该变量时才声明之。这会把注意力不集中的程序员搞糊涂，同时会影响代码在该作用域内的可移植性。
 
@@ -388,6 +427,8 @@ myMethod（） {
 }
 ----
 
+
+[[ojcc-class-and-interface-declarations]]
 === 类和接口的声明（Class and Interface Declarations）
 当编写类和接口时，应当遵守以下组织规矩：
 
@@ -415,7 +456,9 @@ class Sample extends Object {
 ----
 
 
+[[ojcc-statements]]
 == 语句（Statements）
+[[ojcc-simple-statements]]
 === 简单语句（Simple Statements）
 每行至多包含一条语句，例如：
 [source,java,indent=0]
@@ -426,6 +469,8 @@ argc--;       // Correct
 argv++; argc--;       // AVOID!
 ----
 
+
+[[ojcc-compound-statements]]
 === 复合语句（Compound Statements）
 复合语句是包含在大括号中的语句序列，形如"`{ 语句 }`"。例如下面各段。
 
@@ -433,6 +478,8 @@ argv++; argc--;       // AVOID!
 - 左大括号"{"应位于复合语句判断行的行尾；右大括号"}"应另起一行并与复合语句首行对齐。
 - 大括号可以被用于所有语句，包含单个语句，只要这些语句是诸如if-else或for把握组织的一项目组。这样便于添加语句而无需担心因为忘了加括号而引起bug。
 
+
+[[ojcc-return-statements]]
 === 返回语句（return Statements）
 if-else语句应当具有如下结构：
 [source,java,indent=0]
@@ -464,6 +511,8 @@ if (condition)//AVOID! THIS OMITS THE BRACES {}!
     statement;
 ----
 
+
+[[ojcc-for-statements]]
 === for语句（for Statements）
 一个for语句应当具有如下结构：
 [source,java,indent=0]
@@ -481,6 +530,8 @@ for （initialization; condition; ）;
 ----
 当在for语句的初始化或更新子句中应用逗号时，避免因应用三个以上变量，而导致错杂度进步。若须要，可以在for循环之前（为初始化子句）或for循环末尾（为更新子句）应用零丁的语句。
 
+
+[[ojcc-while-statements]]
 ===  while语句（while Statements）
 一个while语句应当具有如下结构：
 [source,java,indent=0]
@@ -497,6 +548,8 @@ while (condition) {
 while (condition);
 ----
 
+
+[[ojcc-do-while-statements]]
 === do-while语句（do-while Statements）
 一个do-while语句应当具有如下结构：
 [source,java,indent=0]
@@ -507,6 +560,8 @@ do {
 } while (condition);
 ----
 
+
+[[ojcc-switch-statements]]
 === switch语句（switch Statements）
 一个switch语句应当具有如下结构：
 [source,java,indent=0]
@@ -531,6 +586,8 @@ default:
 ----
 每当一个`case`顺着往下履行时（因为没有`break`语句），这时就应在`break`语句的地位添加注释。上方的示例代码中就包含注释`/* falls through */`。
 
+
+[[ojcc-try-catch-statements]]
 === try-catch语句（try-catch Statements）
 一个`try-catch`语句应当具有如下结构：
 [source,java,indent=0]
@@ -556,7 +613,9 @@ try {
 ----
 
 
+[[ojcc-white-space]]
 == 空白（White Space）
+[[ojcc-blank-lines]]
 === 空行（Blank Lines）
 空行将逻辑相干的代码段分隔开，以增强可读性。
 
@@ -572,6 +631,8 @@ try {
 - 块注释（参考"5.1.1"）或单行注释（参考"5.1.2"）之前
 - 一个方法内的两个逻辑段之间，用以增强可读性
 
+
+[[ojcc-blank-spaces]]
 === 空格（Blank Spaces）
 下列场景应当应用空格：
 
@@ -614,6 +675,7 @@ myMethod((byte) aNum, (Object) x);
 ----
 
 
+[[ojcc-naming-conventions]]
 == 命名规范（Naming Conventions）
 命名规范使程序更易读，从而更易于理解。它们也可以提供一些有关标识符功能的信息，以助于理解代码，例如，无论它是一个常量，包，还是类。
 [cols="1,4,2",options="header"]
@@ -630,12 +692,16 @@ myMethod((byte) aNum, (Object) x);
 |===
 
 
+[[ojcc-programing-practices]]
 == 编程实践（Programming Practices）
+[[ojcc-providing-access-to-instance-and-class-variables]]
 === 提供对实例以及类变量的访问（Providing Access to Instance and Class Variables）
 若没有足够来由，不要把实例或类变量声明为公有。凡是，实例变量无需显式的设置（set）和获取（gotten），这作为是方法调用的边沿效应 （side effect）而产生。
 
 一个具有公有实例变量的恰当例子，是类仅作为数据结构，没有行为。亦即，若你要应用一个结构（struct）而非一个类（若是java支撑结构的话），那么把类的实例变量声明为公有是合适的。
 
+
+[[ojcc-referring-to-class-variables-and-methods]]
 === 引用类变量和类方法（Referring to Class Variables and Methods）
 避免用一个对象调用一个类的静态变量和方法。应当用类名调换。例如：
 [source,java,indent=0]
@@ -646,9 +712,13 @@ AClass.classMethod();      //OK
 anObject.classMethod();    //AVOID!
 ----
 
+
+[[ojcc-constants]]
 === 常量（Constants）
 位于for循环中作为计数器值的数字常量，除了-1，0和1之外，不该被直接写入代码。
 
+
+[[ojcc-variable-assigments]]
 === 变量赋值（Variable Assignments）
 避免在一个语句中给多个变量赋雷同的值。它很难读懂。例如：
 [source,java,indent=0]
@@ -686,7 +756,9 @@ a = b + c;
 d = a + r;
 ----
 
+[[ojcc-miscellaneous-practices]]
 === 其它实战（Miscellaneous Practices）
+[[ojcc-parentheses]]
 ====  圆括号（Parentheses）
 一般而言，在含有多种运算符的表达式中应用圆括号来强调运算符优先级，是个好方法。即使运算符的优先级对你而言可能很清楚，但对其他人未必如此。你不如假设此外程序员和你一样清楚运算符的优先级。
 [source,java,indent=0]
@@ -696,6 +768,8 @@ if (a == b && c == d)      // AVOID!
 if ((a == b) && (c == d))  // RIGHT
 ----
 
+
+[[ojcc-returning-values]]
 ==== 返回值（Returning Values）
 设法让你的程序组织符合目标。例如：
 [source,java,indent=0]
@@ -729,6 +803,8 @@ return y;
 return （condition ？ x : y）;
 ----
 
+
+[[ojcc-expressions-before-in the-conditional-operator]]
 ==== 前提运算符"?"前的表达式（Expressions before "?" in the Conditional Operator）
 若是一个包含二元运算符的表达式呈如今三元运算符"` ? : `"的"?"之前，那么应当给表达式添上一对圆括号。例如：
 [source,java,indent=0]
@@ -737,13 +813,17 @@ return （condition ？ x : y）;
 (x >= 0) ? x : -x;
 ----
 
+
+[[ojcc-special-comments]]
 ==== 特别注释（Special Comments）
 在注释中应用`XXX`来标识某些未实现（bogus）的但可以工作（works）的内容。用`FIXME`来标识某些假的和错误的内容。
 
 
+[[ojcc-code-examples]]
 == 代码示例（Code Examples）
+[[ojcc-java-source-file-example]]
 === Java源文件示例（Java Source File Example）
-下面的例子，显现了如何合理组织一个包含单一公共类的Java源程序。接口的结构与其类似。更多信息参考"<<__class_and_interface_declarations,类和接口声明>>"以及"<<_documentation_comments,文挡注释>>"。
+下面的例子，显现了如何合理组织一个包含单一公共类的Java源程序。接口的结构与其类似。更多信息参考"<<ojcc-class-and-interface-declarations,类和接口声明>>"以及"<<ojcc-documentation-comments,文挡注释>>"。
 [source,java,indent=0]
 [subs="verbatim,quotes"]
 ----

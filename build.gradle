@@ -117,11 +117,11 @@ configure(allprojects) { project ->
     }
 
     repositories {
-        maven { url "http://repo.parim.net/libs-release" }
+        //maven { url "http://repo.parim.net/libs-release" }
         maven { url "http://repo.parim.net/milestone" }
         maven { url "http://repo.parim.net/snapshot" }
-
-        mavenCentral() // 中央库
+        //jcenter()
+        //mavenCentral() // 中央库
 		maven {url 'http://central.maven.org/maven2/'}
 		maven {url 'http://maven.oschina.net/content/groups/public/'}	// 国内库地址
 		maven {url 'http://download.java.net/maven/2/'}
@@ -422,15 +422,34 @@ configure(rootProject){
 					'revnumber' : project.version,
 					'docinfo' : ""
 
-    FileTree tree = fileTree(sourceDir)
-    tree.include "**/*.png"
-    println relativePath(outputDir)
-    tree.each {File file ->
-      copy{
-        from file
-        into relativePath(outputDir)+"/images"
-      }
-    }
+        FileCollection asciidocResources = files()
+		resources {
+		  from sourceDir
+		  include "**/*.png"
+		  //into "./"
+		  eachFile {file ->
+		    if(file.name.endsWith(".png")){
+		      asciidocResources  = asciidocResources + files(sourceDir.path+"/"+file.path)
+		    }
+		  }
+		}
+
+		resources {
+		  from sourceDir
+		  include "xsl/**"
+		}
+
+		doLast{
+			println asciidocResources.size()
+	        asciidocResources.each {File file ->
+	          println file.path
+	          copy {
+	            from file
+	            into relativePath(outputDir)+"/images"
+	          }
+	        }
+		}
+
 	}
 
   reference {
@@ -438,6 +457,9 @@ configure(rootProject){
 		pdfFilename = "parim-spark-reference.pdf"
 		epubFilename = "parim-spark-reference.epub"
 		expandPlaceholders = ""
+
+		//fopUserConfig = file('src/reference/fop/fop-userconfig.xml')
+		fopUserConfig = file('src/docbook/fop.xml')
 	}
 
   afterEvaluate {

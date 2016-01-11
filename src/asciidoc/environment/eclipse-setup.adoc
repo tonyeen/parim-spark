@@ -4,12 +4,16 @@
 
 Eclipse 官网 http://www.eclipse.org/
 
+
+[[eclipse-downloads]]
 == Eclipse的下载
 Eclipse下载地址 http://www.eclipse.org/downloads/
 当前Eclipse最新版是 Eclipse Mars (4.5) Release，我们安装的是 Eclipse luna (4.4) sr2 Packages http://www.eclipse.org/downloads/packages/release/luna/sr2
 
 我们这里使用的Eclipse工具包集合是 *Eclipse IDE for Java EE Developers*
 
+
+[[eclipse-setup-on-windows]]
 == Windows下Eclipse的安装与配置
 Windows下的eclipse安装很简单，将下载的包解压到指定目录，并将启动文件生成快捷方式到桌面或其他需要的目标地址即可。Eclipse的运行需要依赖于JDK1.6（或更高版本的JDK）。安装步骤如下：
 
@@ -29,6 +33,7 @@ image::images/eclipse-setup-2.png[]
 image::images/eclipse-setup-3.png[]
 
 
+[[eclipse-plugins-setup]]
 == Eclipse插件安装（插件根据自己的需要选择安装）
 纯净的eclipse或许不能完全满足我们开发需求，这时需要安装一些插件来支持我们的开发工作。Eclipse的插件安装方法有很多，常见的有3种途径：
 

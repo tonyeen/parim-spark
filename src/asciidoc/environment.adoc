@@ -11,11 +11,14 @@
 * [可选] Gradle 2.6+
 * [可选] Navicat Premium、PL/SQL
 
+[[environment-introduce]]
 == 开发环境说明
 
+[[environment-setup-manuals]]
 == 开发环境安装手册
 include::environment/jdk-setup.adoc[leveloffset=+2]
 include::environment/gradle-setup.adoc[leveloffset=+2]
 include::environment/eclipse-setup.adoc[leveloffset=+2]
 
+[[environment-guides]]
 == 开发环境使用帮助文档
