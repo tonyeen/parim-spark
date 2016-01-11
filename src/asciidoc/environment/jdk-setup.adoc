@@ -11,22 +11,22 @@
 如果从官网上下载的是 jdk-*-windows-*.exe 的程序安装包，直接双击运行安装即可，安装时默认就会进行相关的环境变量的配置。如果是从其他工具包中拷贝的JDK环境，则需要做一些环境变量的配置（Windows环境变量配置方法），配置步骤如下：
 
 1. 新建环境环境变量`JAVA_HOME=[JDK安装根目录]`
-
++
 .新建JAVA_HOME环境变量
-image:://environment/images/jdk-setup-1.png[width=667]
+image::images/jdk-setup-1.png[width=500]
 
 2. 新建环境变量`CLASSPATH=.;%JAVA_HOME%\lib`
-
++
 .新建CLASSPATH环境变量
-image::images/jdk-setup-2.png[width=667]
+image::images/jdk-setup-2.png[width=480]
 
 3. 编辑环境变量`Path`，在末尾加上 "`;%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin`"，若之前有安装JDK，并且没有卸载或清除，请注意在Path环境变量中找到相应的变量值做修改或删除，以免冲突。
-
++
 .修改path环境变量
-image::images/jdk-setup-3.png[width=667]
+image::images/jdk-setup-3.png[width=400]
 
 4. 测试JDK环境变量设置是否正确生效。新打开一个“命令提示符”窗口，输入Java版本检查命令 "`java -version`"，正确输出配置的JDK版本信息，说明安装配置正确。
-
++
 .输出当前java版本
 image::images/jdk-setup-4.png[width=500]
 

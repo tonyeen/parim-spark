@@ -1,7 +1,8 @@
 [[environment]]
 = 开发环境
-:doctype: book
 
+[partintro]
+---
 本项目是Java Web项目，为了方便协作，建议您根据以下工具列表搭建开发环境：
 
 * JDK 1.7
@@ -10,6 +11,7 @@
 * Git
 * [可选] Gradle 2.6+
 * [可选] Navicat Premium、PL/SQL
+---
 
 [[environment-introduce]]
 == 开发环境说明

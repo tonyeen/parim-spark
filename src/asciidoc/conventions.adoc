@@ -1,8 +1,7 @@
 [[conventions]]
 = 编码规范
-:doctype: book
 
--[partintro]
+[partintro]
 --
 这是通铭教育公司软件工程开发编码规范和项目管理规范
 

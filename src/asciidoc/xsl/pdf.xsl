@@ -57,14 +57,14 @@ under the License.
 				<fo:table-body>
 					<fo:table-row>
 						<fo:table-cell text-align="center">
-							<fo:block>
-								<fo:external-graphic src="images/logo.png" width="240px"
+							<fo:block width="240px" padding="30mm">
+								<fo:external-graphic src="images/logo.png" width="120px"
 									height="auto" content-width="scale-to-fit"
 									content-height="scale-to-fit"
 									content-type="content-type:image/png" text-align="center"
 								/>
 							</fo:block>
-							<fo:block font-family="SimSun" font-size="20pt" font-weight="bold" padding="10mm">
+							<fo:block font-family="SimSun" font-size="24pt" font-weight="bold" padding="10mm">
 								<xsl:value-of select="bookinfo/title"/>
 							</fo:block>
 							<fo:block font-family="SimSun" font-size="14pt" padding-before="2mm">

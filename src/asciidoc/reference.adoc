@@ -1,0 +1,17 @@
+[[project-reference]]
+= 项目开发
+
+[partintro]
+---
+本项目是解决快速高效合作开发，下面介绍如何入手和参与该项目
+---
+
+
+include::reference/architecture.adoc[indexoffset=+1]
+
+== 新产品项目开发手册
+== 功能需求文档
+== 数据库设计
+== 代码设计
+== 部署与测试操作手册（规范）
+== 版本发布手册
