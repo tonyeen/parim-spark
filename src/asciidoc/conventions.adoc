@@ -12,3 +12,19 @@
 
 include::conventions/oracle-java-code-conventions.adoc[leveloffset=+1]
 include::conventions/html-code-style.adoc[leveloffset=+1]
+
+== 公司编码规范总则
+== 公司项目管理规范
+== 公司J2EE项目代码编码规范
+== 公司HTML编码规范
+== 公司项目代码版本管理规范
+== 公司代码审核标准
+
+[[protocal]]
+== 协议和标准
+=== 应遵守以下协议和标准
+- link:http://http.org[HTTP协议]
+- link:http://html.org[HTML5标准]
+- link:http://ddd.fff[AICC课件标准]
+- link:http://dfd.fd[Scorm1.2课件标准]
+- link:dd[公司遵守的开源协议与项目代码开源范围]

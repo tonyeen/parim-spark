@@ -1,0 +1,57 @@
+[[guide-project-structure]]
+= 项目结构
+
+
+[[guide-project-structure-dir-and-files]]
+== 目录和文件
+
+[[gps-dir-root]]
+=== 根目录
+当从服务器下载文件到本地后，从源文件的根目录开始，你大概能看到如下的目录结构。
+
+[source, shell]
+----
+# parim-spark/ $ tree -L 1
+.
+├── build                          <1>
+├── build.gradle                   <2>
+├── CHANGELOG                      <3>
+├── gradle
+├── gradle.properties
+├── gradlew
+├── gradlew.bat
+├── import-into-eclipse.bat        <4>
+├── import-into-eclipse.sh         <4>
+├── import-into-idea.md
+├── README.md                      <5>
+├── settings.gradle
+├── spark-common                   <6>
+├── spark-core                     <7>
+├── spark-generator
+├── spark-prefecture
+├── spark-system
+├── spark-templates
+├── spark-web                      <8>
+└── src                            <9>
+----
+<1> 根项目编译目标目录。该目录需要在编译项目后才会生成。
+<2> Gradle项目构建配置文件。该文件管理了整个项目的构建配置、jar包依赖以及各个子项目之间的依赖关系。
+<3> 更新日志。按里程碑或者项目重要版本为单位记录，记录包含版本信息、更新记录描述及更新项列表和索引。
+<4> 导入到IED(Eclpse)的向导脚本，一般在本地开发初始化项目的时候使用。
+<5> 关于文件。这个文件对项目有个简单的概述，并包含部分重要文档索引，以指导如何使用本项目。
+<6> [子项目]通用项目。该项目提供项目开发的公共组件、工具。其他项目一般直接或间接依赖此项目。
+<7> [打包项目]核心功能打包项目。该项目是个空项目，仅用于打包几个核心项目（ `spark-common` + `spark-templates` + `spark-system` + `spark-gengerator` ），以简便依赖配置。
+<8> [打包项目]WEB属性打包项目。打包整个工程为web工程，用于部署和发布。该项目理论上依赖于其他所有子项目。
+<9> 根项目源文件目录。该项目包含部分编译依赖配置文件，以及项目文档 `TODO:项目文档是否考虑作为单独的子项目或者分布到各个子项目中` 。
+
+[[gps-spark-common-files]]
+=== spark-common子项目文件
+
+[[gps-spark-templates-files]]
+=== spark-templates子项目文件
+
+[[gps-project-ref]]
+== 项目关系
+
+[[gps-module-management]]
+== 模块组织

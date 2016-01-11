@@ -2,12 +2,12 @@
 = 项目开发
 
 [partintro]
----
+--
 本项目是解决快速高效合作开发，下面介绍如何入手和参与该项目
----
+--
 
 
-include::reference/architecture.adoc[indexoffset=+1]
+include::reference/architecture.adoc[leveloffset=+1]
 
 == 新产品项目开发手册
 == 功能需求文档

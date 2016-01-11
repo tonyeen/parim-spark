@@ -1,0 +1,69 @@
+[[guide-prepare-environment]]
+= 准备开发环境
+
+本项目是Java Web项目，为了方便协作，建议您根据以下工具列表搭建开发环境：
+
+* JDK 1.7
+* Eclipse luna (4.4) sr2
+* Tomcat 7.0
+* Git
+* [可选] Gradle 2.6+
+* [可选] Navicat Premium、PL/SQL
+
+
+[[guide-prepare-environment-jdk]]
+== JDK
+
+最新版本（当前是JDK8.0）的下载地址是： http://www.oracle.com/technetwork/java/javase/downloads/index.html 。可以从Oracle的Java Product Archive（Java 产品归档 http://www.oracle.com/technetwork/java/javase/archive-139210.html ）中找到历史版本的JDK文档和下载。
+安装向导请参考：[JDK的安装与配置]()
+
+
+[[guide-prepare-environment-eclipse]]
+== Eclipse
+
+Eclipse下载地址 http://www.eclipse.org/downloads/ 。
+当前Eclipse最新版是 Eclipse Mars (4.5) Release，我们安装的是 Eclipse luna (4.4) sr2 Packages http://www.eclipse.org/downloads/packages/release/luna/sr2 。
+
+我们这里使用的Eclipse工具包集合是 Eclipse IDE for Java EE Developers，如果您没有其他需求请安装这个开发工具集。
+
+安装向导和建议插件选择请参考：[Eclipse的安装与配置]()
+
+
+[[guide-prepare-environment-tomcat]]
+== Tomcat
+
+http://tomcat.apache.org/[Apache Tomcat]目前已经更新到9.0版本，请到Apache Tomcat项目主页  http://tomcat.apache.org/ 选择指定的版本下载安装。本项目建议使用的版本是 http://tomcat.apache.org/download-70.cgi[Tomcat 7.0] 。
+
+安装向导和在项目中配合 Eclipse 做本地开发和调试的安装配置，请参考：[Tomcat的安装和配置]()
+
+
+[[guide-prepare-environment-gradle]]
+== Gradle
+
+因为项目使用了 Gradle 免安装解决方案(gradlew)，所以该工具你可以根据你的需要选择是否安装。
+
+可以从 http://gradle.org[Gradle官网] 获得最新版本的gradle下载，这里是当前版本gradle 2.6的下载链接 https://services.gradle.org/distributions/gradle-2.6-all.zip
+
+安装方法可以参考: [Gradle的安装和配置]() 或者  https://gradle.org/getting-started-gradle-java/[Gradle Getting Started]
+
+了解更多 Gradle 的知识可以参考： +
+http://baike.baidu.com/view/9916271.htm[Gradle 百度词条]、
+https://docs.gradle.org/current/userguide/userguide.html[Gradle User Guide] 。
+
+
+[[guide-prepare-environment-git]]
+== Git
+
+Git 是现在主流的版本管理工具之一，本项目发布在公司的Git仓库中。为了能更好地协作，建议你安装Git客户端管理和发布代码。Git可视化工具，个人认为比较好用的有 `Source Tree`，根据你的需要选择安装。
+
+
+[[guide-prepare-environment-navicat-premium]]
+== Navicat Premium
+
+一个强大的集成数据库连接客户端，这里主要使用它的 MySQL 客户端功能，您可以根据自己的喜好选择是否安装，或者您有更好用的数据库客户端工具，请推荐给大家使用。
+
+
+[[guide-prepare-environment-plsql]]
+== PL/SQL
+
+Oracle 数据库官方客户端工具，对 Oracle 数据库操作系统特性具有强大的处理能力。当项目使用 Oracle 数据库操作系统时，强烈建议使用该客户端处理相关工作。
