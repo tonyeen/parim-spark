@@ -1,0 +1,5 @@
+description = "Spark Comment Web"
+
+apply plugin: "eclipse-wtp"
+
+tasks["eclipse"].dependsOn(eclipseWstWebFregment)

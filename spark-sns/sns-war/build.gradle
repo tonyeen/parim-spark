@@ -1,0 +1,7 @@
+apply plugin: "eclipse-wtp"
+
+tasks["eclipse"].dependsOn(eclipseWstWebApp)
+
+dependencies {
+    compile(project(":spark-core:spark-common-web"))
+}

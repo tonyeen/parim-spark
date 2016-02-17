@@ -1,0 +1,97 @@
+version = '0.1.1'
+
+description = "Spark Common"
+
+dependencies {
+    compile (
+        //spring
+        //compile "org.springframework:spring-context:${springVersion}"
+        "org.springframework:spring-webmvc:${springVersion}", //此时不用配spring-context依赖关系
+        //"org.springframework:spring-test:${springVersion}",
+        "org.springframework:spring-orm:${springVersion}",  //ORM 对象关系映射
+        "org.springframework:spring-oxm:${springVersion}",
+        "org.springframework:spring-context-support:${springVersion}",
+        'org.springframework.data:spring-data-commons:1.11.1.RELEASE', //spring data core
+
+        'org.hibernate:hibernate-validator:5.1.2.Final',    //JSR303 Bean Validator
+
+        //PERSISTENCE
+        //MyBatis
+        "org.mybatis:mybatis:${mybatisVersion}",
+        "org.mybatis:mybatis-spring:${mybatisSpringVersion}",
+        "cglib:cglib:3.2.0",
+        //connection pool
+        "com.alibaba:druid:${druidVersion}",
+        //jdbc driver
+        "mysql:mysql-connector-java:${mysqlDriverVersion}", //mysql 驱动
+        //"com.oracle:ojdbc14:${oracleDriverVersion}",
+
+        //WEB
+        //"opensymphony:sitemesh:${sitemeshVersion}",
+        "taglibs:standard:1.1.2",
+        "javax.servlet:jstl:1.2", //'javax.servlet.jsp.jstl:jstl:1.2',
+
+        //CACHE
+        "net.sf.ehcache:ehcache-core:${ehcacheVersion}",
+        "net.sf.ehcache:ehcache-web:${ehcacheWebVersion}",
+        "redis.clients:jedis:2.5.1",
+
+        //SECURITY
+        "org.apache.shiro:shiro-core:${shiroVersion}",
+        "org.apache.shiro:shiro-spring:${shiroVersion}",
+        "org.apache.shiro:shiro-cas:${shiroVersion}",
+        "org.apache.shiro:shiro-web:${shiroVersion}",
+        "org.apache.shiro:shiro-ehcache:${shiroVersion}",
+
+
+        //日志记录 LOGGING
+        'log4j:log4j:1.2.14',
+        "org.slf4j:slf4j-api:${slf4jVersion}",
+        "org.slf4j:slf4j-log4j12:${slf4jVersion}",
+        "org.slf4j:jcl-over-slf4j:${slf4jVersion}", //common-logging 实际调用slf4j
+        "org.slf4j:jul-to-slf4j:${slf4jVersion}",   //java.util.logging 实际调用slf4j
+
+
+        //GENERAL UTILS
+        //commons
+        "org.apache.commons:commons-lang3:${commonsLang3Version}",
+        "commons-io:commons-io:${commonsIoVersion}",
+        "commons-codec:commons-codec:${commonsCodecVersion}",
+        "commons-fileupload:commons-fileupload:${commonsFileuploadVersion}",
+        "commons-beanutils:commons-beanutils:${commonsBeanutilsVersion}",
+        "org.apache.commons:commons-email:1.4",
+        //google java lib
+        "com.google.guava:guava:${guavaVersion}",
+        //json
+        //compile "com.fasterxml.jackson.core:jackson-databind:2.6.1"
+        "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
+        "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
+        "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}",
+        "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:${jacksonVersion}",
+        //xstream xml
+        "com.thoughtworks.xstream:xstream:${xstreamVersion}",
+        //pojo copy
+        "net.sf.dozer:dozer:${dozerVersion}",
+        //freemarker engine
+        "org.freemarker:freemarker:${freemarkerVersion}",
+        //email
+        "javax.mail:mail:1.4.7",
+        "javax.activation:activation:1.1.1",
+        //poi office
+        "org.apache.poi:poi:${poiVersion}",
+        "org.apache.poi:poi-ooxml:${poiVersion}",
+        "org.apache.poi:poi-ooxml-schemas:${poiVersion}",
+        //image util
+        "com.drewnoakes:metadata-extractor:2.6.2",
+        //条形码、二维码生成
+        "com.google.zxing:core:2.2",
+        "com.google.zxing:javase:2.2",
+        //中文分词
+        "org.wltea:analyzer:2012_u6",
+        //ant core for use ant-zip
+        "org.apache.ant:ant:1.9.4",
+
+        //User Agent
+        "bitwalker:UserAgentUtils:1.13"
+    )
+}
