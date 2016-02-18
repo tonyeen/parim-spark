@@ -1,3 +1,11 @@
+description = "Spark System Web"
 apply plugin: "eclipse-wtp"
 
 tasks["eclipse"].dependsOn(eclipseWstWebFregment)
+
+
+dependencies {
+    compile(project(":spark-core:spark-common"))
+    compile(project(":spark-core:spark-common-web"))
+    compile(project(":spark-core:spark-system"))
+}

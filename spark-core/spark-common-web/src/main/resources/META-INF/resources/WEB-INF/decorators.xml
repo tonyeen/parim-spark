@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/WEB-INF/layouts">
+
+	<excludes>
+		<pattern>/static/*</pattern>
+		<pattern>/cxf/*</pattern>
+		<pattern>/api/*</pattern>
+		<pattern>/javasimon/*</pattern>
+		<!-- <pattern>/admin/login</pattern> -->
+		<pattern>/admin/*/select/*</pattern>
+		<!-- <pattern>/*log*</pattern> -->
+		<pattern>/admin/*/inc/*</pattern>
+		<pattern>/*/inc/*</pattern>
+		<pattern>/front/peoplecenter/showSigleMessage/*</pattern>
+	</excludes>
+	
+	<!-- <decorator name="admin" page="admin/default.jsp">
+		<pattern>/admin</pattern>
+		<pattern>/admin/</pattern>
+		<pattern>/admin/index</pattern>
+	</decorator>
+	<decorator name="admin-product" page="admin/product.jsp">
+		<pattern>/admin/*</pattern>
+	</decorator> -->
+	<decorator name="admin" page="admin/default.jsp">
+		<pattern>/admin</pattern>
+		<pattern>/admin/*</pattern>
+	</decorator>
+	
+	<!-- //TODO: 解决动态加载配置的主题的问题 -->
+	<decorator name="front" page="front/default.jsp">
+		<pattern>/front/*</pattern>
+		<pattern>/*</pattern>
+	</decorator>
+	
+	<!-- 默认装饰页面, 在需要装饰的页面增加<meta name="decorator" content="default"/> -->
+	<decorator name="blank" page="blank.jsp" />
+	<decorator name="admin-blank" page="admin/blank.jsp" />
+	<!-- <decorator name="default" page="layouts/default.jsp" /> -->
+	
+	<!-- CMS基础主题装饰页面 -->
+	<!-- <decorator name="cms_default_basic" page="modules/cms/front/themes/basic/layouts/default.jsp" /> -->
+	<!-- <decorator name="cms_default_weixin" page="modules/cms/front/themes/weixin/layouts/default.jsp" /> -->
+	
+</decorators>

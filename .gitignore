@@ -17,6 +17,7 @@ argfile*
 pom.xml
 activemq-data/
 
+build
 /build
 buildSrc/build
 /spark-*/build

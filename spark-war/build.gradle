@@ -4,7 +4,9 @@ apply plugin: 'com.bmuschko.tomcat'
 tasks["eclipse"].dependsOn(eclipseWstWebApp)
 
 dependencies {
+    compile(project(":spark-core:spark-common"))
     compile(project(":spark-core:spark-common-web"))
+    compile(project(":spark-core:spark-system-web"))
     
     def tomcatVersion = '7.0.59'
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
@@ -13,8 +15,8 @@ dependencies {
 }
 
 tomcat {
-    httpPort = 8090
-    httpsPort = 8091
+    httpPort = 8089
+    httpsPort = 8092
     enableSSL = true
     contextPath = 'spark'
 }

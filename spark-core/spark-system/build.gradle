@@ -1,0 +1,5 @@
+
+
+dependencies {
+    compile(project(":spark-core:spark-common"))
+}

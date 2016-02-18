@@ -6,7 +6,9 @@ tasks["eclipse"].dependsOn(eclipseWstWebFregment)
 
 dependencies {
     compile(project(":spark-core:spark-common"))
-
+    
+    compile "opensymphony:sitemesh:${sitemeshVersion}"
+    
     providedCompile "javax.servlet.jsp:jsp-api:2.2.1-b03"
     providedCompile "javax.servlet:javax.servlet-api:3.1.0" // 编译期
 }
