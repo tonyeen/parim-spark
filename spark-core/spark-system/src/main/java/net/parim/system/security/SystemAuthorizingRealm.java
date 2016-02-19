@@ -101,7 +101,9 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 				logger.debug("User "+ user.getId() + user.getUsername() + " is permissed: " + permission);
 			}
 		}
-		logger.debug(authInfo.getStringPermissions().size()+"");
+		if (null != authInfo.getStringPermissions()){
+			logger.debug(authInfo.getStringPermissions().size() + "");
+		}
 		return authInfo;
 	}
 	

@@ -43,7 +43,7 @@
 	  and X.distance=1
 	</select>
 	
-	<select id="findAllChildren" parameterType="long" resultType="net.parim.system.entity.PermissionTarget">
+	<select id="findAllChildren" parameterType="string" resultType="net.parim.system.entity.PermissionTarget">
 	SELECT x.child_id AS ID, 
 	    X.child_object_type AS "objectType",
         X.child_count AS CHILD_COUNT, 

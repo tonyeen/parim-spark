@@ -41,11 +41,11 @@
 		where id = #{id}
 	</update>
 	
-	<delete id="delete" parameterType="long">
+	<delete id="delete" parameterType="string">
 		delete `admin_role` where id = #{id}
 	</delete>
 	
-	<select id="findOne" parameterType="long" resultMap="roleMap">
+	<select id="findOne" parameterType="string" resultMap="roleMap">
 		select r.`id`,
 			r.`name`,
 			r.`site_id` as "site.id",
@@ -98,7 +98,7 @@
 		</where>
 	</select>
 	
-	<select id="selectPrivilegesByRoleId" parameterType="long" resultType="net.parim.system.entity.Privilege">
+	<select id="selectPrivilegesByRoleId" parameterType="string" resultType="net.parim.system.entity.Privilege">
 	   select p.`id`,
             p.`identifier`,
             p.`name`,

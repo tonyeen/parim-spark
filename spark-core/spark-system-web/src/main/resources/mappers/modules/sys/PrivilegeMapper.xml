@@ -30,11 +30,11 @@
 		where id = #{id}
 	</update>
 	
-	<delete id="delete" parameterType="long">
+	<delete id="delete" parameterType="string">
 		delete `admin_privilege` where id = #{id}
 	</delete>
 	
-	<select id="findOne" parameterType="long" resultType="net.parim.system.entity.Privilege">
+	<select id="findOne" parameterType="string" resultType="net.parim.system.entity.Privilege">
 		select `id`,
 			`identifier`,
 			`name`,

@@ -17,11 +17,11 @@
 	<!-- <update id="delete" parameterType="long">
 		update site set is_deleted=1 where id=#{id} and id&lt;&gt;1
 	</update> -->
-	<delete id="delete" parameterType="long">
+	<delete id="delete" parameterType="string">
 		delete from site where id=#{id} and id&lt;&gt;1
 	</delete>
 	
-	<select id="findOne" parameterType="long" resultType="net.parim.system.entity.Site">
+	<select id="findOne" parameterType="string" resultType="net.parim.system.entity.Site">
 		select s.`created_by` as "createdBy.id", 
 			s.`last_update_date`, 
 			s.`theme`, 
