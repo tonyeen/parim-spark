@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.parim.common.web.MenuProvider;
 import net.parim.system.entity.Menu;
 import net.parim.system.repository.MenuRepository;
 
 @Service
-public class SystemService {
+public class SystemService implements MenuProvider {
 	
 	@Autowired
 	private MenuRepository menuRepository;
@@ -41,6 +42,11 @@ public class SystemService {
 	public void removeMenu(Menu menu){
 		menuRepository.delete(menu);
 		// 更新缓存
+	}
+
+	@Override
+	public List<?> getMenuList() {
+		return findAllMenu();
 	}
 
 }
