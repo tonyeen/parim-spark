@@ -30,7 +30,7 @@ public class Global {
 	 * 保存全局属性值
 	 */
 	private static Map<String, String> map = Maps.newHashMap();
-	private static PropertiesLoader loader = new PropertiesLoader("sns.properties");
+	private static PropertiesLoader loader = new PropertiesLoader("application.properties");
 	
 	private Global(){}
 	

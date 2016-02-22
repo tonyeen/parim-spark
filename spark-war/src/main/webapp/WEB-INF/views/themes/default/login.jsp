@@ -27,7 +27,7 @@
 <div class="login-page">
   <div class="login-box panel panel-default">
     <div class="panel-heading">
-      <div class="panel-title text-center">登录系统</div>
+      <div class="panel-title text-center">登录系统 WAR</div>
     </div>
     <div class="panel-body">
       <div class="error">

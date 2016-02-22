@@ -2,6 +2,10 @@ version = '0.1.1'
 
 description = "Spark Common"
 
+apply plugin: "eclipse-wtp"
+
+tasks["eclipse"].dependsOn(eclipseWstWebFregment)
+
 dependencies {
     compile (
         //spring

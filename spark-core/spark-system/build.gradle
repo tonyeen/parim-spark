@@ -1,4 +1,11 @@
 
+//本项目本来不应该是web项目的，但是在Windows版的Eclipse Version: Luna Service Release 2 (4.4.2)中，
+//Web Deployment Assembly 的项目依赖存在问题，找不到非web或者非webfragment项目
+//在Eclipse的 更高版本 Eclipse Mars.1 (4.5.1) Release for Linux，在出现找不到之后，重新选择项目即可，
+//而 4.4的Windows版不能用相同的方法解决，只能将被依赖的普通Java项目改成java web（-fragment）项目
+apply plugin: "eclipse-wtp"
+
+tasks["eclipse"].dependsOn(eclipseWstWebFregment)
 
 dependencies {
     compile(project(":spark-core:spark-common"))

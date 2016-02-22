@@ -5,8 +5,9 @@
 	<display-name>spark-system-web</display-name>
 	<name>sparkSystemWeb</name>
 	
+	<!-- This ordering just for web resources. Without jar dependencies. -->
 	<ordering>
-        <after><name>sparkCommonWeb</name></after>
+        <before><name>sparkCommonWeb</name></before>
     </ordering>
     
 </web-fragment>

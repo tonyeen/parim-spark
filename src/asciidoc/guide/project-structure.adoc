@@ -25,13 +25,13 @@
 ├── import-into-idea.md
 ├── README.md                      <5>
 ├── settings.gradle
-├── spark-common                   <6>
 ├── spark-core                     <7>
-├── spark-generator
-├── spark-prefecture
-├── spark-system
-├── spark-templates
-├── spark-web                      <8>
+│   ├── spark-common               <6>
+│   ├── spark-generator
+│   ├── spark-prefecture
+│   ├── spark-system
+│   └── spark-templates
+├── spark-war                      <8>
 └── src                            <9>
 ----
 <1> 根项目编译目标目录。该目录需要在编译项目后才会生成。

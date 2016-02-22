@@ -12,7 +12,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             classpath*:/applicationContext.xml
-            classpath*:/applicationContext-sns.xml
+            classpath*:/applicationContext-*.xml
         </param-value>
     </context-param>
     <listener>
@@ -104,7 +104,7 @@
 	
 	<!-- [INSERT FRAGMENT HERE] -->
 
-	<!-- Session configure, to "sns.properties" file "session.sessionTimeout" parameter.
+	<!-- Session configure, to "application.properties" file "session.sessionTimeout" parameter.
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>-->
