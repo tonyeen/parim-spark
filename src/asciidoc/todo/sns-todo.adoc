@@ -1,0 +1,69 @@
+= 社区项目开发待办事项
+
+== 项目规划
+
+== 项目设计
+
+=== 功能需求分析
+
+=== 功能设计
+
+=== PC端界面用例
+
+=== 数据库设计
+
+=== 功能接口设计
+
+=== 结构代码
+
+== 东航项目规划
+
+项目时间 ::
+  3月低上线UAT版本
+
+涵盖功能 ::
+  圈子、讨论 +
+  主要用于班级圈子
+
+使用方式 ::
+  PC管理功能、PC学员界面、手机端接口；
+
+面临问题 ::
+  - 兼容老产品的班级注册方式
+  - 人员角色和管理权限等
+  - 与老产品的非侵入式集成。
+
+
+::
+
+- [*] checked
+- [x] also checked
+- [ ] not checked
+-     normal list item
+
+- [ ] dfasd
+
+
+
+first term::
+definition of first term
+section term::
+definition of second term
+
+[%hardbreaks]
+asdfasdfas
+asdfasd
+asdfasd
+asdfasd
+
+asdfasdf +
+asdfasd
+asdf
+
+[source, java]
+----
+public void main(){
+  String a;
+  String b;
+}
+----
