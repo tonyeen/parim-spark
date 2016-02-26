@@ -9,7 +9,7 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PasswordHelper {
+public class PasswordHelper_nouse {
 	private RandomNumberGenerator randomNumberGenerator = new SecureRandomNumberGenerator();
 
 	private String algorithmName = "md5";

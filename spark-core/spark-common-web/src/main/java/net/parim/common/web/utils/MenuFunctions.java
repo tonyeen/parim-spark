@@ -20,4 +20,12 @@ public class MenuFunctions {
 	public static List<?> getMenuList(){
 		return menuProvider.getMenuList();
 	}
+	
+	public static List<?> getTopLevelMenus(){
+		return menuProvider.getTopLevelMenus();
+	}
+	
+	public static List<?> getMenuListByParentId(String parentId){
+		return menuProvider.getMenuListByParentId(parentId);
+	}
 }

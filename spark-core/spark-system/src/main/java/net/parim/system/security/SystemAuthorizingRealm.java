@@ -5,26 +5,30 @@ package net.parim.system.security;
 
 import java.util.List;
 
-import net.parim.system.entity.Privilege.Type;
-import net.parim.system.entity.User;
-import net.parim.system.entity.UserRole;
-import net.parim.system.service.AccountService;
-import net.parim.system.service.PermissionService;
+import javax.annotation.PostConstruct;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.Permission;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
-import org.apache.shiro.authz.permission.WildcardPermission;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import net.parim.common.security.PasswordHelper;
+import net.parim.common.utils.Encodes;
+import net.parim.system.entity.Privilege.Type;
+import net.parim.system.entity.User;
+import net.parim.system.entity.UserRole;
+import net.parim.system.service.AccountService;
+import net.parim.system.service.PermissionService;
 
 /**
  * 系统安全认证实现类
@@ -42,6 +46,16 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	
 	@Autowired
 	private PermissionService permissionService;
+	
+	/**
+	 * 设定密码校验的Hash算法与迭代次数
+	 */
+	@PostConstruct
+	public void initCredentialsMatcher() {
+		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(PasswordHelper.HASH_ALGORITHM);
+		matcher.setHashIterations(PasswordHelper.HASH_INTERATIONS);
+		setCredentialsMatcher(matcher);
+	}
 
 	/**
 	 * 授权查询回调函数, 进行鉴权但缓存中无用户的授权信息时调用
@@ -59,7 +73,10 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		// 校验用户名密码
 		User user = accountService.findUserByUsername(authcToken.getUsername());
 		if (user != null) {
-			return new SimpleAuthenticationInfo(user, user.getPassword(), getClass().getName());
+			byte[] salt = Encodes.decodeHex(user.getPassword().substring(0,16));
+			return new SimpleAuthenticationInfo(user, 
+					user.getPassword().substring(PasswordHelper.SALT_SIZE*2), 
+					ByteSource.Util.bytes(salt), getClass().getName());
 		} else {
 			return null;
 		}

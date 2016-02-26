@@ -24,7 +24,7 @@
       </div>
     </div>
     
-    <div class="topbar-nav topbar-left">
+    <%-- <div class="topbar-nav topbar-left">
     	<c:forEach items="${fns:getMenuList() }" var="menu">
     		<c:if test="${menu.parent.id eq '1' && menu.isShow eq true}">
     			<c:if test="${empty menu.url }">
@@ -35,6 +35,19 @@
     			</c:if>
     		</c:if>
     	</c:forEach>
+    </div> --%>
+    
+    <div class="topbar-nav topbar-left">
+        <c:forEach items="${fns:getTopLevelMenus() }" var="menu">
+            <c:if test="${menu.isShow eq true}">
+                <c:if test="${empty menu.url }">
+                    <a id="menu-${menu.id }" class="topbar-btn topbar-nav-btn" href="javascript:void(0)" data-href="?menu_id=${menu.id }">${menu.name }</a>
+                </c:if>
+                <c:if test="${not empty menu.url }">
+                    <a id="menu-${menu.id }" class="topbar-btn topbar-nav-btn" href="${fn:indexOf(menu.url, '://') eq -1 ? ctxAdmin : ''}${menu.url }" target="${menu.target }">${menu.name }</a>
+                </c:if>
+            </c:if>
+        </c:forEach>
     </div>
 
     <div class="topbar-info topbar-right"><!-- navbar-right 解决最后一个dropdown定位超出屏幕外的问题 -->

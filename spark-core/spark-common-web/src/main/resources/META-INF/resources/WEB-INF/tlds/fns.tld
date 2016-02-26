@@ -81,6 +81,14 @@
   </function>
   
   <function>
+    <description>获取当前用户的顶级菜单对象列表</description>
+    <name>getTopLevelMenus</name>
+    <function-class>net.parim.common.web.utils.MenuFunctions</function-class>
+    <function-signature>java.util.List getTopLevelMenus()</function-signature>
+    <example>${fns:getTopLevelMenus()}</example>  
+  </function>
+  
+  <function>
     <description>获取当前用户的区域对象列表</description>
     <name>getAreaList</name>
     <function-class>net.parim.system.utils.UserUtils</function-class>

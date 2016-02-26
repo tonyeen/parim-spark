@@ -1,5 +1,6 @@
 package net.parim.system.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,44 @@ public class SystemService implements MenuProvider {
 
 	@Override
 	public List<?> getMenuList() {
-		return findAllMenu();
+		//return findAllMenu();
+		Menu menu = new Menu();
+		menu.setId(1);
+		menu.setName("管理控制台");
+		
+		Menu dashBoard = new Menu();
+		dashBoard.setId(2);
+		dashBoard.setName("我的仪表盘");
+		//dashBoard.setParent(menu);
+		
+		List<Menu> menus = new ArrayList<Menu>();
+		menus.add(menu);
+		menus.add(dashBoard);
+		
+		return menus;
+	}
+
+	@Override
+	public List<?> getTopLevelMenus() {
+		Menu menu = new Menu();
+		menu.setId(1);
+		menu.setName("管理控制台");
+		
+		Menu dashBoard = new Menu();
+		dashBoard.setId(2);
+		dashBoard.setName("我的仪表盘");
+		
+		List<Menu> menus = new ArrayList<Menu>();
+		menus.add(menu);
+		menus.add(dashBoard);
+		
+		return menus;
+	}
+
+	@Override
+	public List<?> getMenuListByParentId(String parentId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

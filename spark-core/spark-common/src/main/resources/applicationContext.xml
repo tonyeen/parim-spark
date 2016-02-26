@@ -30,7 +30,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="typeAliasesPackage" value="net.parim"/>
         <property name="typeAliasesSuperType" value="net.parim.common.persistence.BaseEntity"/>
-        <property name="mapperLocations" value="classpath*:/mappers/**/*.xml"/>
+        <property name="mapperLocations" value="classpath*:/mappers/**/${jdbc.type}/*.xml"/>
 		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
     </bean>
     
