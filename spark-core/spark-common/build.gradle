@@ -91,11 +91,11 @@ dependencies {
         "com.google.zxing:core:2.2",
         "com.google.zxing:javase:2.2",
         //中文分词
-        "org.wltea:analyzer:2012_u6",
+        //"org.wltea:analyzer:2012_u6",
         //ant core for use ant-zip
         "org.apache.ant:ant:1.9.4",
 
         //User Agent
-        "bitwalker:UserAgentUtils:1.13"
+        "eu.bitwalker:UserAgentUtils:1.19"
     )
 }

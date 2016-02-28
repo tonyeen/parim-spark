@@ -4,7 +4,7 @@
  */
 buildscript {
     repositories {
-        
+        maven { url "http://maven.parim.net/nexus/content/groups/public/" }
         maven { url "https://repo.spring.io/plugins-release" }
         jcenter()
     }
