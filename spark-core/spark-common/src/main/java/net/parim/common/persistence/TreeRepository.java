@@ -8,6 +8,8 @@ public interface TreeRepository<E extends TreeEntity<?>> extends CurdRepository<
 	
 	public List<?> findAllRoots(E entity, OperateUser user);
 	
+	public List<?> findChildren(E entity);
+	
 	/**
 	 * 查找所有的子节点
 	 * @param entity

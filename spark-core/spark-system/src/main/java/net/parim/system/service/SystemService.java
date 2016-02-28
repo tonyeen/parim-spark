@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import net.parim.common.utils.IdGen;
 import net.parim.common.web.MenuProvider;
 import net.parim.system.entity.Menu;
 import net.parim.system.repository.MenuRepository;
@@ -29,7 +30,8 @@ public class SystemService implements MenuProvider {
 		menu.setParentIds(menu.getParent().getParentIds()+","+menu.getParent().getId());
 		
 		// 保存当前实体
-		if(menu.getId() == null){
+		if(menu.getIsNewRecord()){
+			menu.setId(IdGen.uuid());
 			menuRepository.insert(menu);
 		}else{
 			menuRepository.update(menu);
@@ -66,25 +68,25 @@ public class SystemService implements MenuProvider {
 
 	@Override
 	public List<?> getTopLevelMenus() {
-		Menu menu = new Menu();
-		menu.setId(1);
-		menu.setName("管理控制台");
-		
-		Menu dashBoard = new Menu();
-		dashBoard.setId(2);
-		dashBoard.setName("我的仪表盘");
-		
-		List<Menu> menus = new ArrayList<Menu>();
-		menus.add(menu);
-		menus.add(dashBoard);
-		
-		return menus;
+		return menuRepository.findAllRoots(null, null);
 	}
 
 	@Override
 	public List<?> getMenuListByParentId(String parentId) {
-		// TODO Auto-generated method stub
-		return null;
+		Menu menu = menuRepository.findByIdentifier(parentId);
+		return menuRepository.findChildren(menu);
+	}
+	
+	@Override
+	public List<?> getUserCustomMenus() {
+		Menu dashBoard = new Menu();
+		dashBoard.setId(100);
+		dashBoard.setName("我的仪表盘");
+		
+		List<Menu> menus = new ArrayList<Menu>();
+		menus.add(dashBoard);
+		
+		return menus;
 	}
 
 }

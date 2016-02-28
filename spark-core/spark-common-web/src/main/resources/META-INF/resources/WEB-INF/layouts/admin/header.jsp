@@ -41,10 +41,10 @@
         <c:forEach items="${fns:getTopLevelMenus() }" var="menu">
             <c:if test="${menu.isShow eq true}">
                 <c:if test="${empty menu.url }">
-                    <a id="menu-${menu.id }" class="topbar-btn topbar-nav-btn" href="javascript:void(0)" data-href="?menu_id=${menu.id }">${menu.name }</a>
+                    <a id="menu-${menu.identifier }" class="topbar-btn topbar-nav-btn" href="javascript:void(0)" data-href="?menu_id=${menu.id }">${menu.name }</a>
                 </c:if>
                 <c:if test="${not empty menu.url }">
-                    <a id="menu-${menu.id }" class="topbar-btn topbar-nav-btn" href="${fn:indexOf(menu.url, '://') eq -1 ? ctxAdmin : ''}${menu.url }" target="${menu.target }">${menu.name }</a>
+                    <a id="menu-${menu.identifier }" class="topbar-btn topbar-nav-btn" href="${fn:indexOf(menu.url, '://') eq -1 ? ctxAdmin : ''}${menu.url }" target="${menu.target }">${menu.name }</a>
                 </c:if>
             </c:if>
         </c:forEach>

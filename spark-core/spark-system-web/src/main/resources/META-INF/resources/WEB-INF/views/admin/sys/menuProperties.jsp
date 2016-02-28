@@ -55,6 +55,14 @@
 					</div>
 				</div>
 				<div class="form-group">
+                    <label class="col-sm-4 control-label">标识:</label>
+                    <div class="col-sm-8 controls">
+                        <form:input path="identifier" htmlEscape="false" maxlength="2000" class="input-xlarge"/>
+                        <span class="error ${empty ERR_url ? 'hide':'' }">${ERR_url }</span>
+                        <span class="help-inline">用于页面定位菜单</span>
+                    </div>
+                </div>
+				<div class="form-group">
 					<label class="col-sm-4 control-label">链接:</label>
 					<div class="col-sm-8 controls">
 						<form:input path="url" htmlEscape="false" maxlength="2000" class="input-xxlarge"/>

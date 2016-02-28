@@ -89,6 +89,22 @@
   </function>
   
   <function>
+    <description>获取当前用户的顶级菜单对象列表</description>
+    <name>getMenuListByParentId</name>
+    <function-class>net.parim.common.web.utils.MenuFunctions</function-class>
+    <function-signature>java.util.List getMenuListByParentId(java.lang.String)</function-signature>
+    <example>${fns:getMenuListByParentId()}</example>  
+  </function>getUserCustomMenus
+  
+  <function>
+    <description>获取当前用户的顶级菜单对象列表</description>
+    <name>getUserCustomMenus</name>
+    <function-class>net.parim.common.web.utils.MenuFunctions</function-class>
+    <function-signature>java.util.List getUserCustomMenus()</function-signature>
+    <example>${fns:getUserCustomMenus()}</example>  
+  </function>
+  
+  <function>
     <description>获取当前用户的区域对象列表</description>
     <name>getAreaList</name>
     <function-class>net.parim.system.utils.UserUtils</function-class>

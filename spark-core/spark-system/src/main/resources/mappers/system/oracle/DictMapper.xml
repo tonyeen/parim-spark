@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.parim.system.repository.DictRepository">
+	
+	<insert id="insert" parameterType="net.parim.system.entity.Dict">
+		insert into sys_dict(
+			identifier,
+			name,
+			group_identifier,
+			group_name,
+			sort
+		) values(
+			#{value},
+			#{label},
+			#{type},
+			#{description},
+			#{sort}
+		)
+	</insert>
+	
+	<update id="update" parameterType="net.parim.system.entity.Dict">
+		update sys_dict set
+			identifier = #{value},
+			name = #{label},
+			group_identifier = #{type},
+			group_name = #{description},
+			sort = #{sort}
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="string">
+		delete sys_dict where id=#{id}
+	</delete>
+	
+	<select id="findOne" parameterType="string" resultType="net.parim.system.entity.Dict">
+		select id,
+			identifier value,
+			name label,
+			group_identifier type,
+			group_name description,
+			sort
+		from sys_dict
+		where id = #{id}
+	</select>
+	
+	<select id="findAll" resultType="net.parim.system.entity.Dict">
+		select id,
+			identifier value,
+            name label,
+            group_identifier type,
+            group_name description,
+			sort
+		from sys_dict
+	</select>
+</mapper>

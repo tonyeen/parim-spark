@@ -22,4 +22,10 @@ public class DefaultMenuProvider implements MenuProvider{
 		return null;
 	}
 
+	@Override
+	public List<?> getUserCustomMenus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

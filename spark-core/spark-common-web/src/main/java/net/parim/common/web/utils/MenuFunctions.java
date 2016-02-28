@@ -28,4 +28,8 @@ public class MenuFunctions {
 	public static List<?> getMenuListByParentId(String parentId){
 		return menuProvider.getMenuListByParentId(parentId);
 	}
+	
+	public static List<?> getUserCustomMenus(){
+		return menuProvider.getUserCustomMenus();
+	}
 }

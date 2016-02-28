@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.parim.system.repository.UserRoleRepository">
+    
+    <select id="findAll" parameterType="net.parim.system.entity.UserRole" resultType="net.parim.system.entity.UserRole">
+        select ur.id as id,
+            ur.user_id as "user.id",
+            ur.user_
+    </select>
+    
+    <select id="findAllByUser" parameterType="net.parim.system.entity.User" resultType="net.parim.system.entity.UserRole">
+        select ur.id as id,
+            u.id as "user.id",
+            ur.role_id as "role.id",
+            ur.privilege_id as "privilege.id",
+            ur.target,
+            ur.target_id
+        from user_role ur,
+            sys_user u
+        where
+            (u.id = ur.user_id or u.user_group_id = ur.user_group_id)
+            and ur.site_id = u.site_id
+            and u.id = #{id}
+    </select>
+</mapper>

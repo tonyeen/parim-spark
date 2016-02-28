@@ -4,9 +4,10 @@
 	
 	<insert id="insert" parameterType="net.parim.system.entity.Menu">
 		insert into sys_menu(
+		    id,
 			parent_id,
-			parent_ids,
 			name,
+			identifier,
 			sort,
 			url,
 			target,
@@ -14,9 +15,10 @@
 			is_show,
 			permission
 		) values(
+		    #{id},
 			#{parent.id},
-			#{parentIds},
 			#{name},
+			#{identifier},
 			#{sort},
 			#{url},
 			#{target},
@@ -29,8 +31,8 @@
 	<update id="update" parameterType="net.parim.system.entity.Menu">
 		update sys_menu set
 			parent_id = #{parent.id},
-			parent_ids = #{parentIds},
 			name = #{name},
+			identifier = #{identifier},
 			sort = #{sort},
 			url = #{url},
 			target = #{target},
@@ -44,11 +46,11 @@
 		delete from sys_menu where id=#{id} or parent_ids like concat(#{parentIds},',',#{id},'%') and id&lt;&gt;1
 	</delete>
 	
-	<select id="findOne" parameterType="long" resultType="net.parim.system.entity.Menu">
+	<select id="findOne" parameterType="string" resultType="net.parim.system.entity.Menu">
 		select a.id,
 			a.parent_id as "parent.id",
-			a.parent_ids,
 			a.name,
+			a.identifier,
 			a.sort,
 			a.url,
 			a.target,
@@ -64,8 +66,8 @@
 	<select id="findAll" resultType="net.parim.system.entity.Menu">
 		select id,
 			parent_id as "parent.id",
-			parent_ids,
 			name,
+			identifier,
 			sort,
 			url,
 			target,
@@ -75,4 +77,53 @@
 		from sys_menu
 		order by sort
 	</select>
+	
+	<select id="findAllRoots" resultType="net.parim.system.entity.Menu">
+       select id,
+            parent_id as "parent.id",
+            name,
+            identifier,
+            sort,
+            url,
+            target,
+            icon,
+            is_show,
+            permission
+        from sys_menu
+        where parent_id is null
+        order by sort
+    </select>
+	
+	<select id="findChildren" parameterType="net.parim.system.entity.Menu" resultType="net.parim.system.entity.Menu">
+	   select id,
+            parent_id as "parent.id",
+            name,
+            identifier,
+            sort,
+            url,
+            target,
+            icon,
+            is_show,
+            permission
+        from sys_menu
+        where parent_id = #{id}
+        order by sort
+	</select>
+	
+	<select id="findByIdentifier" parameterType="string" resultType="net.parim.system.entity.Menu">
+        select a.id,
+            a.parent_id as "parent.id",
+            a.name,
+            a.identifier,
+            a.sort,
+            a.url,
+            a.target,
+            a.icon,
+            a.is_show,
+            a.permission,
+            p.name as "parent.name"
+        from sys_menu a
+            left join sys_menu p on a.parent_id = p.id
+        where a.identifier = #{identifier}
+    </select>
 </mapper>

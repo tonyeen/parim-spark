@@ -6,7 +6,7 @@ public class Role extends DataEntity<Role> {
 	private String name;
 	private Site site;
 	private String targets;
-	private Boolean isSuperuser;
+	private Boolean isSupperuser;
 	
 	private List<Privilege> privileges;
 	
@@ -34,10 +34,10 @@ public class Role extends DataEntity<Role> {
 	public void setTargets(String targets) {
 		this.targets = targets;
 	}
-	public Boolean getIsSuperuser() {
-		return isSuperuser;
+	public Boolean getIsSupperuser() {
+		return isSupperuser;
 	}
-	public void setIsSuperuser(Boolean isSuperuser) {
-		this.isSuperuser = isSuperuser;
+	public void setIsSupperuser(Boolean isSuperuser) {
+		this.isSupperuser = isSuperuser;
 	}
 }

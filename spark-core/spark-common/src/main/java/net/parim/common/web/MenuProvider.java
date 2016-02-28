@@ -9,5 +9,7 @@ public interface MenuProvider {
 	public List<?> getTopLevelMenus();
 	
 	public List<?> getMenuListByParentId(String parentId);
+	
+	public List<?> getUserCustomMenus();
 
 }

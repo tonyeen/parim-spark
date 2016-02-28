@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.parim.system.repository.RoleRepository">
+
+    <resultMap type="net.parim.system.entity.Role" id="roleMap">
+       <collection column="id" property="privileges" javaType="ArrayList" select="selectPrivilegesByRoleId" />
+    </resultMap>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="net.parim.system.entity.Role">
+		INSERT INTO admin_role (
+			name,
+			site_id,
+			targets,
+			is_supperuser,
+			created_by,
+			create_date,
+			last_updated_by,
+			last_update_date
+		)
+		VALUES
+			(
+				#{name},
+				#{site.id},
+				#{targets},
+				#{issupperuser},
+				#{createdBy.id},
+				sysdate,
+				#{lastUpdatedBy.id},
+				sysdate
+			)
+	</insert>
+	
+	<update id="update" parameterType="net.parim.system.entity.Role">
+		update admin_role set
+			name=#{name},
+			<!-- site_id=#{site.id}, -->
+			targets=#{targets},
+			is_supperuser=#{issupperuser},
+			#{lastUpdatedBy.id},
+			sysdate
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="string">
+		delete admin_role where id = #{id}
+	</delete>
+	
+	<select id="findOne" parameterType="string" resultMap="roleMap">
+		select r.id,
+			r.name,
+			r.site_id as "site.id",
+			r.targets,
+			r.is_supperuser,
+			r.created_by  as "createdBy.id",
+			r.create_date,
+			r.last_updated_by as "lastUpdatedBy",
+			r.last_update_date,
+			s.name as "site.name",
+			uc.username as "createdBy.username",
+			uc.first_name as "createdBy.firstName",
+			uc.last_name as "createdBy.lastName",
+			ul.username as "lastUpdatedBy.username",
+			ul.first_name as "lastUpdatedBy.firstName",
+			ul.last_name as "lastUpdatedBy.lastName"
+		from admin_role r
+			left join site s on s.id = r.site_id
+			left join sys_user uc on uc.id = r.created_by
+			left join sys_user ul on ul.id = r.last_updated_by
+		where r.id = #{id}
+	</select>
+	
+	<select id="findAll" resultMap="roleMap">
+		select r.id,
+			r.name,
+			r.site_id as "site.id",
+			r.targets,
+			r.is_supperuser,
+			r.created_by  as "createdBy.id",
+			r.create_date,
+			r.last_updated_by as "lastUpdatedBy",
+			r.last_update_date,
+			s.name as "site.name",
+			uc.username as "createdBy.username",
+			uc.first_name as "createdBy.firstName",
+			uc.last_name as "createdBy.lastName",
+			ul.username as "lastUpdatedBy.username",
+			ul.first_name as "lastUpdatedBy.firstName",
+			ul.last_name as "lastUpdatedBy.lastName"
+		from admin_role r
+			left join site s on s.id = r.site_id
+			left join sys_user uc on uc.id = r.created_by
+			left join sys_user ul on ul.id = r.last_updated_by
+		<where>
+			1=1
+			<if test="name != null and name != ''">
+				and r.name like concat('%',#{name},'%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectPrivilegesByRoleId" parameterType="string" resultType="net.parim.system.entity.Privilege">
+	   select p.id,
+            p.identifier,
+            p.name,
+            p.targets,
+            p.user_type,
+            p.type
+        from admin_privilege p, admin_role_xref r
+        where p.id = r.privilege_id
+            and r.role_id = #{id}
+	</select>
+	
+</mapper>

@@ -3,15 +3,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="main-menu" content="2"/>
-<meta name="menu" content="menu-8"/>
+<meta name="main-menu" content="system_management"/>
+<meta name="menu" content="menu-menu_management"/>
 <title>菜单列表</title>
 <%@ include file="/WEB-INF/views/include/treetable.jsp" %>
 	<script type="text/javascript" src="${ctxStatic }/venders/mustache.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var tpl = $("#treeTableTpl").html().replace(/(\/\/\<!\-\-)|(\/\/\-\->)/g,"");
-			var data = ${fns:toJson(menuList)}, rootId = "${not empty menu.id ? menu.id : '1'}"; //rootId=1 就隐藏了功能菜单这个项，0则显示
+			var data = ${fns:toJson(menuList)}, rootId = "${not empty menu.id ? menu.id : '0'}"; //rootId=1 就隐藏了功能菜单这个项，0则显示
 			addRow("#treeTableList", tpl, data, rootId, true);
 			$("#treeTable").treeTable({expandLevel : 2});
 		});
@@ -19,7 +19,7 @@
 			for (var i=0; i<data.length; i++){
 				var row = data[i];
 				//if (($~{fns:jsGetVal('row.parentId')}) == pid){
-				if(row.parent.id == pid){
+				if(row.parentId == pid){
 					$(list).append(Mustache.render(tpl, {
 						dict: {
 							type: '--'//getDictLabel($~{fns:toJson(fns:getDictList('sys_office_type'))}, row.type)
@@ -63,6 +63,7 @@
 				<thead>
 					<tr>
 						<th>名称</th>
+						<th>标识</th>
 						<th>链接</th>
 						<th>排序</th>
 						<th>可见</th>
@@ -92,7 +93,8 @@
 			<script type="text/template" id="treeTableTpl">
 			<tr id="{{row.id}}" pId="{{pid}}">
 				<td><a href="${ctxAdmin }/sys/menu/properties/{{row.id}}"><i class="{{row.icon}}"></i> {{row.name}}</a></td>
-				<td>{{row.url}}</td>
+                <td>{{row.identifier}}</td>				
+                <td>{{row.url}}</td>
 				<td>{{row.sort}}</td>
 				<td>{{row.isShow?"是"："否"}}</td>
 				<td>{{row.permission}}</td>

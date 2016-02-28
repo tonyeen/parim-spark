@@ -1,18 +1,22 @@
 package net.parim.system.entity;
 
+import java.util.List;
+
 import javax.validation.constraints.DecimalMin;
 
 import net.parim.common.persistence.BaseEntity;
+import net.parim.common.persistence.TreeEntity;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
-public class Menu extends BaseEntity<Menu> {
-	private Menu parent;
+public class Menu extends TreeEntity<Menu> {
+	//private Menu parent;
 	private String parentIds;
 	@NotBlank(message="{menu.name.not.be.blank}")
 	@Length(min=2, max=6, message="{menu.name.length.between}")
 	private String name;
+	private String identifier;
 	@DecimalMin(value="0", message="{menu.sort.not.be.empty}")
 	private Integer sort;
 	//@URL(message="")
@@ -75,5 +79,22 @@ public class Menu extends BaseEntity<Menu> {
 	}
 	public void setPermission(String permission) {
 		this.permission = permission;
+	}
+	
+	@Override
+	public List<Menu> getChildren() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void setChildren(List<Menu> children) {
+		// TODO Auto-generated method stub
+		
+	}
+	public String getIdentifier() {
+		return identifier;
+	}
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
 	}
 }

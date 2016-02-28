@@ -3,8 +3,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="main-menu" content="2"/>
-<meta name="menu" content="menu-6"/>
+<meta name="main-menu" content="system_management"/>
+<meta name="menu" content="menu-user_management"/>
 <title>菜单列表</title>
 <%@ include file="/WEB-INF/views/include/treeview.jsp" %>
 </head>
