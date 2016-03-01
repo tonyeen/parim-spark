@@ -12,7 +12,7 @@ buildscript {
     dependencies {
         classpath("org.springframework.build.gradle:propdeps-plugin:0.0.7")
         classpath("org.asciidoctor:asciidoctor-gradle-plugin:1.5.2")
-        classpath("io.spring.gradle:docbook-reference-plugin:0.3.1")
+        //classpath("io.spring.gradle:docbook-reference-plugin:0.3.1")
         classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.4'
     }
 }
@@ -148,9 +148,94 @@ allprojects {
         providedCompile "javax.servlet.jsp:jsp-api:2.2.1-b03"
         providedCompile "javax.servlet:javax.servlet-api:3.1.0" // 编译期
     }
+
+
 }
 
 
 subprojects {
 
+}
+
+configure(rootProject){
+    description "Parim Spark"
+
+    apply plugin: "org.asciidoctor.convert"
+    apply plugin: "docbook-reference"
+
+    asciidoctor {
+		sourceDir project.file('src/asciidoc')
+		separateOutputDirs = false
+		backends = ['docbook']
+		options doctype: 'book', eruby: 'erubis'
+		attributes 	'spring-version': project.version,
+					'revnumber' : project.version,
+					'docinfo' : ""
+
+        FileCollection asciidocResources = files()
+		resources {
+		  from sourceDir
+		  include "**/*.png"
+		  //into "./"
+		  eachFile {file ->
+		    if(file.name.endsWith(".png")){
+		      asciidocResources  = asciidocResources + files(sourceDir.path+"/"+file.path)
+		    }
+		  }
+		}
+
+		resources {
+		  from sourceDir
+		  include "xsl/**"
+		}
+
+		doLast{
+			println asciidocResources.size()
+	        asciidocResources.each {File file ->
+	          println file.path
+	          copy {
+	            from file
+	            into relativePath(outputDir)+"/images"
+	          }
+	        }
+		}
+
+	}
+
+    reference {
+		sourceDir = asciidoctor.outputDir
+		pdfFilename = "parim-spark-reference.pdf"
+		epubFilename = "parim-spark-reference.epub"
+		expandPlaceholders = ""
+
+		//fopUserConfig = file('src/reference/fop/fop-userconfig.xml')
+		fopUserConfig = file('src/docbook/fop.xml')
+	}
+
+    afterEvaluate {
+		tasks.findAll { it.name.startsWith("reference") }.each{ it.dependsOn.add("asciidoctor") }
+	}
+
+    // don't publish the default jar for the root project
+	configurations.archives.artifacts.clear()
+
+    task docsZip(type: Zip, dependsOn: 'reference') {
+		group = "Distribution"
+		baseName = "parim-spark"
+		classifier = "docs"
+		description = "Builds -${classifier} archive containing api and reference " +
+			"for deployment at http://static.springframework.org/spring-framework/docs."
+
+		from("src/dist") {
+			include "changelog.txt"
+		}
+
+		/*from (api) {
+			into "javadoc-api"
+		}*/
+
+		from (reference) {
+			into "parim-spark-reference"
+		}
+	}
 }
