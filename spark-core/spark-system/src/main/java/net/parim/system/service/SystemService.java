@@ -74,6 +74,7 @@ public class SystemService implements MenuProvider {
 	@Override
 	public List<?> getMenuListByParentId(String parentId) {
 		Menu menu = menuRepository.findByIdentifier(parentId);
+		
 		return menuRepository.findChildren(menu);
 	}
 	
