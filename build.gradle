@@ -4,6 +4,7 @@
  */
 buildscript {
     repositories {
+        maven { url "http://maven.parim.net/nexus/content/groups/public/" }
         maven { url "https://repo.spring.io/plugins-release" }
         jcenter()
     }
@@ -114,23 +115,12 @@ allprojects {
     }
 
     repositories {
+    	maven { url "http://maven.parim.net/nexus/content/groups/public/" }
         mavenCentral()
         jcenter()
         //maven { url "http://repo.parim.net/libs-release" }
-        maven { url "http://repo.parim.net/milestone" }
-        maven { url "http://repo.parim.net/snapshot" }
-        //jcenter()
-        //mavenCentral() // 中央库
-		maven {url 'http://central.maven.org/maven2/'}
-		maven {url 'http://maven.oschina.net/content/groups/public/'}	// 国内库地址
-		maven {url 'http://download.java.net/maven/2/'}
-		maven {url 'http://repo.spring.io/release/'}
-		maven {url 'http://repo.maven.apache.org/maven2'}
-		maven {url 'http://repo1.maven.org/maven2/'}
-		maven {url 'https://maven.alfresco.com/nexus/content/groups/public'}
-		maven {url 'https://app.camunda.com/nexus/content/groups/public'}
-		maven {url 'http://git.oschina.net/thinkgem/repos/raw/master'}
-		maven {url 'https://raw.github.com/thinkgem/repository/master'}
+        //maven { url "http://repo.parim.net/milestone" }
+        //maven { url "http://repo.parim.net/snapshot" }
     }
 
     dependencies {
