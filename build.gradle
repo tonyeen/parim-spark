@@ -172,6 +172,13 @@ configure(rootProject){
 					'revnumber' : project.version,
 					'docinfo' : ""
 
+
+		resources {
+		  from sourceDir
+		  include "xsl/**"
+          include "*.xml"
+		}
+
         FileCollection asciidocResources = files()
 		resources {
 		  from sourceDir
@@ -184,15 +191,8 @@ configure(rootProject){
 		  }
 		}
 
-		resources {
-		  from sourceDir
-		  include "xsl/**"
-		}
-
 		doLast{
-			println asciidocResources.size()
 	        asciidocResources.each {File file ->
-	          println file.path
 	          copy {
 	            from file
 	            into relativePath(outputDir)+"/images"
@@ -207,6 +207,8 @@ configure(rootProject){
 		pdfFilename = "parim-spark-reference.pdf"
 		epubFilename = "parim-spark-reference.epub"
 		expandPlaceholders = ""
+
+        //webhelp.outputDir = outputDir
 
 		//fopUserConfig = file('src/reference/fop/fop-userconfig.xml')
 		fopUserConfig = file('src/docbook/fop.xml')

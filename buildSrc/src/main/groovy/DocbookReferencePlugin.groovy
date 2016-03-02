@@ -48,11 +48,13 @@ class DocbookReferencePlugin implements Plugin<Project> {
         def single = tasks.create("referenceHtmlSingle", HtmlSingleDocbookReferenceTask)
         def pdf = tasks.create("referencePdf", PdfDocbookReferenceTask)
         //def epub = tasks.create("referenceEpub", EpubDocbookReferenceTask)
+		def website = tasks.create("referenceWebsite", WebsiteDocbookReferenceTask)
+		def webhelp = tasks.create("referenceWebhelp", WebhelpDocbookReferenceTask)
 
         def reference = tasks.create("reference") {
             group = 'Documentation'
             description = "Generates HTML and PDF reference documentation."
-            dependsOn([multi, single/*, pdf, epub*/])
+            dependsOn([/*multi, single, pdf, epub,*/webhelp])
 
             ext.sourceDir = null // e.g. new File('src/reference')
             ext.outputDir = new File(project.buildDir, "reference")
@@ -70,16 +72,22 @@ class DocbookReferencePlugin implements Plugin<Project> {
             if (single.sourceDir == null) single.sourceDir = reference.sourceDir
             if (pdf.sourceDir == null) pdf.sourceDir = reference.sourceDir
             //if (epub.sourceDir == null) epub.sourceDir = reference.sourceDir
+			if (website.sourceDir == null) website.sourceDir = reference.sourceDir 
+			if (webhelp.sourceDir == null) webhelp.sourceDir = reference.sourceDir
 
             if (multi.outputDir == null) multi.outputDir = reference.outputDir
             if (single.outputDir == null) single.outputDir = reference.outputDir
             if (pdf.outputDir == null) pdf.outputDir = reference.outputDir
             //if (epub.outputDir == null) epub.outputDir = reference.outputDir
+			if (website.outputDir == null) website.outputDir = reference.outputDir
+			if (webhelp.outputDir == null) webhelp.outputDir = reference.outputDir
 
             if (multi.sourceFileName == null) multi.sourceFileName = reference.sourceFileName
             if (single.sourceFileName == null) single.sourceFileName = reference.sourceFileName
             if (pdf.sourceFileName == null) pdf.sourceFileName = reference.sourceFileName
             //if (epub.sourceFileName == null) epub.sourceFileName = reference.sourceFileName
+			if (website.sourceFileName == null) website.sourceFileName = reference.sourceFileName
+			if (webhelp.sourceFileName == null) webhelp.sourceFileName = reference.sourceFileName
         }
 
     }
@@ -346,6 +354,69 @@ class HtmlMultiDocbookReferenceTask extends AbstractDocbookReferenceTask {
     }
 }
 
+class WebsiteDocbookReferenceTask extends AbstractDocbookReferenceTask {
+
+	public WebsiteDocbookReferenceTask(){
+		setDescription("Generates Website reference documentation.");
+		//stylesheet = "docbook-xsl-ns-1.79.1/website/website.xsl"
+		stylesheet = "website.xsl"
+		xdir = "website"
+	}
+	
+	@Override
+	protected String getExtension() {
+		return 'html';
+	}
+	
+}
+
+class WebhelpDocbookReferenceTask extends AbstractDocbookReferenceTask {
+	
+	public WebhelpDocbookReferenceTask(){
+		setDescription("Generates Webhelp reference documentation.");
+		//stylesheet = "docbook-xsl-ns-1.79.1/website/website.xsl"
+		stylesheet = "webhelp.xsl"
+		xdir = "webhelp"
+	}
+	
+	@Override
+	protected String getExtension() {
+		return 'html';
+	}
+	
+	@Override
+	protected void preTransform(Transformer transformer, File sourceFile, File outputFile) {
+		String rootFilename = outputFile.getName()
+		rootFilename = rootFilename.substring(0, rootFilename.lastIndexOf('.'))
+		transformer.setParameter("root.filename", rootFilename)
+		transformer.setParameter("base.dir", outputFile.getParent() + File.separator)
+	}
+	
+	@Override
+	protected void postTransform(File outputFile) {
+		super.postTransform(outputFile)
+		copyTemplate(project, xdir)
+	}
+	
+	protected String copyTemplate(def project, def dir) {
+		def targetPath = "${project.buildDir}/reference/${dir}"
+
+		// copy plugin provided resources first
+		project.copy {
+			into targetPath
+			from "${project.buildDir}/docbook-resources/webhelp/template"
+		}
+
+		// allow for project provided resources to override
+		/*project.copy {
+			into targetPath
+			from "${sourceDir}/css"
+		}*/
+
+		return targetPath
+	}
+	
+}
 
 class PdfDocbookReferenceTask extends AbstractDocbookReferenceTask {
 
