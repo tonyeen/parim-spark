@@ -6,10 +6,16 @@
 讲述如何导入和初始化工程，一些基本的公共组件和工具的使用，以及如何开发一个简单的功能。
 --
 
+
 [[guide-get-start]]
 == 从这里开始
 include::guide/prepare-environment.adoc[leveloffset=+2]
 include::guide/how-to-setup.adoc[leveloffset=+2]
 
+
 [[guide-project-structure-and-files]]
 == 项目结构和重要文件
+include::guide/project-structure.adoc[leveloffset=+2]
+
+
+include::guide/how-to-develop.adoc[leveloffset=+1]

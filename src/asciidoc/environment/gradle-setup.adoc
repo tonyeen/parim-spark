@@ -17,26 +17,26 @@ Gradle 百度词条 http://baike.baidu.com/view/9916271.htm
 Gradle的安装非常简单，只需要解压压缩包到指定目录并配置正确的环境变量即可。gradle使用前需要安装JDK1.6（或更高版本的JDK）并正确配置环境变量 JAVA_HOME。Gradle安装步骤如下：
 
 1. 将下载的程序包解压到指定目录
-
++
 .解压安装包
 image::images/gradle-setup-1.png[width=667]
-
++
 2. 添加环境变量 `GRADLE_HOME=[gradle安装根目录]`
-
++
 .新建GRADLE_HOME环境变量
 image::images/gradle-setup-2.png[width=667]
-
++
 3. 编辑环境变量 Path，在末尾加上 `;%GRADLE_HOME%\bin`
-
++
 .修改path环境变量
 image::images/gradle-setup-3.png[width=667]
-
++
 4. 检查安装配置是否正确生效。新打开一个“命令提示符”窗口，输入gradle版本检查命令 `gradle -v` ，正确输出配置的gradle版本信息，说明安装配置正确。
-
++
 .输出gradle版本
 image::images/gradle-setup-4.png[]
-
++
 5. 由于在使用gradle的过程中，gradle将从中央仓库下载众多项目中使用的jar包并保存到当前用户的本地仓库中（默认当前用户文件夹下的 " `.gradle` " 目录），这对于C盘空间资源不是很富裕的Windows用户来说不是期望的结果，我们可以通过新建环境变量 `GRADLE_USER_HOME=[重新制定的gradle本地仓库路径]` 来重定向gradle的本地仓库位置，某些情况下需要注销当前用户重新登录后才会生效。
-
++
 .重新制定的gradle本地仓库
 image::images/gradle-setup-5.png[width=667]
