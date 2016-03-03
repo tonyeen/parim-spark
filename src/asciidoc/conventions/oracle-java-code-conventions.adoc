@@ -55,7 +55,7 @@ Java程序应用下列文件后缀：
 [[ojcc-file-organization]]
 == 文件组织（File Organization）
 一个文件由被空行分别而成的段落以及标识每个段落的可选注释共同构成。跨越2000行的程序难以浏览，应当尽量避免。
-"<<ojcc-java-java-source-file-example,Java源文件示例>>"提供了一个合理组织的Java程序范例。
+"<<ojcc-java-source-file-example,Java源文件示例>>"提供了一个合理组织的Java程序范例。
 
 
 [[ojcc-java-source-files]]
@@ -100,7 +100,7 @@ import java.awt.peer.CanvasPeer;
 
 [[ojcc-class-and-interface-declarations-case]]
 ==== 类和接口声明（Class and Interface Declarations）
-下表描述了类和接口声明的各个项目组以及它们呈现的先后次序。参考"<<ojcc-java-java-source-file-example,Java源文件示例>>"中一个包含注释的例子。
+下表描述了类和接口声明的各个项目组以及它们呈现的先后次序。参考"<<ojcc-java-source-file-example,Java源文件示例>>"中一个包含注释的例子。
 [cols="1,4,8",options="header"]
 |======
 ||类/接口声明的各项目组|注解
@@ -327,7 +327,7 @@ else {
 
 [[ojcc-documentation-comments]]
 === 文档注释（Documentation Comments）
-*注意：*此处描述的注释组织示例，参考"<<ojcc-java-java-source-file-example,Java源文件示例>>"
+*注意：*此处描述的注释组织示例，参考"<<ojcc-java-source-file-example,Java源文件示例>>"
 
 若想理解更多，参考"How to Write Doc Comments for Javadoc"，此中包含了有关文档注释标识表记标帜的信息（`@return`， `@param`， `@see`）：
 
