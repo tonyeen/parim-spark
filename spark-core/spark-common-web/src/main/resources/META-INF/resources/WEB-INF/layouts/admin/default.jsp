@@ -18,7 +18,7 @@
     <script src="${ctx }/static/admin/scripts/plugins.js"></script>
     
     
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+    <script src="${ctxStatic }/venders/jquery/jquery-migrate-1.2.1.js"></script>
     <link href="${ctxStatic }/venders/jquery-jbox/2.3/Skins/Bootstrap/jbox.min.css" rel="stylesheet" />
     <script src="${ctxStatic }/venders/jquery-jbox/2.3/jquery.jBox-2.3.js" type="text/javascript"></script>
     
