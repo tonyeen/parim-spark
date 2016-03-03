@@ -23,7 +23,7 @@ dependencies {
         //MyBatis
         "org.mybatis:mybatis:${mybatisVersion}",
         "org.mybatis:mybatis-spring:${mybatisSpringVersion}",
-        "cglib:cglib:3.2.0",
+        "cglib:cglib:2.2.2",
         //connection pool
         "com.alibaba:druid:${druidVersion}",
         //jdbc driver
