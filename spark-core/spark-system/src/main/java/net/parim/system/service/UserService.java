@@ -2,6 +2,8 @@ package net.parim.system.service;
 
 import java.util.List;
 
+import net.parim.common.security.PasswordHelper;
+import net.parim.common.utils.StringUtils;
 import net.parim.system.entity.User;
 import net.parim.system.repository.UserRepository;
 
@@ -17,6 +19,14 @@ public class UserService {
 	UserRepository userRepository;
 	
 	public void save(User user){
+	    String salt = PasswordHelper.generateSalt();
+        String plainPassword = user.getPassword();
+        if (StringUtils.isBlank(plainPassword)) {
+            plainPassword = "888888";
+            //TODO 增加根据模板邮件通知功能
+        }
+        user.setSalt(salt);
+        user.setPassword(PasswordHelper.entryptPassword(plainPassword, salt));
 		User cuUser = new User();
 		cuUser.setId(1L);
 		if(user.getId()!=null){

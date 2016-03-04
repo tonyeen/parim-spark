@@ -382,6 +382,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 	public static boolean isBlank(Long id) {
 		return id == null || id == 0;
 	}
+	
+	public static boolean isBlank(String string) {
+        return string == null || "".equals(trim(string));
+    }
 
 	public static boolean isNotBlank(Long id) {
 		return id!=null && id>0;

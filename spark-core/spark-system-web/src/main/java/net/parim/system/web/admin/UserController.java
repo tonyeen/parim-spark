@@ -1,5 +1,6 @@
 package net.parim.system.web.admin;
 
+import net.parim.common.security.PasswordHelper;
 import net.parim.system.entity.PermissionTarget;
 import net.parim.system.entity.Site;
 import net.parim.system.entity.User;
@@ -81,8 +82,6 @@ public class UserController {
 			user.setUserGroup(userGroup);
 			user.setSite(userGroup.getSite());
 		}
-		
-		user.setSalt("df");
 		
 		userService.save(user);
 		
