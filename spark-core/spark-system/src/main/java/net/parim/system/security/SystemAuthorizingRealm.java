@@ -52,9 +52,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	 */
 	@PostConstruct
 	public void initCredentialsMatcher() {
-		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(PasswordHelper.HASH_ALGORITHM);
-		matcher.setHashIterations(PasswordHelper.HASH_INTERATIONS);
-		setCredentialsMatcher(matcher);
+		setCredentialsMatcher(new CustomCredentialsMatcher());
 	}
 
 	/**
@@ -73,9 +71,8 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		// 校验用户名密码
 		User user = accountService.findUserByUsername(authcToken.getUsername());
 		if (user != null) {
-			byte[] salt = Encodes.decodeHex(user.getPassword().substring(0,16));
-			return new SimpleAuthenticationInfo(user, 
-					user.getPassword().substring(PasswordHelper.SALT_SIZE*2), 
+			byte[] salt = user.getSalt().getBytes();
+			return new SimpleAuthenticationInfo(user, user.getPassword(), 
 					ByteSource.Util.bytes(salt), getClass().getName());
 		} else {
 			return null;

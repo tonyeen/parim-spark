@@ -128,7 +128,7 @@
 	</select>
 	
 	<select id="findUserByUsername" parameterType="string" resultType="net.parim.system.entity.User">
-		select id, username, password, email from sys_user where username = #{username}
+		select id, username, password, email,salt from sys_user where username = #{username}
 	</select>
 	
 </mapper>

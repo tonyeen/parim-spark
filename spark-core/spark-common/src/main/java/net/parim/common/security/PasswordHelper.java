@@ -37,7 +37,7 @@ public class PasswordHelper {
 	
 	public static void main(String[] args){
 		
-		String pwd = "manager712";
+		String pwd = "admin";
 		String salt = "8o6b0dbbQJDkp9mWDjqeeO";
 		System.out.println(entryptPassword(pwd,salt));
 		System.out.println(validatePassword(pwd, salt, "dy6r5MtDqRBboP8VI7RWCA=="));
