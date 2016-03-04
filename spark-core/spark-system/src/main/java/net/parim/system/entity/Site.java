@@ -4,6 +4,8 @@ import java.util.List;
 
 
 public class Site extends DataTreeEntity<Site> {
+
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private String shortName;
 	private String description;
@@ -13,7 +15,7 @@ public class Site extends DataTreeEntity<Site> {
 		super();
 	}
 	
-	public Site(String id){
+	public Site(Long id){
 		super(id);
 	}
 	

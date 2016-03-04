@@ -4,12 +4,14 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import net.parim.common.utils.Reflections;
 
-public abstract class TreeEntity<E> extends BaseEntity<E> {
-	private static final long serialVersionUID = 8924003950923240082L;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+public abstract class TreeEntity<E extends BaseEntity<?>> 
+		extends BaseEntity<E> {
+	
+	private static final long serialVersionUID = 1L;
 	
 	protected E parent;
 	protected List<E> children;
@@ -18,17 +20,10 @@ public abstract class TreeEntity<E> extends BaseEntity<E> {
 	protected Long childCount;
 	
 	public TreeEntity() {
-	}
-	
-	public TreeEntity(String id) {
-		super(id);
+		super();
 	}
 	
 	public TreeEntity(Long id) {
-		super(id);
-	}
-	
-	public TreeEntity(Integer id) {
 		super(id);
 	}
 	
@@ -61,16 +56,13 @@ public abstract class TreeEntity<E> extends BaseEntity<E> {
 	public void setSort(Integer sort) {
 		this.sort = sort;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 	
-	public String getParentId(){
-		String id = null;
+	public Long getParentId(){
+		Long id = null;
 		if (parent != null){
-			id = (String)Reflections.getFieldValue(parent, "id");
+			id = (Long)Reflections.getFieldValue(parent, "id");
 		}
-		return null!=id ? id : "0";
+		return (id==null) ? 0L : id;
 	}
 
 	public Long getChildCount() {

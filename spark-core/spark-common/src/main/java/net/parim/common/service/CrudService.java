@@ -1,26 +1,27 @@
-/**
- * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- */
 package net.parim.common.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import net.parim.common.persistence.BaseEntity;
-import net.parim.common.persistence.CurdRepository;
-import net.parim.common.utils.IdGen;
+import net.parim.common.persistence.CrudRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
+
 /**
  * Service基类
- * @author ThinkGem
- * @version 2014-05-16
+ * @author YinTao
+ * @version 2014-04-26
  */
 @Transactional(readOnly = true)
-public abstract class CrudService<R extends CurdRepository<T>, T extends BaseEntity<T>> extends BaseService {
+public abstract class CrudService<R extends CrudRepository<T, ID>, 
+			T extends BaseEntity<?>, 
+			ID extends Serializable>
+		extends BaseService {
 	
 	/**
 	 * 持久层对象
@@ -33,7 +34,7 @@ public abstract class CrudService<R extends CurdRepository<T>, T extends BaseEnt
 	 * @param id
 	 * @return
 	 */
-	public T findOne(String id) {
+	public T findOne(ID id) {
 		return repository.findOne(id);
 	}
 	
@@ -61,6 +62,7 @@ public abstract class CrudService<R extends CurdRepository<T>, T extends BaseEnt
 	 * @param entity
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public Page<T> findAll(T entity, Pageable pageable) {
 		return (Page<T>)repository.findAll(entity, pageable);
 	}
@@ -71,9 +73,8 @@ public abstract class CrudService<R extends CurdRepository<T>, T extends BaseEnt
 	 */
 	@Transactional(readOnly = false)
 	public void save(T entity) {
-		if (entity.getIsNewRecord()){
+		if (entity.isNewRecord()){
 			//entity.preInsert();
-			entity.setId(IdGen.randomLong());
 			repository.insert(entity);
 		}else{
 			//entity.preUpdate();

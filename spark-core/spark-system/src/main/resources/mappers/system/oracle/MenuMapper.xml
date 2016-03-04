@@ -15,7 +15,7 @@
 			is_show,
 			permission
 		) values(
-		    #{id},
+		    SEQ_GENERAL.NEXTVAL,
 			#{parent.id},
 			#{name},
 			#{identifier},
@@ -46,7 +46,7 @@
 		delete from sys_menu where id=#{id} or parent_ids like concat(#{parentIds},',',#{id},'%') and id&lt;&gt;1
 	</delete>
 	
-	<select id="findOne" parameterType="string" resultType="net.parim.system.entity.Menu">
+	<select id="findOne" parameterType="long" resultType="net.parim.system.entity.Menu">
 		select a.id,
 			a.parent_id as "parent.id",
 			a.name,

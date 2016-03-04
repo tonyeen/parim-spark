@@ -37,7 +37,7 @@ public class PrivilegeController {
 	}
 	
 	@RequestMapping(value="/properties/{id}")
-	public String properties(@PathVariable String id, Model model){
+	public String properties(@PathVariable Long id, Model model){
 		Privilege priv = privilegeService.findPrivilegeById(id);
 		model.addAttribute(priv);
 		return "admin/sys/privilegeProperties"; 

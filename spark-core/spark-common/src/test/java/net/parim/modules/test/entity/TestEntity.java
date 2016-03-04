@@ -2,7 +2,7 @@ package net.parim.modules.test.entity;
 
 import net.parim.common.persistence.BaseEntity;
 
-public class TestEntity extends BaseEntity<Object> {
+public class TestEntity extends BaseEntity<TestEntity> {
 	/**
 	 * 
 	 */

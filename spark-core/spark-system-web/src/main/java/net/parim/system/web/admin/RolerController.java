@@ -37,7 +37,7 @@ public class RolerController {
 	}
 	
 	@RequestMapping(value="/properties/{id}")
-	public String properties(@PathVariable String id, Model model){
+	public String properties(@PathVariable Long id, Model model){
 		Role role = roleService.findRoleById(id);
 		model.addAttribute(role);
 		return "admin/sys/roleProperties"; 

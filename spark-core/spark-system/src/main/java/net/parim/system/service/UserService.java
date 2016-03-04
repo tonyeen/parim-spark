@@ -39,7 +39,7 @@ public class UserService {
 		}
 	}
 	
-	public User findOne(String id){
+	public User findOne(Long id){
 		return userRepository.findOne(id);
 	}
 	
@@ -48,8 +48,8 @@ public class UserService {
 		return userRepository.findAll(user);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Page<User> findAll(User user, Pageable pageable){
-		
 		return (Page<User>)userRepository.findAll(user, pageable);
 	}
 }

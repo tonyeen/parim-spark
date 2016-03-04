@@ -5,6 +5,9 @@ import java.util.List;
 import net.parim.common.persistence.TreeEntity;
 
 public class PermissionTarget extends TreeEntity<PermissionTarget>{
+	
+	private static final long serialVersionUID = 1L;
+	
 	protected ObjectType objectType;
 
 	@Override

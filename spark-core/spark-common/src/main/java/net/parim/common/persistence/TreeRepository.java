@@ -1,8 +1,10 @@
 package net.parim.common.persistence;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface TreeRepository<E extends TreeEntity<?>> extends CurdRepository<E> {
+public interface TreeRepository<E extends TreeEntity<?>, ID extends Serializable> 
+		extends CrudRepository<E, ID> {
 	
 	//public List<?> findAllRoots(E entity);
 	

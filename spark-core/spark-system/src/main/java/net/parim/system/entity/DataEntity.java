@@ -3,10 +3,11 @@ package net.parim.system.entity;
 import java.util.Date;
 
 import net.parim.common.persistence.BaseEntity;
-import net.parim.system.entity.User;
 
-public class DataEntity<E> extends BaseEntity<E> {
-	private static final long serialVersionUID = 8019120436306066356L;
+public class DataEntity<E extends BaseEntity<?>> 
+		extends BaseEntity<E> {
+	
+	private static final long serialVersionUID = 1L;
 	
 	public static final String DEL_FLAG_NORMAL = "0";
 	public static final String DEL_FLAG_DELETE = "1";
@@ -23,10 +24,6 @@ public class DataEntity<E> extends BaseEntity<E> {
 	
 	public DataEntity(Long id){
 		super(id);
-	}
-	
-	public DataEntity(String id){
-		super(Long.parseLong(id));
 	}
 
 	public User getCreatedBy() {

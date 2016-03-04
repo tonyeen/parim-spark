@@ -1,14 +1,11 @@
-/**
- * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- */
 package net.parim.common.service;
 
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Service基类
- * @author ThinkGem
- * @version 2014-05-16
+ * @author YinTao
+ * @version 2014-04-26
  */
 @Transactional(readOnly = true)
 //public abstract class TreeService<D extends TreeDao<T>, T extends TreeEntity<T>> extends CrudService<D, T> {

@@ -24,7 +24,7 @@ public class Dict extends DataEntity<Dict> {
 		super();
 	}
 	
-	public Dict(String id){
+	public Dict(Long id){
 		super(id);
 	}
 	

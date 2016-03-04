@@ -1,25 +1,15 @@
-/**
- * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
- */
 package net.parim.common.service;
-
-import java.util.List;
-
-import net.parim.common.persistence.BaseEntity;
-import net.parim.common.utils.StringUtils;
-//import net.parim.system.entity.Role;
-//import net.parim.system.entity.User;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.google.common.collect.Lists;
+//import net.parim.system.entity.Role;
+//import net.parim.system.entity.User;
 
 /**
  * Service基类
- * @author ThinkGem
- * @version 2014-05-16
+ * @author YinTao
+ * @version 2014-04-26
  */
 @Transactional(readOnly = true)
 public abstract class BaseService {

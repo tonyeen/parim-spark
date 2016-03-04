@@ -6,6 +6,7 @@ import net.parim.common.persistence.OperateUser;
 
 public class User extends DataEntity<User> implements OperateUser {
 	
+	private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
 	private String email;
@@ -112,5 +113,11 @@ public class User extends DataEntity<User> implements OperateUser {
 	public String getName() {
 		return getFirstName() + getLastName();
 		//throw new UnsupportedOperationException("Auto-generated method stub");
+	}
+	
+	@Override
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

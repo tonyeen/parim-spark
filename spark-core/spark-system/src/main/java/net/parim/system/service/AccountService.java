@@ -14,7 +14,7 @@ public class AccountService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public User findUserById(String id){
+	public User findUserById(Long id){
 		return userRepository.findOne(id);
 	}
 	

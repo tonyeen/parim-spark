@@ -54,7 +54,7 @@ public class PermissionService {
 		}
 		for(UserRole userRole:userRoles){
 			if(userRole.getRole()!=null 
-					&& !userRole.getRole().getIsNewRecord()){
+					&& !userRole.getRole().isNewRecord()){
 				Role role = roleRepository.findOne(userRole.getRole());
 				List<Privilege> rolePrivileges = role.getPrivileges();
 				if(null!=rolePrivileges && !rolePrivileges.isEmpty()){

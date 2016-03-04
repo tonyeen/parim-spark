@@ -3,6 +3,8 @@ package net.parim.system.entity;
 import java.util.List;
 
 public class Role extends DataEntity<Role> {
+
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private Site site;
 	private String targets;

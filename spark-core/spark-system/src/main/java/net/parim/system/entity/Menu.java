@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.validation.constraints.DecimalMin;
 
-import net.parim.common.persistence.BaseEntity;
 import net.parim.common.persistence.TreeEntity;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 public class Menu extends TreeEntity<Menu> {
+	private static final long serialVersionUID = 1L;
 	//private Menu parent;
 	private String parentIds;
 	@NotBlank(message="{menu.name.not.be.blank}")
