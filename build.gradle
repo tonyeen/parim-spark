@@ -57,6 +57,7 @@ allprojects {
 		dozerVersion = '5.5.1'
 		poiVersion = '3.9'
 		freemarkerVersion = '2.3.20'
+		logbackVersion = '1.1.6'
 
         //test utils
         hamcrestVersion      = "1.3"
