@@ -26,12 +26,12 @@ public class SiteService {
 	}
 	
 	public void save(Site site){
-		if(site.getParent()==null || site.getParentId().isEmpty()){
-			Site rootSite = new Site("1");
+		if(site.getParent()==null || site.getParent().isNewRecord()){
+			Site rootSite = new Site(1L);
 			site.setParent(rootSite);
 		}
 		
-		if(!site.getIsNewRecord()){
+		if(!site.isNewRecord()){
 			site.setLastUpdatedBy(user);
 			siteRepository.update(site);
 		}else {
@@ -55,7 +55,7 @@ public class SiteService {
 		}
 	}
 	
-	public Site findOne(String id){
+	public Site findOne(Long id){
 		return siteRepository.findOne(id);
 	}
 	
@@ -63,10 +63,12 @@ public class SiteService {
 		return siteRepository.findAll();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Site> findRoots(){
 		return (List<Site>) siteRepository.findAllRoots(null, null);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Site> findChildren(Site site){
 		return (List<Site>) siteRepository.findAllChildren(site);
 	}

@@ -27,7 +27,7 @@
 		)
 		VALUES
 			(
-				#{id},
+				SEQ_GENERAL.NEXTVAL,
 				#{email},
 				#{userGroup.id},
 				#{username},
@@ -71,7 +71,7 @@
 		delete sys_user where id = #{id}
 	</delete>
 	
-	<select id="findOne" parameterType="string" resultType="net.parim.system.entity.User">
+	<select id="findOne" parameterType="long" resultType="net.parim.system.entity.User">
 		select u.id,
 			u.email,
 			u.user_group_id as "userGroup.id",

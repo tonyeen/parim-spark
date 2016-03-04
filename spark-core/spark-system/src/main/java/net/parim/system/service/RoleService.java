@@ -2,10 +2,8 @@ package net.parim.system.service;
 
 import java.util.List;
 
-import net.parim.system.entity.Privilege;
 import net.parim.system.entity.Role;
 import net.parim.system.entity.User;
-import net.parim.system.repository.PrivilegeRepository;
 import net.parim.system.repository.RoleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +34,7 @@ public class RoleService {
 	}
 	
 	public void saveRole(Role role){
-		if(!role.getIsNewRecord()){
+		if(!role.isNewRecord()){
 			updateRole(role);
 		}else{
 			createRole(role);
@@ -47,7 +45,7 @@ public class RoleService {
 		roleRepository.delete(role);
 	}
 	
-	public void removeRole(String id){
+	public void removeRole(Long id){
 		roleRepository.delete(id);
 	}
 	
@@ -57,7 +55,7 @@ public class RoleService {
 		}
 	}
 	
-	public Role findRoleById(String id){
+	public Role findRoleById(Long id){
 		return roleRepository.findOne(id);
 	}
 	
@@ -73,6 +71,7 @@ public class RoleService {
 		return findAllRoles(null, pageable);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Page<Role> findAllRoles(Role role, Pageable pageable){
 		return (Page<Role>)roleRepository.findAll(role, pageable);
 	}

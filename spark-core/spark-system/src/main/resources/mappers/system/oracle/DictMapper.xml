@@ -4,12 +4,14 @@
 	
 	<insert id="insert" parameterType="net.parim.system.entity.Dict">
 		insert into sys_dict(
+		    id,
 			identifier,
 			name,
 			group_identifier,
 			group_name,
 			sort
 		) values(
+		    SEQ_GENERAL.NEXTVAL,
 			#{value},
 			#{label},
 			#{type},
@@ -28,11 +30,11 @@
 		where id = #{id}
 	</update>
 	
-	<delete id="delete" parameterType="string">
+	<delete id="delete" parameterType="long">
 		delete sys_dict where id=#{id}
 	</delete>
 	
-	<select id="findOne" parameterType="string" resultType="net.parim.system.entity.Dict">
+	<select id="findOne" parameterType="long" resultType="net.parim.system.entity.Dict">
 		select id,
 			identifier value,
 			name label,

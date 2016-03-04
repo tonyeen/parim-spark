@@ -18,17 +18,17 @@ Eclipse下载地址 http://www.eclipse.org/downloads/
 Windows下的eclipse安装很简单，将下载的包解压到指定目录，并将启动文件生成快捷方式到桌面或其他需要的目标地址即可。Eclipse的运行需要依赖于JDK1.6（或更高版本的JDK）。安装步骤如下：
 
 1. 将下载的程序包解压到指定目录
-
++
 .解压安装包
 image::images/eclipse-setup-1.png[]
-
++
 2. 将启动文件生成快捷方式到桌面
-
++
 .创建快捷方式
 image::images/eclipse-setup-2.png[]
-
++
 3. 若系统资源足够，可以编辑 eclipse 根目录的eclipse.ini 文件，配置相应的启动参数以提高eclipse的运行效率。
-
++
 .修改启动参数
 image::images/eclipse-setup-3.png[]
 
@@ -44,16 +44,16 @@ image::images/eclipse-setup-3.png[]
 本文选择使用从Market安装的方式。
 
 1. 安装SVN版本控制插件，在 Market 中搜索 "subversion" ,点击"Install" 安装
-
++
 .安装SVN版本控制插件
 image::images/eclipse-setup-4.png[]
-
++
 2. 安装gradle插件，在 Market 中搜索 "gradle" ,点击"Install" 安装
-
++
 .安装gradle插件
 image::images/eclipse-setup-5.png[]
-
++
 3. 安装spring插件，在 Market 中搜索 "spring" ,点击"Install" 安装
-
++
 .安装spring插件STS
 image::images/eclipse-setup-6.png[]

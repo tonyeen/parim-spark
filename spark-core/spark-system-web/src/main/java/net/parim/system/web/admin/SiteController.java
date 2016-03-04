@@ -56,7 +56,7 @@ public class SiteController {
 	}
 	
 	@RequestMapping(value="/properties/{id}")
-	public String properties(@PathVariable String id, Model model){
+	public String properties(@PathVariable Long id, Model model){
 		Site site = siteService.findOne(id);
 		model.addAttribute(site);
 		
@@ -74,14 +74,14 @@ public class SiteController {
 	}
 	
 	@RequestMapping(value="/delete/{id}")
-	public String delete(@PathVariable String id, RedirectAttributes redirectAttributes, Model model){
+	public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes, Model model){
 		siteService.remove(new Site(id));
 		return "redirect:"+adminPath+"/sys/site/";
 	}
 	
 	@RequestMapping(value="/treeData")
 	@ResponseBody
-	public List<Site> treeData(@RequestParam(required=false, defaultValue="0") String id, Model model){
+	public List<Site> treeData(@RequestParam(required=false, defaultValue="0") Long id, Model model){
 		return siteService.findChildren(new Site(id));
 	}
 	

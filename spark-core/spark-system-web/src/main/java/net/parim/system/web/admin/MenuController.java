@@ -55,7 +55,7 @@ public class MenuController extends BaseController {
 	
 	@RequiresPermissions("system:menu:edit")
 	@RequestMapping(value="/properties/{id}")
-	public String properties(@PathVariable String id, Model model){
+	public String properties(@PathVariable Long id, Model model){
 		Menu menu = systemService.findMenuById(id);
 		model.addAttribute(menu);
 		
@@ -64,7 +64,7 @@ public class MenuController extends BaseController {
 	
 	@RequiresPermissions("system:menu:edit")
 	@RequestMapping(value="/addsub/{id}")
-	public String addSub(@PathVariable String id, Model model){
+	public String addSub(@PathVariable Long id, Model model){
 		Menu menu = new Menu();
 		Menu parent = systemService.findMenuById(id);
 		menu.setParent(parent);
@@ -91,7 +91,7 @@ public class MenuController extends BaseController {
 	
 	@RequiresPermissions("system:menu:delete")
 	@RequestMapping(value="/delete/{id}")
-	public String delete(@PathVariable String id, RedirectAttributes redirectAttributes){
+	public String delete(@PathVariable Long id, RedirectAttributes redirectAttributes){
 		Menu menu = systemService.findMenuById(id);
 		//menu.setId(id);
 		systemService.removeMenu(menu);

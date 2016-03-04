@@ -2,7 +2,7 @@ package net.parim.modules.test.dao;
 
 import net.parim.common.persistence.BaseRepository;
 import net.parim.common.persistence.annotation.MyBatisRepository;
-import net.parim.modules.test.entity.Test;
+import net.parim.modules.test.entity.TestEntity;
 
 @MyBatisRepository
 public interface TestDao extends BaseRepository {
@@ -12,5 +12,5 @@ public interface TestDao extends BaseRepository {
 	 * @param id
 	 * @return
 	 */
-	public Test get(Long id);
+	public TestEntity get(Long id);
 }

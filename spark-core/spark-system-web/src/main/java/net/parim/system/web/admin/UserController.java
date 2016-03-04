@@ -10,6 +10,7 @@ import net.parim.system.service.SiteService;
 import net.parim.system.service.UserGroupService;
 import net.parim.system.service.UserService;
 
+import org.apache.ibatis.type.JdbcType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -66,7 +67,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/properties/{id}")
-	public String properties(@PathVariable String id, Model model){
+	public String properties(@PathVariable Long id, Model model){
 		User user = userService.findOne(id);
 		model.addAttribute(user);
 		return "admin/sys/userProperties"; 

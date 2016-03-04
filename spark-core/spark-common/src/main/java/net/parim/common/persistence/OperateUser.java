@@ -23,6 +23,6 @@ package net.parim.common.persistence;
  * @since 4.2.1
  */
 public interface OperateUser {
-	public String getId();
+	public Long getId();
 	public String getName();
 }

@@ -3,6 +3,8 @@ package net.parim.system.entity;
 import java.util.List;
 
 public class UserGroup extends DataTreeEntity<UserGroup>{
+	
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private Boolean isRoot;
 	private Long customThemeId;

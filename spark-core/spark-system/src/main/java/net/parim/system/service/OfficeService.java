@@ -13,7 +13,7 @@ public class OfficeService {
 	@Autowired
 	OfficeRepository officeRepository;
 	
-	public Office findById(String id){
+	public Office findById(Long id){
 		return officeRepository.findOne(id);
 	}
 	

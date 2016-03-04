@@ -9,11 +9,11 @@ import net.parim.system.entity.User;
 import net.parim.system.entity.PermissionTarget.ObjectType;
 
 @MyBatisRepository
-public interface PermissionTargetRepository extends BaseRepository<PermissionTarget> {
+public interface PermissionTargetRepository extends BaseRepository<PermissionTarget, Long> {
 	
 	public List<PermissionTarget> findRoots(User user, List<ObjectType> objectTypes);
 	
 	public List<PermissionTarget> findChildren(PermissionTarget permissionTarget, List<ObjectType> objectTypes);
 	
-	public List<PermissionTarget> findAllChildren(String parentId);
+	public List<PermissionTarget> findAllChildren(Long parentId);
 }

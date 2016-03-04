@@ -1,12 +1,12 @@
 package net.parim.system.entity;
 
-import java.util.List;
-
 import net.parim.common.persistence.BaseEntity;
 
 public class TreeXref extends BaseEntity<TreeXref> {
-	protected String childId;
-	protected String parentId;
+	
+	private static final long serialVersionUID = 1L;
+	protected Long childId;
+	protected Long parentId;
 	protected Long distance;
 	protected Long countPath;
 	protected String childObjectType;
@@ -27,16 +27,16 @@ public class TreeXref extends BaseEntity<TreeXref> {
 	//public List<?> getParents();
 	//public String getTargetType();
 	
-	public String getChildId() {
+	public Long getChildId() {
 		return childId;
 	}
-	public void setChildId(String childId) {
+	public void setChildId(Long childId) {
 		this.childId = childId;
 	}
-	public String getParentId() {
+	public Long getParentId() {
 		return parentId;
 	}
-	public void setParentId(String parentId) {
+	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
 	public Long getDistance() {

@@ -1,13 +1,10 @@
 package net.parim.system.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import net.parim.system.entity.PermissionTarget;
 import net.parim.system.entity.Site;
 import net.parim.system.entity.User;
 import net.parim.system.entity.UserGroup;
-import net.parim.system.entity.PermissionTarget.ObjectType;
 import net.parim.system.repository.PermissionTargetRepository;
 import net.parim.system.repository.UserGroupRepository;
 
@@ -22,7 +19,7 @@ public class UserGroupService {
 	@Autowired
 	PermissionTargetRepository permissionTargetRepository;
 	
-	public UserGroup findOne(String id){
+	public UserGroup findOne(Long id){
 		return userGroupRepository.findOne(id);
 	}
 	
@@ -31,7 +28,7 @@ public class UserGroupService {
 		user.setId(1L);
 		userGroup.setIsRoot(userGroup.getParent()==null || userGroup.getParent().getId()==null);
 		userGroup.setSite(userGroup.getIsRoot()? userGroup.getSite(): findOne(userGroup.getParent().getId()).getSite());
-		if(userGroup.getIsNewRecord()){
+		if(userGroup.isNewRecord()){
 			userGroup.setCreatedBy(user);
 			userGroup.setLastUpdatedBy(user);
 			userGroupRepository.insert(userGroup);
@@ -59,7 +56,7 @@ public class UserGroupService {
 		return null;
 	}
 	
-	public void remove(String id){
+	public void remove(Long id){
 		userGroupRepository.delete(id);
 	}
 	

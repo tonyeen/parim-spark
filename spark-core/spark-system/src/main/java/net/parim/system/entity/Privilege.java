@@ -2,6 +2,9 @@ package net.parim.system.entity;
 
 
 public class Privilege extends DataEntity<Privilege> {
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String identifier;
 	private String name;
 	private String targets;

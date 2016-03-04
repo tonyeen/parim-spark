@@ -2,6 +2,8 @@ package net.parim.system.entity;
 
 
 public class LogicalGroup extends DataEntity<LogicalGroup> {
+
+	private static final long serialVersionUID = 1L;
 	
 	private Condition condition;
 	private Site site;

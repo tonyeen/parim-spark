@@ -34,7 +34,7 @@ public class PrivilegeService {
 	}
 	
 	public void savePrivilege(Privilege privilege){
-		if(!privilege.getIsNewRecord()){
+		if(!privilege.isNewRecord()){
 			updatePrivilege(privilege);
 		}else{
 			createPrivilege(privilege);
@@ -45,7 +45,7 @@ public class PrivilegeService {
 		privilegeRepository.delete(privilege);
 	}
 	
-	public void removePrivileg(String id){
+	public void removePrivileg(Long id){
 		privilegeRepository.delete(id);
 	}
 	
@@ -55,7 +55,7 @@ public class PrivilegeService {
 		}
 	}
 	
-	public Privilege findPrivilegeById(String id){
+	public Privilege findPrivilegeById(Long id){
 		return privilegeRepository.findOne(id);
 	}
 	
@@ -75,6 +75,7 @@ public class PrivilegeService {
 		return findAllPrivileges(null, pageable);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Page<Privilege> findAllPrivileges(Privilege privilege, Pageable pageable){
 		return (Page<Privilege>)privilegeRepository.findAll(privilege, pageable);
 	}

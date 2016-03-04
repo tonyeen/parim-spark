@@ -2,6 +2,8 @@ package net.parim.system.entity;
 
 
 public class UserRole extends DataEntity<UserRole> {
+	
+	private static final long serialVersionUID = 1L;
 	private Site site;
 	private User user;
 	private UserGroup userGroup;
@@ -9,7 +11,7 @@ public class UserRole extends DataEntity<UserRole> {
 	private Role role;
 	private Privilege privilege;
 	private String target;
-	private String targetId;
+	private Long targetId;
 	
 	public Site getSite() {
 		return site;
@@ -53,10 +55,10 @@ public class UserRole extends DataEntity<UserRole> {
 	public void setTarget(String target) {
 		this.target = target;
 	}
-	public String getTargetId() {
+	public Long getTargetId() {
 		return targetId;
 	}
-	public void setTargetId(String targetId) {
+	public void setTargetId(Long targetId) {
 		this.targetId = targetId;
 	}
 }

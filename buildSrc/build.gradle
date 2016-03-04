@@ -34,7 +34,7 @@ dependencies {
     compile 'org.apache.avalon.framework:avalon-framework-api:4.3.1'
 }
 
-task copyDocbookResources44445 {
+task copyDocbookResources {
     outputs.dir "${project.buildDir}/docbook"
 
     doLast() {
@@ -55,10 +55,10 @@ task copyDocbookResources44445 {
 }
 
 
-task docbookResourcesZip44445(type: Zip, dependsOn: copyDocbookResources44445) {
-    from copyDocbookResources44445.outputs.files
+task docbookResourcesZip(type: Zip, dependsOn: copyDocbookResources) {
+    from copyDocbookResources.outputs.files
     destinationDir = new File(project.sourceSets.main.output.classesDir, "META-INF")
     archiveName = 'docbook-resources.zip'
 }
 
-jar.dependsOn docbookResourcesZip44445
+jar.dependsOn docbookResourcesZip

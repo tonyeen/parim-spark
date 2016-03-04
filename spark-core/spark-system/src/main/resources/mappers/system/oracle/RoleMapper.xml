@@ -8,6 +8,7 @@
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="net.parim.system.entity.Role">
 		INSERT INTO admin_role (
+		    id,
 			name,
 			site_id,
 			targets,
@@ -19,6 +20,7 @@
 		)
 		VALUES
 			(
+			    SEQ_GENERAL.NEXTVAL,
 				#{name},
 				#{site.id},
 				#{targets},
@@ -41,11 +43,11 @@
 		where id = #{id}
 	</update>
 	
-	<delete id="delete" parameterType="string">
+	<delete id="delete" parameterType="long">
 		delete admin_role where id = #{id}
 	</delete>
 	
-	<select id="findOne" parameterType="string" resultMap="roleMap">
+	<select id="findOne" parameterType="long" resultMap="roleMap">
 		select r.id,
 			r.name,
 			r.site_id as "site.id",
@@ -98,7 +100,7 @@
 		</where>
 	</select>
 	
-	<select id="selectPrivilegesByRoleId" parameterType="string" resultType="net.parim.system.entity.Privilege">
+	<select id="selectPrivilegesByRoleId" parameterType="long" resultType="net.parim.system.entity.Privilege">
 	   select p.id,
             p.identifier,
             p.name,
