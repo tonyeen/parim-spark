@@ -112,12 +112,10 @@ public class User extends DataEntity<User> implements OperateUser {
 	@Override
 	public String getName() {
 		return getFirstName() + getLastName();
-		//throw new UnsupportedOperationException("Auto-generated method stub");
 	}
 	
 	@Override
 	public Long getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return id;
 	}
 }
