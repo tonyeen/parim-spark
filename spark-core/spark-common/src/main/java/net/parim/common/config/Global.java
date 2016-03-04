@@ -30,7 +30,7 @@ public class Global {
 	 * 保存全局属性值
 	 */
 	private static Map<String, String> map = Maps.newHashMap();
-	private static PropertiesLoader loader = new PropertiesLoader("application.properties");
+	private static PropertiesLoader loader = new PropertiesLoader("classpath*:/application.properties");
 	
 	private Global(){}
 	
@@ -89,5 +89,10 @@ public class Global {
 	
 	public static String getProjectPath(){
 		return getConfig("gen.projectPath");
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(getConfig("jdbc.username"));
+		System.out.println(getConfig("redis.password"));
 	}
 }

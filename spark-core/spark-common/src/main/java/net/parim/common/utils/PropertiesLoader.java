@@ -7,6 +7,7 @@ package net.parim.common.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Properties;
 
@@ -16,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 /**
  * Properties文件载入工具类. 可载入多个properties文件, 相同的属性在最后载入的文件中的值将会覆盖之前的值，但以System的Property优先.
@@ -133,16 +135,18 @@ public class PropertiesLoader {
 	 */
 	private Properties loadProperties(String... resourcesPaths) {
 		Properties props = new Properties();
-
+		PathMatchingResourcePatternResolver resourceResolver = new PathMatchingResourcePatternResolver();
 		for (String location : resourcesPaths) {
 
-//			logger.debug("Loading properties file from:" + location);
-
+			logger.debug("Loading properties file from:" + location);
+			
 			InputStream is = null;
 			try {
-				Resource resource = resourceLoader.getResource(location);
-				is = resource.getInputStream();
-				props.load(is);
+				Resource[] resources = resourceResolver.getResources(location);
+				for(Resource resource : resources){
+					is = resource.getInputStream();
+					props.load(is);
+				}
 			} catch (IOException ex) {
 				logger.info("Could not load properties from path:" + location + ", " + ex.getMessage());
 			} finally {
