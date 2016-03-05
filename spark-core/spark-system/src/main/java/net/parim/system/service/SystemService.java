@@ -3,6 +3,7 @@ package net.parim.system.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.parim.common.service.CrudService;
 import net.parim.common.web.MenuProvider;
 import net.parim.system.entity.Menu;
 import net.parim.system.repository.MenuRepository;
@@ -11,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SystemService implements MenuProvider {
+public class SystemService 
+		extends CrudService<MenuRepository, Menu, Long> 
+		implements MenuProvider {
 	
 	@Autowired
 	private MenuRepository menuRepository;
@@ -26,7 +29,6 @@ public class SystemService implements MenuProvider {
 	
 	public void saveMenu(Menu menu){
 		menu.setParent(findMenuById(menu.getParent().getId()));
-		menu.setParentIds(menu.getParent().getParentIds()+","+menu.getParent().getId());
 		
 		// 保存当前实体
 		if(menu.isNewRecord()){
@@ -63,6 +65,11 @@ public class SystemService implements MenuProvider {
 		menus.add(dashBoard);
 		
 		return menus;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Menu> findAllParents(Menu menu){
+		return (List<Menu>) menuRepository.findAllParents(menu);
 	}
 
 	@Override

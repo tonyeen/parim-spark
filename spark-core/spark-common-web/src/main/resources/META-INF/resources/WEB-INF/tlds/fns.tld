@@ -94,7 +94,7 @@
     <function-class>net.parim.common.web.utils.MenuFunctions</function-class>
     <function-signature>java.util.List getMenuListByParentId(java.lang.String)</function-signature>
     <example>${fns:getMenuListByParentId()}</example>  
-  </function>getUserCustomMenus
+  </function>
   
   <function>
     <description>获取当前用户的顶级菜单对象列表</description>
