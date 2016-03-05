@@ -44,8 +44,14 @@ public class SystemService
 	}
 	
 	public void removeMenu(Menu menu){
+		@SuppressWarnings("unchecked")
+		List<Menu> children = (List<Menu>) menuRepository.findAllChildren(menu);
+		for(Menu m: children) {
+			menuRepository.delete(m);
+		}
 		menuRepository.delete(menu);
-		// 更新缓存
+		
+		//TODO: 更新缓存
 	}
 
 	@Override

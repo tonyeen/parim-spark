@@ -43,7 +43,7 @@
 	</update>
 	
 	<delete id="delete" parameterType="net.parim.system.entity.Menu">
-		delete from sys_menu where id=#{id} or parent_ids like concat(#{parentIds},',',#{id},'%') and id&lt;&gt;1
+		delete from sys_menu where id=#{id}
 	</delete>
 	
 	<select id="findOne" parameterType="long" resultType="net.parim.system.entity.Menu">
