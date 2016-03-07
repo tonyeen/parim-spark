@@ -8,7 +8,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="decorator" content="blank"/>
-
+	<script type="text/javascript">
+    	var _ctx = '${ctx}';
+    </script>
     <link rel="stylesheet" href="${ctx }/static/admin/styles/main.css">
     <link rel="stylesheet" href="${ctx }/static/admin/styles/console.css">
     <link rel="stylesheet" href="${ctx }/static/admin/styles/admin.css">
@@ -21,6 +23,9 @@
     
     <link href="${ctxStatic }/venders/jquery-jbox/2.3/Skins/Bootstrap/jbox.min.css" rel="stylesheet" />
     <script src="${ctxStatic }/venders/jquery-jbox/2.3/jquery.jBox-2.3.js" type="text/javascript"></script>
+    <script src="${ctxStatic }/sys/login.js" type="text/javascript"></script>
+    <script type="text/javascript" src="${ctx}/static/venders/jquery-validation/1.11.1/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="${ctx}/static/venders/jquery-validation/1.11.1/messages_bs_zh.js"></script>
 <title>登录系统</title>
 </head>
 <body class="login-page">
@@ -35,19 +40,28 @@
       </div>
       <div class="">
         <div class="col-md-12">
-          <form class="form-horizontal" role="form" action="${ctx }/login" method="post">
+          <form class="form-horizontal" id="dataForm" role="form" action="${ctx }/login" method="post">
             <div class="form-group">
               <label for="username" class="sr-only control-label text-right">用户名：</label>
               <div class="input-group input-group-lg">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                <input type="text" id="username" name="username" class="form-control" placeholder="请输入用户名"/>
+                <input type="text" id="username" name="username" class="form-control required"  placeholder="请输入用户名"/>
               </div>
             </div>
             <div class="form-group">
               <label for="password" class="sr-only control-label text-right">密码：</label>
               <div class="input-group input-group-lg">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                <input type="password" id="password" name="password" class="form-control" placeholder="密码长度不小于8位"/>
+                <input type="password" id="password" name="password" class="form-control required " minlength="5" placeholder="密码长度不小于8位"/>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="password" class="sr-only control-label text-right">验证码：</label>
+              <div class="input-group input-group-lg">
+                
+                <div class="col-xs-8"> <input type="text" id="code" name="code" class="form-control required" minlength="4" placeholder="请输入验证码"/></div>
+                <div class="col-xs-4"> <img id="code-img"  src="${ctx}/kaptcha.jpg"></div>
+                
               </div>
             </div>
             <div class="form-group">

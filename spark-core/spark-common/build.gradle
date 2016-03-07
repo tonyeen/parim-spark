@@ -97,6 +97,8 @@ dependencies {
         "org.apache.ant:ant:1.9.4",
 
         //User Agent
-        "eu.bitwalker:UserAgentUtils:1.19"
+        "eu.bitwalker:UserAgentUtils:1.19",
+        //验证码
+        "com.github.penggle:kaptcha:2.3.2"
     )
 }
