@@ -3,8 +3,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="main-menu" content="system_management"/>
-<meta name="menu" content="menu-system_role_management"/>
+<meta name="decorator" content="admin-blank"/>
 <title>菜单属性</title>
 </head>
 <body>
@@ -18,59 +17,56 @@
           </div>
           <div class="console-title console-title-border clearfix">
             <div class="pull-left">
-              <h4>${not empty role.id?'修改':'添加'}</h4>
+              <h4>${not empty org.id?'修改':'添加'}</h4>
             </div>
             <div class="pull-right">
-              <a class="btn btn-default" href="${ctxAdmin }/sys/role/list?id=">
+              <a class="btn btn-default" href="${ctxAdmin }/sys/dict/list?id=">
                 <i class="glyphicon glyphicon-refresh"></i>
                 返回组织机构列表
               </a>
             </div>
+            
           </div>
         </div>
       </div>
     </div>
     <div class="row">
     	<div class="col-sm-12">
-    		<form:form id="inputForm" modelAttribute="role" action="${ctxAdmin }/sys/role/save" method="post" class="form-horizontal">
+    		<form:form id="inputForm" modelAttribute="dict" action="${ctxAdmin }/sys/dict/save" method="post" class="form-horizontal">
     			<form:hidden path="id"/>
     			<div class="form-group">
-    				<label class="control-label col-sm-3">所属站点</label>
-    				<div class="col-sm-3 row">
-    					<sys:treeselect id="siteselect" name="site.id" value="${role.site.id}" labelName="site.name" labelValue="${role.site.name}"
-							title="站点" url="${ctxAdmin }/sys/site/treeSelectData" simpleData="true" extId="${site.id}" isAsync="false" cssClass="required"/>
-    				</div>
-    			</div>
-    			<div class="form-group">
-    				<label class="control-label col-sm-3"><span class="red">*</span> 角色名称</label>
+    				<label class="control-label col-sm-3"><span class="red">*</span> 名称</label>
     				<div class="col-sm-9 row">
-    					<form:input path="name" class="col-lg-5 col-sm-5"/>
+    					<form:input path="label" class="col-lg-5 col-sm-5"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
-    			<c:if test="${not empty role.id }">
     			<div class="form-group">
-    				<label class="control-label col-sm-3"><span class="red">*</span> 对象类型代码</label>
+    				<label class="control-label col-sm-3"><span class="red">*</span> 群组标识(Group_identifier)</label>
     				<div class="col-sm-9 row">
-    					<form:input readonly="true" path="targets" class="col-lg-5 col-sm-5"/>
+    					<form:input path="type" class="col-lg-5 col-sm-5"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
-    			</c:if>
     			<div class="form-group">
-    				<label class="control-label col-sm-3"><span class="red">*</span></label>
+    				<label class="control-label col-sm-3"><span class="red">*</span> 群组标识中文名</label>
     				<div class="col-sm-9 row">
-    					<label class="text-left pull-left"><form:checkbox path="isSuperuser" class=""/>
-    					超级管理员
-    					</label>
+    					<form:input path="description" class="col-lg-5 col-sm-5"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
-    			
+    			<div class="form-group">
+    				<label class="control-label col-sm-3"><span class="red">*</span> 分组</label>
+    				<div class="col-sm-9 row">
+    					<form:input path="sort" class="col-lg-5 col-sm-5"/>
+    					<span class="help-inline col-lg-7 col-sm-7"></span>
+    				</div>
+    			</div>
     			
     			<div class="form-group">
     				<button type="submit" class="btn btn-primary col-sm-offset-3">保存</button>
     			</div>
+    			
     		</form:form>
     	</div>
     </div>
