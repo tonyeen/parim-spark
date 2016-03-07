@@ -30,35 +30,40 @@
         </div>
       </div>
     </div>
+    
     <div class="row">
     	<div class="col-sm-12">
-    		<form:form id="inputForm" modelAttribute="dict" action="${ctxAdmin }/sys/dict/save" method="post" class="form-horizontal">
+    		<div class="alert alert-info">
+    		  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <i class="fa fa-info-circle sign"></i><strong>提示：</strong> 请完善以下信息！
+            </div>
+			<form:form id="inputForm" modelAttribute="dict" action="${ctxAdmin }/sys/dict/save" method="post" class="form-horizontal">
     			<form:hidden path="id"/>
     			<div class="form-group">
     				<label class="control-label col-sm-3"><span class="red">*</span> 名称</label>
     				<div class="col-sm-9 row">
-    					<form:input path="label" class="col-lg-5 col-sm-5"/>
+    					<form:input path="label" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
     			<div class="form-group">
     				<label class="control-label col-sm-3"><span class="red">*</span> 群组标识(Group_identifier)</label>
     				<div class="col-sm-9 row">
-    					<form:input path="type" class="col-lg-5 col-sm-5"/>
+    					<form:input path="type" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
     			<div class="form-group">
     				<label class="control-label col-sm-3"><span class="red">*</span> 群组标识中文名</label>
     				<div class="col-sm-9 row">
-    					<form:input path="description" class="col-lg-5 col-sm-5"/>
+    					<form:input path="description" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
     			<div class="form-group">
     				<label class="control-label col-sm-3"><span class="red">*</span> 分组</label>
     				<div class="col-sm-9 row">
-    					<form:input path="sort" class="col-lg-5 col-sm-5"/>
+    					<form:input path="sort" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
@@ -68,8 +73,21 @@
     			</div>
     			
     		</form:form>
-    	</div>
-    </div>
+		</div>
+	</div>
+	
 </div>
+
+<script type="text/javascript">
+(function($){
+	function validForm(){
+		$("#inputForm").validate();
+	}
+	
+	$(function(){
+		validForm();
+	});
+})(jQuery);
+</script>	
 </body>
 </html>	
