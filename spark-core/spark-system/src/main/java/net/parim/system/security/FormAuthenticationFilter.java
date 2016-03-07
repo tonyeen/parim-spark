@@ -29,7 +29,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.FormAuthenticationFilter {
 
-	public static final String DEFAULT_CAPTCHA_PARAM = "validateCode";
+	public static final String DEFAULT_CAPTCHA_PARAM = "code";
 	public static final String DEFAULT_MOBILE_PARAM = "mobileLogin";
 	public static final String DEFAULT_MESSAGE_PARAM = "message";
 
@@ -47,7 +47,7 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 		String host = StringUtils.getRemoteAddr((HttpServletRequest)request);
 		String captcha = getCaptcha(request);
 		boolean mobile = isMobileLogin(request);
-		return new UsernamePasswordToken(username, password.toCharArray(), rememberMe, host, captcha, mobile);
+		return new UsernamePasswordToken(username, password, rememberMe, host, captcha, mobile);
 	}
 
 	public String getCaptchaParam() {
@@ -105,11 +105,9 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 			//User currentUser = SpringContextHolder.getBean(AccountService.class).findUserByLoginName(user.username);
 			//subject.getSession().setAttribute(Constants.CURRENT_USER, currentUser);
 			//if(user.isAdmin){
-			if(false){
-				httpServletResponse.sendRedirect("admin/index");
-			}else{
-				issueSuccessRedirect(request, response);
-			}
+			
+			issueSuccessRedirect(request, response);
+			
 		} else {
 			UserUtils user = (UserUtils) subject.getPrincipal();//获取封装的用户
 			//User currentUser = SpringContextHolder.getBean(AccountService.class).findUserByLoginName(user.username);
