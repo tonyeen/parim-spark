@@ -12,7 +12,6 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Menu extends TreeEntity<Menu> {
 	private static final long serialVersionUID = 1L;
 	//private Menu parent;
-	private String parentIds;
 	@NotBlank(message="{menu.name.not.be.blank}")
 	@Length(min=2, max=6, message="{menu.name.length.between}")
 	private String name;
@@ -31,12 +30,6 @@ public class Menu extends TreeEntity<Menu> {
 	}
 	public void setParent(Menu parent) {
 		this.parent = parent;
-	}
-	public String getParentIds() {
-		return parentIds;
-	}
-	public void setParentIds(String parentIds) {
-		this.parentIds = parentIds;
 	}
 	public String getName() {
 		return name;

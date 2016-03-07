@@ -110,22 +110,33 @@ public class MenuController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "treeData")
-	public List<Map<String, Object>> treeData(@RequestParam(required=false) String extId,@RequestParam(required=false) String isShowHide, HttpServletResponse response) {
+	public List<Map<String, Object>> treeData(@RequestParam(required=false) Long extId,@RequestParam(required=false) String isShowHide, HttpServletResponse response) {
 		List<Map<String, Object>> mapList = Lists.newArrayList();
 		List<Menu> menus = systemService.findAllMenu();
+		Menu extMenu = systemService.findOne(extId);
 		for (int i=0; i<menus.size(); i++){
 			Menu menu = menus.get(i);
-			if (StringUtils.isBlank(extId) || (extId!=null && !extId.equals(menu.getId()) && menu.getParentIds().indexOf(","+extId+",")==-1)){
+			if (StringUtils.isBlank(extId) || (extId!=null && !extId.equals(menu.getId()) && !isParent(menu, extMenu))){
 				if(!menu.getIsShow()){
 					continue;
 				}
 				Map<String, Object> map = Maps.newHashMap();
 				map.put("id", menu.getId());
-				map.put("pId", menu.getParent().getId());
+				map.put("pId", menu.getParentId());
 				map.put("name", menu.getName());
 				mapList.add(map);
 			}
 		}
 		return mapList;
+	}
+	
+	private boolean isParent(Menu child, Menu parent){
+		List<Menu> menus = systemService.findAllParents(child);
+		for(Menu menu: menus){
+			if(menu.getId() == parent.getId()){
+				return true;
+			}
+		}
+		return false;
 	}
 }

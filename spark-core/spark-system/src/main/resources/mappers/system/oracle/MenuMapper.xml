@@ -43,7 +43,7 @@
 	</update>
 	
 	<delete id="delete" parameterType="net.parim.system.entity.Menu">
-		delete from sys_menu where id=#{id} or parent_ids like concat(#{parentIds},',',#{id},'%') and id&lt;&gt;1
+		delete from sys_menu where id=#{id}
 	</delete>
 	
 	<select id="findOne" parameterType="long" resultType="net.parim.system.entity.Menu">
@@ -125,5 +125,43 @@
         from sys_menu a
             left join sys_menu p on a.parent_id = p.id
         where a.identifier = #{identifier}
+    </select>
+    
+    <select id="findAllParents" parameterType="net.parim.system.entity.Menu" resultType="net.parim.system.entity.Menu">
+        select a.id,
+            a.parent_id as "parent.id",
+            a.name,
+            a.identifier,
+            a.sort,
+            a.url,
+            a.target,
+            a.icon,
+            a.is_show,
+            a.permission,
+            p.name as "parent.name"
+        from sys_menu a
+            left join sys_menu p on a.parent_id = p.id
+        where a.id &lt;&gt; #{id}
+		 START WITH a.ID = #{id}
+		CONNECT BY PRIOR a.PARENT_ID = a.ID
+    </select>
+    
+    <select id="findAllChildren" parameterType="net.parim.system.entity.Menu" resultType="net.parim.system.entity.Menu">
+        select a.id,
+            a.parent_id as "parent.id",
+            a.name,
+            a.identifier,
+            a.sort,
+            a.url,
+            a.target,
+            a.icon,
+            a.is_show,
+            a.permission,
+            p.name as "parent.name"
+        from sys_menu a
+            left join sys_menu p on a.parent_id = p.id
+        where a.id &lt;&gt; #{id}
+         START WITH a.ID = #{id}
+        CONNECT BY PRIOR a.ID = a.PARENT_ID
     </select>
 </mapper>
