@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.parim.devwork.repository.PostRepository">
+    
+    <insert id="insert" parameterType="net.parim.devwork.entity.Post">
+        INSERT INTO DEV_POST
+		  (ID,
+		   TITLE,
+		   PUBLIC_SLUG,
+		   CATEGORY,
+		   BROADCAST,
+		   DRAFT,
+		   PUBLISH_DATE,
+		   RAW_CONTENT,
+		   RENDERED_CONTENT,
+		   RENDERED_SUMMARY,
+		   CREATED_BY,
+		   CREATE_DATE)
+		VALUES
+		  (SEQ_GENERAL.NEXTVAL,
+		   #{title},
+		   #{publicSlug},
+		   #{category},
+		   #{broadcast},
+		   #{draft},
+		   #{publishDate},
+		   #{rawContent},
+		   #{renderedContent},
+		   #{renderedSummary},
+		   #{createdBy.id},
+		   SYSDATE)
+    </insert>
+    
+    <update id="update" parameterType="net.parim.devwork.entity.Post">
+        
+    </update>
+    
+    <delete id="delete" parameterType="net.parim.devwork.entity.Post">
+    
+    </delete>
+    
+    <select id="findOne" parameterType="net.parim.devwork.entity.Post" resultType="net.parim.devwork.entity.Post">
+    
+    </select>
+    
+    <select id="findAll" parameterType="net.parim.devwork.entity.Post" resultType="net.parim.devwork.entity.Post">
+    
+    </select>
+    
+    
+    
+</mapper>

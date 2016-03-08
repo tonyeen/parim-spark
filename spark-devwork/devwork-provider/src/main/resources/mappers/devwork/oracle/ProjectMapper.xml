@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.parim.devwork.repository.ProjectRepository">
+    <insert id="insert" parameterType="net.parim.devwork.entity.Project">
+    INSERT INTO DEV_PROJECT
+	  (ID, NAME, REPO_URL, CATEGORY, SITE_URL, IS_AGGREGATOR)
+	VALUES
+	  (SEQ_GENERAL.NEXTVAL,
+	   #{name},
+	   #{repoUrl},
+	   #{category},
+	   #{siteUrl},
+	   #{isAggregator})
+    </insert>
+    
+    <update id="update" parameterType="net.parim.devwork.entity.Project">
+    UPDATE DEV_PROJECT SET
+      NAME = #{name}, 
+      REPO_URL = #{repoUrl}, 
+      CATEGORY = #{category}, 
+      SITE_URL = #{siteUrl}, 
+      IS_AGGREGATOR = #{isAggregator})
+    WHERE ID = #{id}
+    </update>
+    
+    <delete id="delete" parameterType="net.parim.devwork.entity.Project">
+    DELETE FROM DEV_PROJECT WHERE ID = #{id}
+    </delete>
+    
+    <select id="findOne" parameterType="net.parim.devwork.entity.Project" resultType="net.parim.devwork.entity.Project">
+    select ID, NAME, REPO_URL, CATEGORY, SITE_URL, IS_AGGREGATOR
+    from DEV_PROJECT
+    where id = #{id}
+    </select>
+    
+    <select id="findAll" parameterType="net.parim.devwork.entity.Project" resultType="net.parim.devwork.entity.Project">
+    select ID, NAME, REPO_URL, CATEGORY, SITE_URL, IS_AGGREGATOR
+    from DEV_PROJECT
+    </select>
+    
+</mapper>

@@ -28,3 +28,7 @@ include 'spark-sns:spark-forum-web'
 include 'spark-sns:sns-war'
 
 include 'spark-war'
+
+
+include 'spark-devwork:devwork-provider'
+include 'spark-devwork:devwork-site'
