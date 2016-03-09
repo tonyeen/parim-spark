@@ -55,8 +55,6 @@ https://docs.gradle.org/current/userguide/userguide.html[Gradle User Guide] 。
 == Git
 
 Git 是现在主流的版本管理工具之一，本项目发布在公司的Git仓库中。为了能更好地协作，建议你安装Git客户端管理和发布代码。Git可视化工具，个人认为比较好用的有 `Source Tree` 和 `GitHub Windows` ，根据你的需要选择安装。
-+
-http://www.ibm.com/developerworks/cn/opensource/os-cn-tourofgit/[开源分布式版本控制工具 —— Git 之旅]
 
 
 [[guide-prepare-environment-navicat-premium]]
