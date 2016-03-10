@@ -25,9 +25,10 @@ public class UserGroupService {
 	
 	public void save(UserGroup userGroup){
 		User user = new User();
-		user.setId(1L);
-		userGroup.setIsRoot(userGroup.getParent()==null || userGroup.getParent().getId()==null);
-		userGroup.setSite(userGroup.getIsRoot()? userGroup.getSite(): findOne(userGroup.getParent().getId()).getSite());
+		user.setId(2L);
+		if(userGroup.getParent() != null && !userGroup.getParent().isNewRecord()){
+			userGroup.setSite(findOne(userGroup.getParent().getId()).getSite());
+		}
 		if(userGroup.isNewRecord()){
 			userGroup.setCreatedBy(user);
 			userGroup.setLastUpdatedBy(user);

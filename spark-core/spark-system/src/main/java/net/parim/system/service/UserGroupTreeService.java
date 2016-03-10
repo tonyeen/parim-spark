@@ -17,7 +17,7 @@ public class UserGroupTreeService {
 
 	public List<PermissionTarget> getPermissionRoots(){
 		User user = new User();
-		user.setId(1L);
+		user.setId(2L);
 		
 		List<PermissionTarget.ObjectType> objectTypes = new ArrayList<PermissionTarget.ObjectType>();
 		objectTypes.add(PermissionTarget.ObjectType.S);

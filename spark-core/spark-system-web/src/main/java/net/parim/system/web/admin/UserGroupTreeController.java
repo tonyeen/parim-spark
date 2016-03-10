@@ -26,7 +26,7 @@ public class UserGroupTreeController {
 	
 	@RequestMapping(value="/children")
 	@ResponseBody
-	public List<?> children(@RequestParam(value="id") Long id){
+	public List<?> children(@RequestParam(value="id", defaultValue="0") Long id){
 		PermissionTarget permissionTarget = new PermissionTarget();
 		permissionTarget.setId(id);
 		
