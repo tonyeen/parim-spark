@@ -3,15 +3,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="main-menu" content="2"/>
-<meta name="menu" content="menu-24"/>
+<meta name="main-menu" content="system_management"/>
+<meta name="menu" content="menu-site_management"/>
 <title>站点列表</title>
 <%@ include file="/WEB-INF/views/include/treetable.jsp" %>
 	<script type="text/javascript" src="${ctxStatic }/venders/mustache.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var tpl = $("#treeTableTpl").html().replace(/(\/\/\<!\-\-)|(\/\/\-\->)/g,"");
-			var data = ${fns:toJson(sites)}, rootId = "${not empty site.id ? site.id : '0'}"; //rootId=1 就隐藏了功能菜单这个项，0则显示
+			var data = ${fns:toJson(sites)}, rootId = "${not empty site.id ? site.id : '0'}";
 			//console.log(data)
 			addRow("#treeTableList", tpl, data, rootId, true);
 			$("#treeTable").treeTable({expandLevel : 2});

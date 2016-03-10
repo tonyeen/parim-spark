@@ -3,8 +3,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="main-menu" content="2"/>
-<meta name="menu" content="menu-8"/>
+<meta name="main-menu" content="system_management"/>
+<meta name="menu" content="menu-menu_management"/>
 <title>菜单属性</title>
 </head>
 <body>
@@ -42,7 +42,7 @@
 					<label class="col-sm-4 control-label">上级菜单:</label>
 					<div class="col-sm-4 controls">
 		                <sys:treeselect id="menu" name="parent.id" value="${empty menu.parent.id? 1:menu.parent.id}" labelName="parent.name" labelValue="${menu.parent.name}"
-							title="菜单" url="${ctxAdmin }/sys/menu/treeData" simpleData="true" extId="${menu.id}" cssClass="required" required="true"/>
+							title="菜单" url="${ctxAdmin }/sys/menu/treeData" simpleData="true" extId="${menu.id}" cssClass="required" required="false"/>
 							<span class="error ${empty ERR_parentName ? 'hide':'' }">${ERR_parentName }</span>
 					</div>
 				</div>

@@ -9,7 +9,7 @@ public class Site extends DataTreeEntity<Site> {
 	private String name;
 	private String shortName;
 	private String description;
-	private String theme;
+	private CustomTheme customTheme;
 	
 	public Site() {
 		super();
@@ -37,13 +37,7 @@ public class Site extends DataTreeEntity<Site> {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getTheme() {
-		return theme;
-	}
-	public void setTheme(String theme) {
-		this.theme = theme;
-	}
-
+	
 	@Override
 	public Site getParent() {
 		return parent;
@@ -62,5 +56,13 @@ public class Site extends DataTreeEntity<Site> {
 	@Override
 	public void setChildren(List<Site> children) {
 		this.children = children;
+	}
+
+	public CustomTheme getCustomTheme() {
+		return customTheme;
+	}
+
+	public void setCustomTheme(CustomTheme customTheme) {
+		this.customTheme = customTheme;
 	}
 }

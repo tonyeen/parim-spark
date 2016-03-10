@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.parim.system.repository.SiteRepository">
+	
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="net.parim.system.entity.Site">
+		<selectKey resultType="long" order="BEFORE" keyProperty="id">
+		select seq_general.nextval as "id" from dual
+		</selectKey>
+		insert into site ( id, created_by, last_update_date, custom_theme_id, create_date, parent_id, short_name, description, name, last_updated_by) 
+		values (#{id}, #{createdBy.id}, sysdate, #{customTheme.id}, sysdate, #{parent.id}, #{shortName}, #{description}, #{name}, #{lastUpdatedBy.id})
+	</insert>
+	
+	<update id="update" parameterType="net.parim.system.entity.Site">
+		update site set last_update_date=sysdate, custom_theme_id=#{customTheme.id}, parent_id=#{parent.id}, short_name=#{shortName}, description=#{description}, name=#{name}, last_updated_by=#{lastUpdatedBy.id} where id=#{id}
+	</update>
+	
+	<delete id="delete" parameterType="string">
+		delete from site where id=#{id} and id&lt;&gt;1
+	</delete>
+	
+	<select id="findOne" parameterType="string" resultType="net.parim.system.entity.Site">
+		select s.created_by as "createdBy.id", 
+			s.last_update_date, 
+			ct.name as "customTheme.name",
+			ct.id as "customTheme.id",
+			s.id, 
+			s.create_date, 
+			s.is_deleted, 
+			s.parent_id as "parent.id", 
+			s.short_name, 
+			s.description, 
+			s.name, 
+			s.last_updated_by as "lastUpdatedBy.id",
+			p.name as "parent.name",
+			uc.username as "createdBy.username",
+			uc.first_name as "createdBy.firstName",
+			uc.last_name as "createdBy.lastName",
+			ul.username as "lastUpdatedBy.username",
+			ul.first_name as "lastUpdatedBy.firstName",
+			ul.last_name as "lastUpdatedBy.lastName"
+		from site s left join site p on p.id = s.parent_id
+			left join sys_user uc on uc.id = s.created_by
+			left join sys_user ul on ul.id = s.last_updated_by
+			left join custom_theme ct on ct.id = s.custom_theme_id
+		where s.id = #{id} 
+			and s.is_deleted = 0 
+			<!-- and (p.is_deleted=null or p.is_deleted=0) -->
+	</select>
+	
+	<select id="findAll" resultType="net.parim.system.entity.Site">
+		select s.created_by as "createdBy.id", 
+			s.last_update_date, 
+			ct.name as "customTheme.name",
+            ct.id as "customTheme.id",
+			s.id, 
+			s.create_date, 
+			s.is_deleted, 
+			s.parent_id as "parent.id", 
+			s.short_name, 
+			s.description, 
+			s.name, 
+			s.last_updated_by as "lastUpdatedBy.id",
+			p.name as "parent.name",
+			uc.username as "createdBy.username",
+			uc.first_name as "createdBy.firstName",
+			uc.last_name as "createdBy.lastName",
+			ul.username as "lastUpdatedBy.username",
+			ul.first_name as "lastUpdatedBy.firstName",
+			ul.last_name as "lastUpdatedBy.lastName"
+		from site s left join site p on p.id = s.parent_id
+			left join sys_user uc on uc.id = s.created_by
+			left join sys_user ul on ul.id = s.last_updated_by
+			left join custom_theme ct on ct.id = s.custom_theme_id
+		where s.is_deleted = 0
+	</select>
+	
+	<select id="findAllRoots" resultType="net.parim.system.entity.Site">
+		select s.created_by as "createdBy.id", 
+			s.last_update_date, 
+			ct.name as "customTheme.name",
+            ct.id as "customTheme.id",
+			s.id, 
+			s.create_date, 
+			s.is_deleted, 
+			s.parent_id as "parent.id", 
+			s.short_name, 
+			s.description, 
+			s.name, 
+			s.last_updated_by as "lastUpdatedBy.id",
+			uc.username as "createdBy.username",
+			uc.first_name as "createdBy.firstName",
+			uc.last_name as "createdBy.lastName",
+			ul.username as "lastUpdatedBy.username",
+			ul.first_name as "lastUpdatedBy.firstName",
+			ul.last_name as "lastUpdatedBy.lastName"
+		from site s
+			left join sys_user uc on uc.id = s.created_by
+			left join sys_user ul on ul.id = s.last_updated_by
+			left join custom_theme ct on ct.id = s.custom_theme_id
+		where s.id = 1
+			and s.is_deleted = 0
+	</select>
+	
+	<select id="findAllChildren" resultType="net.parim.system.entity.Site">
+		select s.created_by as "createdBy.id", 
+			s.last_update_date, 
+			ct.name as "customTheme.name",
+            ct.id as "customTheme.id",
+			s.id, 
+			s.create_date, 
+			s.is_deleted, 
+			s.parent_id as "parent.id", 
+			s.short_name, 
+			s.description, 
+			s.name, 
+			s.last_updated_by as "lastUpdatedBy.id",
+			p.name as "parent.name",
+			uc.username as "createdBy.username",
+			uc.first_name as "createdBy.firstName",
+			uc.last_name as "createdBy.lastName",
+			ul.username as "lastUpdatedBy.username",
+			ul.first_name as "lastUpdatedBy.firstName",
+			ul.last_name as "lastUpdatedBy.lastName"
+		from site s left join site p on p.id = s.parent_id
+			left join sys_user uc on uc.id = s.created_by
+			left join sys_user ul on ul.id = s.last_updated_by
+			left join custom_theme ct on ct.id = s.custom_theme_id
+		where s.parent_id = #{id}
+			and s.is_deleted = 0
+	</select>
+	
+	<select id="findAllParents" resultType="net.parim.system.entity.Site">
+		
+	</select>
+</mapper>
