@@ -43,7 +43,8 @@ public class AuthenticateController {
     @UseTheme(value = false)
     public String login(Model model) {
     	boolean openValidation = false;//是否开启验证码
-    	if("enable".equals(Global.getConfig("kaptcha.status"))){
+    	int loginFailTimes = 0;
+    	if("enable".equals(Global.getConfig("kaptcha.status")) && (loginFailTimes >= 5)){
     		openValidation = true;
     	}
     	model.addAttribute("openValidation", openValidation);
