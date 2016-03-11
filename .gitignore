@@ -20,6 +20,7 @@ activemq-data/
 build
 /build
 buildSrc/build
+/**/build
 /spark-*/build
 /src/asciidoc/build
 target/
