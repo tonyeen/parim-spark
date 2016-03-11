@@ -60,23 +60,28 @@
     <div class="row">
     	<div class="col-sm-12">
 			<table id="treeTable" class="table table-striped table-bordered table-condensed">
-				<thead><tr><th>机构名称</th><th>归属区域</th><th>机构编码</th><th>机构类型</th><th>备注</th><shiro:hasPermission name="sys:org:edit"><th>操作</th></shiro:hasPermission></tr></thead>
+				<thead><tr><th>机构名称</th><th>归属区域</th><th>机构编码</th><th>机构类型</th><th>备注</th><%-- <shiro:hasPermission name="sys:org:edit"> --%><th>操作</th><%-- </shiro:hasPermission> --%></tr></thead>
 				<tbody id="treeTableList"></tbody>
 			</table>
 	<script type="text/template" id="treeTableTpl">
 		<tr id="{{row.id}}" pId="{{pid}}">
-			<td><a href="${ctx}/sys/org/form?id={{row.id}}">{{row.name}}</a></td>
+			<td><a href="${ctxAdmin}/sys/org/properties/{{row.id}}">{{row.name}}</a></td>
 			<td>{{row.area.name}}</td>
 			<td>{{row.code}}</td>
 			<td>{{dict.type}}</td>
 			<td>{{row.remarks}}</td>
-			<shiro:hasPermission name="sys:org:edit"><td>
-				<a href="${ctx}/sys/org/form?id={{row.id}}">修改</a>
-				<a href="${ctx}/sys/org/delete?id={{row.id}}" onclick="return confirmx('要删除该机构及所有子机构项吗？', this.href)">删除</a>
-				<a href="${ctx}/sys/org/form?parent.id={{row.id}}">添加下级机构</a> 
-			</td></shiro:hasPermission>
+			<td>
+				<a href="${ctxAdmin}/sys/org/properties/{{row.id}}">修改</a>
+				<a href="${ctxAdmin}/sys/org/delete/{{row.id}}" onclick="return confirmx('要删除该机构及所有子机构项吗？', this.href)">删除</a>
+				<a href="${ctxAdmin}/sys/org/form?parent.id={{row.id}}">添加下级机构</a> 
+			</td>
 		</tr>
 	</script>
+	<!-- <shiro:hasPermission name="sys:org:edit"><td>
+                <a href="${ctx}/sys/org/form?id={{row.id}}">修改</a>
+                <a href="${ctx}/sys/org/delete?id={{row.id}}" onclick="return confirmx('要删除该机构及所有子机构项吗？', this.href)">删除</a>
+                <a href="${ctx}/sys/org/form?parent.id={{row.id}}">添加下级机构</a> 
+            </td></shiro:hasPermission> -->
 		</div>
 	</div>
 </div>

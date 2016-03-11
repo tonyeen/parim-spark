@@ -64,7 +64,8 @@
 	</select>
 	
 	<select id="findAll" resultType="net.parim.system.entity.UserGroup">
-		select g.parent_id as "parent.id", 
+		select g.id,
+		    g.parent_id as "parent.id", 
 			g.site_id as "site.id", 
 			g.name, 
 			g.created_by as "createdBy.id", 
@@ -92,7 +93,8 @@
 	</select>
 	
 	<select id="findAllRoots" resultType="net.parim.system.entity.UserGroup">
-		select g.parent_id as "parent.id", 
+		select g.id,
+		    g.parent_id as "parent.id", 
 			g.site_id as "site.id", 
 			g.name, 
 			g.created_by as "createdBy.id", 
@@ -121,7 +123,8 @@
 	</select>
 	
 	<select id="findAllChildren" resultType="net.parim.system.entity.UserGroup">
-		select g.parent_id as "parent.id", 
+		select g.id,
+		    g.parent_id as "parent.id", 
 			g.site_id as "site.id", 
 			g.name, 
 			g.created_by as "createdBy.id", 

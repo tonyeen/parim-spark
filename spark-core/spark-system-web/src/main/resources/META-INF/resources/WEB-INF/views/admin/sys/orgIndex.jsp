@@ -12,7 +12,7 @@
 <div class="console-container" style="height: 100%;">
 	
 	<div class="row"  style="height: 100%;">
-		<div class="col-sm-2"  style="height: 100%;">
+		<div class="col-sm-2"  style="height: 100%; min-width: 200px;">
 			<div class="panel panel-default"  style="height: 90%; margin-top: 15px;">
 				<div class="panel-heading"><h3 class="panel-title">组织</h3></div>
 				<div class="panel-body" style="padding:8px;">
@@ -25,14 +25,42 @@
 		</div>
 	</div>
 	<script>
+	function setIcon(responseData){
+		if (responseData) {
+          for(var i =0; i < responseData.length; i++) {
+              if(responseData[i].objectType == 'S'){
+                  //responseData[i].iconSkin = "glyphicon glyphicon-home ";
+                  responseData[i].icon = "${ctxStatic}/admin/images/site.gif";
+              }
+              if(responseData[i].objectType == 'O'){
+                  //responseData[i].iconSkin = "glyphicon glyphicon-folder-open ";
+                  responseData[i].icon = "${ctxStatic}/admin/images/org.gif";
+              }
+          }
+        }
+        return responseData;
+	}
+	
+	function ajaxDataFilter(treeId, parentNode, responseData) {
+	    if (responseData) {
+	      for(var i =0; i < responseData.length; i++) {
+	    	  
+	      }
+	      responseData = setIcon(responseData);
+	    }
+	    return responseData;
+	}
+	
 	var setting = {
 			async: {
 				enable: true,
 				autoParam: ['id'],
-				url: "${ctxAdmin}/sys/userGroupTree/children"
+				url: "${ctxAdmin}/sys/userGroupTree/children",
+				dataFilter: ajaxDataFilter
 			},
 			data:{simpleData:{enable:false,idKey:"id",pIdKey:"pid",rootPId:'0'}},
-			callback:{onClick:function(event, treeId, treeNode){
+			callback:{
+				onClick:function(event, treeId, treeNode){
 					var id = treeNode.id == '0' ? '' :treeNode.id;
 					$('#orgContent').attr("src","${ctxAdmin}/sys/org/list?id="+id+"&parentIds="+treeNode.pIds);
 				}
@@ -41,6 +69,7 @@
 	
 	function refreshTree(){
 		$.getJSON("${ctxAdmin}/sys/userGroupTree/roots",function(data){
+			data = setIcon(data);
 			console.log(data);
 			var orgTree = $.fn.zTree.init($("#ztree"), setting, data);
 			//orgTree.expandAll(true);

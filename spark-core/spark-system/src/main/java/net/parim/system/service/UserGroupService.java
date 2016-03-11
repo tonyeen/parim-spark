@@ -2,6 +2,7 @@ package net.parim.system.service;
 
 import java.util.List;
 
+import net.parim.common.service.CrudService;
 import net.parim.system.entity.Site;
 import net.parim.system.entity.User;
 import net.parim.system.entity.UserGroup;
@@ -12,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserGroupService {
+public class UserGroupService extends CrudService<UserGroupRepository, UserGroup, Long> {
 	
 	@Autowired
 	UserGroupRepository userGroupRepository;

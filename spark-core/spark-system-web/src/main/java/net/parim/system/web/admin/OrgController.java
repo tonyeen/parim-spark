@@ -3,7 +3,6 @@ package net.parim.system.web.admin;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import net.parim.system.entity.PermissionTarget;
 import net.parim.system.entity.Site;
 import net.parim.system.entity.UserGroup;
@@ -14,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,6 +30,16 @@ public class OrgController {
 	
 	@Value(value="${adminPath}")
 	private String adminPath;
+	
+	@ModelAttribute
+	public void getUserGroup(@RequestParam(value = "id", defaultValue = "-1") Long id, Model model){
+		if(id!=-1){
+			UserGroup org = userGroupService.findOne(id);
+			if(null != org) {
+				model.addAttribute(org);
+			}
+		}
+	}
 	
 	@RequestMapping(value="/")
 	public String index() {
@@ -70,6 +81,14 @@ public class OrgController {
 		userGroupService.save(userGroup);
 		
 		return "redirect:"+adminPath+"/sys/org/list";
+	}
+	
+	@RequestMapping(value="/delete/{id}")
+	public String delete(@PathVariable(value="id") Long id, UserGroup org, Model model){
+		
+		userGroupService.delete(org);
+		
+		return list(null, model);
 	}
 	
 	

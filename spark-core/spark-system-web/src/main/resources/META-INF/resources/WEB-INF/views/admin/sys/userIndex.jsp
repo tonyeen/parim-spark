@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="main-menu" content="system_management"/>
-<meta name="menu" content="menu-user_management"/>
+<meta name="menu" content="menu-users_management"/>
 <title>菜单列表</title>
 <%@ include file="/WEB-INF/views/include/treeview.jsp" %>
 </head>
@@ -25,30 +25,59 @@
 		</div>
 	</div>
 	<script>
-	var setting = {
-			async: {
-				enable: true,
-				autoParam: ['id'],
-				url: "${ctxAdmin}/sys/userGroupTree/children"
-			},
-			data:{simpleData:{enable:false,idKey:"id",pIdKey:"pid",rootPId:'0'}},
-			callback:{onClick:function(event, treeId, treeNode){
-					var id = treeNode.id == '0' ? '' :treeNode.id;
-					$('#orgContent').attr("src","${ctxAdmin}/sys/user/list?id="+id+"&objectType="+treeNode.objectType);
-				}
-			}
-		};
-	
-	function refreshTree(){
-		$.getJSON("${ctxAdmin}/sys/userGroupTree/roots",function(data){
-			console.log(data);
-			var orgTree = $.fn.zTree.init($("#ztree"), setting, data);
-			//orgTree.expandAll(true);
-			orgTree.expandNode(orgTree.getNodes()[0]);
-		});
-	}
-	refreshTree();
-	</script>
+    function setIcon(responseData){
+        if (responseData) {
+          for(var i =0; i < responseData.length; i++) {
+              if(responseData[i].objectType == 'S'){
+                  //responseData[i].iconSkin = "glyphicon glyphicon-home ";
+                  responseData[i].icon = "${ctxStatic}/admin/images/site.gif";
+              }
+              if(responseData[i].objectType == 'O'){
+                  //responseData[i].iconSkin = "glyphicon glyphicon-folder-open ";
+                  responseData[i].icon = "${ctxStatic}/admin/images/org.gif";
+              }
+          }
+        }
+        return responseData;
+    }
+    
+    function ajaxDataFilter(treeId, parentNode, responseData) {
+        if (responseData) {
+          for(var i =0; i < responseData.length; i++) {
+              
+          }
+          responseData = setIcon(responseData);
+        }
+        return responseData;
+    }
+    
+    var setting = {
+            async: {
+                enable: true,
+                autoParam: ['id'],
+                url: "${ctxAdmin}/sys/userGroupTree/children",
+                dataFilter: ajaxDataFilter
+            },
+            data:{simpleData:{enable:false,idKey:"id",pIdKey:"pid",rootPId:'0'}},
+            callback:{
+                onClick:function(event, treeId, treeNode){
+                    var id = treeNode.id == '0' ? '' :treeNode.id;
+                    $('#orgContent').attr("src","${ctxAdmin}/sys/user/list?id="+id+"&parentIds="+treeNode.pIds);
+                }
+            }
+        };
+    
+    function refreshTree(){
+        $.getJSON("${ctxAdmin}/sys/userGroupTree/roots",function(data){
+            data = setIcon(data);
+            console.log(data);
+            var orgTree = $.fn.zTree.init($("#ztree"), setting, data);
+            //orgTree.expandAll(true);
+            orgTree.expandNode(orgTree.getNodes()[0]);
+        });
+    }
+    refreshTree();
+    </script>
 </div>
 </body>
 </html>
