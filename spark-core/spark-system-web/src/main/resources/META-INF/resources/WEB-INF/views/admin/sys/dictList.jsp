@@ -32,33 +32,6 @@
         </div>
       </div>
     </div>
-    <%-- <div class="row">
-    	<div class="col-sm-12">
-    		<ul class="nav nav-tabs">
-    			<li class="${empty tabActive or tabActive eq 'all' ? 'active' : '' }"><a href="${ctxAdmin }/prefecture/">全部(89)</a></li>
-    			<li class="${tabActive eq 'published' ? 'active' : '' }"><a href="${ctxAdmin }/prefecture/published">已发布(40)</a></li>
-    			<li><a href="?all">精选(15)</a></li>
-    			<li><a href="?all">待审核(7)</a></li>
-    		</ul>
-    	</div>
-    </div> --%>
-    <%-- <div class="row">	
-    	<div class="col-sm-12">
-    		<form id="searchForm" class="form-inline" action="" style="margin: 15px 0;">
-    			<div class="form-group">
-				    <label for="">名称</label>
-				    <input type="text" class="form-control" name="name" value="${prefecture.name }" placeholder="专区名称">
-				</div>
-				<div class="form-group">
-				    <label for="" class="sr-only">分类</label>
-				    <select class="form-control" id="">
-				    	<option value="0">专区分类</option>
-				    </select>
-				</div>
-				<button type="submit" class="btn btn-default">搜索</button>
-    		</form>
-    	</div>
-    </div> --%>
     <div class="row">	
     	<div class="col-sm-12">
     		<table class="table table-hover">
@@ -77,13 +50,12 @@
 						<tr id="dict_${dict.id }">
 							<td><a href="${ctxAdmin }/sys/dict/properties/${dict.id }">${dict.label }</a></td>
 							<td></td>
-							<td>2015-02-09</td>
+							<td>${dict.createdBy }</td>
 							<td>已发布</td>
 							<td>否</td>
 							<td class="text-right">
                    <a href="${ctxAdmin }/sys/dict/properties/${dict.id }">修改</a> ｜ 
                    <a href="${ctxAdmin }/sys/dict/delete/${dict.id }">删除</a> ｜
-                   <%-- <a href="${ctxAdmin }/sys/dict/addsub/${dict.id }">添加下级菜单</a> --%></td>
 						</tr>
 					</c:forEach>
 					<c:if test="${empty dicts }">

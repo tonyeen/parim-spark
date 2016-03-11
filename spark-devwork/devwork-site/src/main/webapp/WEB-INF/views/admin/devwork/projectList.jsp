@@ -22,7 +22,7 @@
               <h4>项目列表</h4>
             </div>
             <div class="pull-right">
-              <a class="btn btn-default">
+              <a class="btn btn-default" href="${ctxAdmin }/devwork/project/list">
                 <i class="glyphicon glyphicon-refresh"></i>
                 刷新
               </a>
@@ -34,17 +34,17 @@
     </div>
     <div class="row">   
         <div class="col-sm-12">
-            <form id="searchForm" class="form-inline" action="" style="margin: 15px 0;">
+            <form id="searchForm" class="form-inline" action="${ctxAdmin }/devwork/project/findone" style="margin: 15px 0;">
                 <div class="form-group">
                     <label for="">名称</label>
-                    <input type="text" class="form-control" name="name" value="${prefecture.name }" placeholder="专区名称">
+                    <input type="text" class="form-control" name="name" value="${project.name }" placeholder="专区名称">
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="" class="sr-only">分类</label>
                     <select class="form-control" id="">
                         <option value="0">专区分类</option>
                     </select>
-                </div>
+                </div> -->
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
         </div>
@@ -66,13 +66,21 @@
                 <tbody>
                     <c:forEach items="${projects.content }" var="project">
                         <tr id="project_${project.id }">
-                            <td><input type="checkbox"></td>
+                            <td><input type="checkbox" name="chk_list" value="${project.id }"></td>
                             <td><a href="${ctxAdmin }/devwork/project/properties/${project.id }">${project.name }</a></td>
                             <td>${project.repoUrl }</td>
                             <td>${project.category }</td>
                             <td>${project.siteUrl }</td>
+                            <c:if test="${project.isAggregator == true }">
+                            <td>是</td>
+　　							</c:if>
+							<c:if test="${project.isAggregator == false }">
                             <td>否</td>
-                            <td class="text-right">修改 ｜ 删除 </td>
+　　							</c:if>
+                            <td class="text-right">
+                            	<a href="${ctxAdmin }/devwork/project/properties/${project.id }">修改</a>｜ 
+                            	<a href="${ctxAdmin }/devwork/project/delete/${project.id }">删除</a> 
+                            	</td>
                         </tr>
                     </c:forEach>
                     <c:if test="${empty projects.content }">
@@ -85,9 +93,9 @@
                     <tr>
                         <td colspan="7">
                         <page:formpage page="${projects}"/>
-                        <a href="javascript:void(0)">全选</a>
-                        <button class="btn btn-success">新增</button>
-                        <button class="btn btn-danger">删除</button>
+                        <a href="javascript:void(0)" name="checkAll">全选</a>
+                        <button class="btn btn-success" id="addBtn" >新增</button>
+                        <button class="btn btn-danger" id="deleteBtn" >删除</button>
                         </td>
                     </tr>
                 </tfoot>
@@ -96,5 +104,78 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+var id="";
+var arrChk;
+var count;
+
+//批量删除备份方法
+$("#deleteBtn").click(function(){
+	count = 0;
+	arrChk=$("input[name='chk_list']");
+	$(arrChk).each(function(){
+		if($(this).attr("checked") == "checked")
+			{
+			id=id+$(this).val()+",";
+			count++;
+			}
+	})
+	
+		if(count == 0)
+			{
+			alert("请选择至少一条记录!");
+			return;
+			}
+		if(count >= 1)
+			{
+			 if(confirm("确定要删除"+count+"条数据吗")){
+				 location.href = "${ctxAdmin }/devwork/project/deleteAll/"+id;
+			}
+			}
+}) 
+
+//新增
+$("#addBtn").click(function(){
+	location.href = "${ctxAdmin }/devwork/project/properties";
+})
+
+function check(info0,info1){
+			arrChk=$("input[name='chk_list']");
+			count = 0;
+			$(arrChk).each(function(){
+				if($(this).attr("checked") == "checked")
+					{
+					count++;
+					}
+			})
+			if(count>1)
+				{
+				alert(info1);
+				return;
+				}
+			if(count==0)
+				{
+				alert(info0);
+				return;
+				}
+		}
+		$("a[name='checkAll']").click(function(){
+			var flag = true;
+			var arrChk=$("input[name='chk_list']");
+		      $(arrChk).each(function(){
+		         if($(this).attr("checked") != "checked")
+		    	   {
+		    	   		flag = false;
+		    	   }
+		    });  
+		    //如果已经全部都被选中，则再次点击时取消全选
+		     if(flag)
+		    	{
+		    		$("input[name='chk_list']").attr("checked",false);
+		    	}else{
+		    		$("input[name='chk_list']").attr("checked",true);
+		    	}
+		});
+</script>
 </body>
 </html>

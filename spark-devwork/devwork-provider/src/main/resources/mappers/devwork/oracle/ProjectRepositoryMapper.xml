@@ -2,23 +2,57 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.parim.devwork.repository.ProjectRepositoryRepository">
     <insert id="insert" parameterType="net.parim.devwork.entity.ProjectRepository">
-        insert into dev_post 
+        INSERT INTO DEV_PROJECT_REPOSITORY
+		  (ID,
+		   NAME,
+		   URL,
+		   SNAPSHOTS_ENABLE)
+		VALUES
+		  (SEQ_GENERAL.NEXTVAL,
+		   #{name},
+		   #{Url},
+		   #{snapshotsEnable})
     </insert>
     
     <update id="update" parameterType="net.parim.devwork.entity.ProjectRepository">
-    
+    UPDATE DEV_PROJECT_REPOSITORY SET
+      NAME = #{name}, 
+      URL = #{Url}, 
+      SNAPSHOTS_ENABLE = #{snapshotsEnable}
+    WHERE ID = #{id}
     </update>
     
-    <delete id="delete" parameterType="net.parim.devwork.entity.ProjectRepository">
-    
-    </delete>
-    
+    <delete id="deleteAll" parameterType="java.util.List">
+    delete from DEV_PROJECT_REPOSITORY where id in 
+    <foreach collection="list" item = "projectRepositoryid" open="(" separator="," close=")">#{ projectRepositoryid} 
+    </foreach>
+	</delete> 
+
     <select id="findOne" parameterType="net.parim.devwork.entity.ProjectRepository" resultType="net.parim.devwork.entity.ProjectRepository">
-    
+    select 
+   		   ID,
+		   NAME,
+		   URL,
+		   SNAPSHOTS_ENABLE
+    from DEV_PROJECT_REPOSITORY
+    where id = #{id}
     </select>
     
     <select id="findAll" parameterType="net.parim.devwork.entity.ProjectRepository" resultType="net.parim.devwork.entity.ProjectRepository">
-    
+    select * from DEV_PROJECT_REPOSITORY where 1=1
+    <if test="id != null">  
+        and ID = #{id}  
+    </if>  
+    <if test="name != null and name != ''">  
+        and NAME like '%${name}%'
+    </if>
+    <if test="Url != null">  
+        and URL = #{Url}  
+    </if>
+
+    <if test="snapshotsEnable != null">  
+        and SNAPSHOTS_ENABLE = #{snapshotsEnable}  
+    </if>
     </select>
     
 </mapper>

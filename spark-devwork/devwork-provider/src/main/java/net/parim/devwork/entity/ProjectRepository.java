@@ -22,6 +22,7 @@ public class ProjectRepository extends DataEntity<ProjectRepository> {
 	public void setUrl(String url) {
 		Url = url;
 	}
+	
 	public Boolean getSnapshotsEnable() {
 		return snapshotsEnable;
 	}
