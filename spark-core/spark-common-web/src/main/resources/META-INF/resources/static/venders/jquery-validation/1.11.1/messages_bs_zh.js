@@ -65,9 +65,5 @@ jQuery.extend(jQuery.validator.defaults, {
 
     errorPlacement : function(error, element) {  
         element.parent('div').append(error);  
-    },  
-
-    submitHandler : function(form) {  
-        form.submit();  
     } 
 });

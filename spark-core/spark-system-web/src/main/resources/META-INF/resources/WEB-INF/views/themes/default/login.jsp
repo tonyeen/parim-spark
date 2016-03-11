@@ -36,7 +36,7 @@
     </div>
     <div class="panel-body">
       <div class="error">
-
+		<c:if test="${not empty message }">${message }</c:if>
       </div>
       <div class="">
         <div class="col-md-12">
@@ -52,18 +52,20 @@
               <label for="password" class="sr-only control-label text-right">密码：</label>
               <div class="input-group input-group-lg">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                <input type="password" id="password" name="password" class="form-control required " minlength="5" placeholder="密码长度不小于8位"/>
+                <input type="password" id="password" name="password" class="form-control required " minlength="5" placeholder="密码长度不小于6位"/>
               </div>
             </div>
+            <c:if test="${openValidation}">
             <div class="form-group row">
               <label for="password" class="sr-only control-label text-right">验证码：</label>
               <div class="input-group input-group-lg">
                 
-                <div class="col-xs-8"> <input type="text" id="code" name="code" class="form-control required" minlength="4" placeholder="请输入验证码"/></div>
+                <div class="col-xs-8"> <input type="text" id="code" name="code" class="form-control required" minlength="4" maxlength="4" placeholder="请输入验证码"/></div>
                 <div class="col-xs-4"> <img id="code-img"  src="${ctx}/kaptcha.jpg"></div>
                 
               </div>
             </div>
+            </c:if>
             <div class="form-group">
               <div class="">
                 <label><input type="checkbox" class=""/>记住登录</label>

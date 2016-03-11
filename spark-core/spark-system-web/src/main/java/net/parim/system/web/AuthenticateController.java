@@ -42,7 +42,12 @@ public class AuthenticateController {
             "${adminPath}/login" }, method = RequestMethod.GET)
     @UseTheme(value = false)
     public String login(Model model) {
-
+    	boolean openValidation = false;//是否开启验证码
+    	int loginFailTimes = 0;
+    	if("enable".equals(Global.getConfig("kaptcha.status")) && (loginFailTimes >= 5)){
+    		openValidation = true;
+    	}
+    	model.addAttribute("openValidation", openValidation);
         return Global.getThemePath() + "login";
     }
 
@@ -50,7 +55,11 @@ public class AuthenticateController {
             "${adminPath}/login" }, method = RequestMethod.POST)
     @UseTheme(value = false)
     public String loginFailed(Model model) {
-
+    	boolean openValidation = false;//是否开启验证码
+    	if("enable".equals(Global.getConfig("kaptcha.status"))){
+    		openValidation = true;
+    	}
+    	model.addAttribute("openValidation", openValidation);
         return Global.getThemePath() + "login";
     }
 
@@ -62,17 +71,12 @@ public class AuthenticateController {
         return Global.getThemePath() + "login";
     }
 
-    @ResponseBody
-    public String checkKaptchaCode() {
-
-        return null;
-    }
 
     @RequestMapping("/login/ajax")
     @ResponseBody
     public Map<String, Object> ajaxLogin(
             @RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String userName,
-            @RequestParam(value = "rememberMe", required = false) Boolean rememberMe,
+            @RequestParam(value = "rememberMe", required = false,defaultValue="false") Boolean rememberMe,
             @RequestParam(value = "code", required = false) String code,
             @RequestParam("password") String password, Model model,
             HttpServletRequest request) {
@@ -129,19 +133,25 @@ public class AuthenticateController {
             return "false";
         }
     }
-
-    private boolean checkKaptchaCode(HttpServletRequest request,String code) {
-        String kaptchaValue = (String) request.getSession().getAttribute(
-                com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+    @RequestMapping("/login/check_code/ajax")
+    @ResponseBody
+    public boolean checkKaptchaCode(HttpServletRequest request,
+    		@RequestParam(value = "code", required = true) String code) {
+        String kaptchaValue = getKaptchaCode(request);
         // 比较输入的验证码和实际生成的验证码是否相同
-        if (kaptchaValue == null || kaptchaValue == ""
-                || code.equalsIgnoreCase(kaptchaValue)) {
+        if (kaptchaValue != null 
+                && code.equalsIgnoreCase(kaptchaValue)) {
             return true;
         } else {
             return false;
         }
     }
 
+    private String getKaptchaCode(HttpServletRequest request){
+    	String kaptchaValue = (String) request.getSession().getAttribute(
+                "KAPTCHA_SESSION_KEY");
+    	return kaptchaValue;
+    }
     /**
      * ajax登出 spring mvc 实现
      */
