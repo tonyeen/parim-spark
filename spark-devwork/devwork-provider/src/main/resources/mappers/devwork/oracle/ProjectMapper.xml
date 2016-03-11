@@ -19,14 +19,19 @@
       REPO_URL = #{repoUrl}, 
       CATEGORY = #{category}, 
       SITE_URL = #{siteUrl}, 
-      IS_AGGREGATOR = #{isAggregator})
+      IS_AGGREGATOR = #{isAggregator}
     WHERE ID = #{id}
     </update>
     
-    <delete id="delete" parameterType="net.parim.devwork.entity.Project">
+    <!-- <delete id="delete" parameterType="net.parim.devwork.entity.Project">
     DELETE FROM DEV_PROJECT WHERE ID = #{id}
-    </delete>
-    
+    </delete> -->
+    <delete id="deleteAll" parameterType="java.util.List">
+    delete from DEV_PROJECT where id in 
+    <foreach collection="list" item = "projectid" open="(" separator="," close=")">#{ projectid} 
+    </foreach>
+	</delete> 
+	
     <select id="findOne" parameterType="net.parim.devwork.entity.Project" resultType="net.parim.devwork.entity.Project">
     select ID, NAME, REPO_URL, CATEGORY, SITE_URL, IS_AGGREGATOR
     from DEV_PROJECT
@@ -35,7 +40,25 @@
     
     <select id="findAll" parameterType="net.parim.devwork.entity.Project" resultType="net.parim.devwork.entity.Project">
     select ID, NAME, REPO_URL, CATEGORY, SITE_URL, IS_AGGREGATOR
-    from DEV_PROJECT
+    from DEV_PROJECT WHERE 1=1
+    <if test="id != null">  
+        and ID = #{id}  
+    </if>  
+    <if test="name != null and name != ''">  
+        and NAME like	'%${name}%'
+    </if>
+    <if test="repoUrl != null">  
+        and REPO_URL = #{repoUrl}  
+    </if>
+    <if test="category != null">  
+        and CATEGORY = #{category}  
+    </if>
+    <if test="siteUrl != null">  
+        and SITE_URL = #{siteUrl}  
+    </if>
+    <if test="isAggregator != null">  
+        and IS_AGGREGATOR = #{isAggregator}  
+    </if>
     </select>
     
 </mapper>

@@ -32,21 +32,81 @@
     </insert>
     
     <update id="update" parameterType="net.parim.devwork.entity.Post">
-        
+      UPDATE DEV_POST SET
+      TITLE = #{title}, 
+      PUBLIC_SLUG = #{publicSlug}, 
+      CATEGORY = #{category}, 
+      BROADCAST = #{broadcast}, 
+      DRAFT = #{draft},
+  		<if test="publishDate != null">PUBLISH_DATE = #{publishDate},</if>
+      RAW_CONTENT = #{rawContent},
+      RENDERED_CONTENT = #{renderedContent},
+      RENDERED_SUMMARY = #{renderedSummary},
+      CREATED_BY = #{createdBy.id},
+      CREATE_DATE = #{createDate}
+    WHERE ID = #{id}
     </update>
     
-    <delete id="delete" parameterType="net.parim.devwork.entity.Post">
-    
-    </delete>
-    
+    <delete id="deleteAll" parameterType="java.util.List">
+    delete from DEV_POST where id in 
+    <foreach collection="list" item = "postid" open="(" separator="," close=")">#{ postid} 
+    </foreach>
+	</delete> 
     <select id="findOne" parameterType="net.parim.devwork.entity.Post" resultType="net.parim.devwork.entity.Post">
-    
+   	select 
+   		   ID,
+   		   TITLE,
+		   PUBLIC_SLUG,
+		   CATEGORY,
+		   BROADCAST,
+		   DRAFT,
+		   PUBLISH_DATE,
+		   RAW_CONTENT,
+		   RENDERED_CONTENT,
+		   RENDERED_SUMMARY,
+		   CREATED_BY,
+		   CREATE_DATE
+    from DEV_POST
+    where id = #{id}
     </select>
     
     <select id="findAll" parameterType="net.parim.devwork.entity.Post" resultType="net.parim.devwork.entity.Post">
-    
+    select * from DEV_POST where 1=1
+    <if test="id != null">  
+        and ID = #{id}  
+    </if>  
+    <if test="title != null and title != ''">  
+        and TITLE like	'%${title}%'
+    </if>
+    <if test="publicSlug != null">  
+        and PUBLIC_SLUG = #{publicSlug}  
+    </if>
+    <if test="category != null">  
+        and CATEGORY = #{category}  
+    </if>
+    <if test="broadcast != null">  
+        and BROADCAST = #{broadcast}  
+    </if>
+    <if test="draft != null">  
+        and DRAFT = #{draft}  
+    </if>
+    <if test="publishDate != null">  
+        and PUBLISH_DATE = #{publishDate}  
+    </if>
+    <if test="rawContent != null">  
+        and RAW_CONTENT = #{rawContent}  
+    </if>
+    <if test="renderedContent != null">  
+        and RENDERED_CONTENT = #{renderedContent}  
+    </if>
+    <if test="renderedSummary != null">  
+        and RENDERED_SUMMARY = #{renderedSummary}  
+    </if>
+    <if test="createdBy != null">  
+        and CREATED_BY = #{createdBy.id}  
+    </if>
+    <if test="createDate != null">  
+        and CREATE_DATE = #{createDate}  
+    </if>
     </select>
-    
-    
-    
 </mapper>

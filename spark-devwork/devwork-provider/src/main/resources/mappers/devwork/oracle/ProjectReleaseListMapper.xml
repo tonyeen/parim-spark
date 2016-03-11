@@ -2,23 +2,83 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.parim.devwork.repository.ProjectReleaseListRepository">
     <insert id="insert" parameterType="net.parim.devwork.entity.ProjectReleaseList">
-        
+        INSERT INTO DEV_PROJECT_RELEASELIST
+		  (ID,
+		   VERSION_NAME,
+		   REPONSITORY_ID,
+		   API_DOC_URL,
+		   ARTIFACT_ID,
+		   GROUP_ID,
+		   REF_DOC_URL,
+		   <!-- RELEASE_STATUS, -->
+		   IS_CURRENT)
+		VALUES
+		  (SEQ_GENERAL.NEXTVAL,
+		   #{versionName},
+		  #{reponsitoryId},
+		  #{apiDocUrl},
+		  #{artifactId},
+		  #{groupId},
+		  #{refDocUrl},
+		  <!-- #{releaseStatus}, -->
+		  #{isCurrent})
     </insert>
     
     <update id="update" parameterType="net.parim.devwork.entity.ProjectReleaseList">
-    
+    UPDATE DEV_PROJECT_RELEASELIST SET
+      VERSION_NAME = #{versionName}, 
+      REPONSITORY_ID = #{reponsitoryId},
+      API_DOC_URL = #{apiDocUrl}, 
+      ARTIFACT_ID = #{artifactId}, 
+      GROUP_ID = #{groupId}, 
+      REF_DOC_URL = #{refDocUrl}, 
+      <!-- RELEASE_STATUS = #{releaseStatus},  -->
+      IS_CURRENT = #{isCurrent}
+    WHERE ID = #{id}
     </update>
     
-    <delete id="delete" parameterType="net.parim.devwork.entity.ProjectReleaseList">
-    
-    </delete>
-    
+    <!-- <delete id="delete" parameterType="net.parim.devwork.entity.ProjectReleaseList">
+    DELETE FROM DEV_PROJECT_RELEASELIST WHERE ID = #{id}
+    </delete> -->
+    <delete id="deleteAll" parameterType="java.util.List">
+    delete from DEV_PROJECT_RELEASELIST where id in 
+    <foreach collection="list" item = "projectReleaseListid" open="(" separator="," close=")">#{ projectReleaseListid} 
+    </foreach>
+	</delete> 
     <select id="findOne" parameterType="net.parim.devwork.entity.ProjectReleaseList" resultType="net.parim.devwork.entity.ProjectReleaseList">
-    
+    select * from DEV_PROJECT_RELEASELIST
+    where id = #{id}
     </select>
     
     <select id="findAll" parameterType="net.parim.devwork.entity.ProjectReleaseList" resultType="net.parim.devwork.entity.ProjectReleaseList">
-    
+    select * from DEV_PROJECT_RELEASELIST where 1=1
+    <if test="id != null">  
+        and ID = #{id}  
+    </if>  
+    <if test="versionName != null and versionName != ''">  
+        and VERSION_NAME like '%${versionName}%'
+    </if>
+    <if test="reponsitoryId != null">  
+        and REPONSITORY_ID = #{reponsitoryId}  
+    </if>
+	<if test="apiDocUrl != null">  
+        and API_DOC_URL = #{apiDocUrl}  
+    </if>
+    <if test="artifactId != null">  
+        and ARTIFACT_ID = #{artifactId}  
+    </if>
+    <if test="groupId != null">  
+        and GROUP_ID = #{groupId}  
+    </if>
+    <if test="refDocUrl != null">  
+        and REF_DOC_URL = #{refDocUrl}  
+    </if>
+    <if test="releaseStatus != null">  
+        and RELEASE_STATUS = #{releaseStatus}  
+    </if>
+    <if test="isCurrent != null">  
+        and IS_CURRENT = #{isCurrent}  
+    </if>
     </select>
     
 </mapper>
