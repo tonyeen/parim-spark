@@ -7,7 +7,7 @@ $(function(){
 	$('#dataForm').validate({
 		submitHandler: function(form){
 			//如果存在验证码，则异步校验验证码的正确性，否则直接提交登录请求
-			if($("#code") != undefined){
+			if($("#code").length > 0){
 				$.ajax({
 					url: _ctx + "/login/check_code/ajax",
 					data: {"code" : $("#code").val()},
