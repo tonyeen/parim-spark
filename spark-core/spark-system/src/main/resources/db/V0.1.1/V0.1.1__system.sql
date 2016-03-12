@@ -1,0 +1,647 @@
+/*==============================================================*/
+/* DBMS name:      ORACLE Version 11g                           */
+/* Created on:     2016/3/4 16:24:15                            */
+/*==============================================================*/
+
+
+ALTER TABLE "ADMIN_ROLE"
+   DROP CONSTRAINT FK_ADMIN_RO_ADMIN_ROL_SITE;
+
+ALTER TABLE "ADMIN_ROLE_XREF"
+   DROP CONSTRAINT FK_ADMIN_RO_ADMIN_ROL_ADMIN_PR;
+
+ALTER TABLE "ADMIN_ROLE_XREF"
+   DROP CONSTRAINT FK_ADMIN_RO_ADMIN_ROL_ADMIN_RO;
+
+ALTER TABLE "SYS_MENU"
+   DROP CONSTRAINT FK_SYS_MENU_MENU_TREE_SYS_MENU;
+
+ALTER TABLE "SYS_MENU_XREF"
+   DROP CONSTRAINT FK_SYS_MENU_SYS_MENU__SYS_MENU;
+
+ALTER TABLE "SYS_MENU_XREF"
+   DROP CONSTRAINT FK_SYS_MENU_SYS_MENU__ADMIN_PR;
+
+ALTER TABLE "SYS_USER"
+   DROP CONSTRAINT FK_SYS_USER_USER_SITE_SITE;
+
+ALTER TABLE "SYS_USER"
+   DROP CONSTRAINT FK_SYS_USER_USER_USER_USER_GRO;
+
+ALTER TABLE "USER_GROUP"
+   DROP CONSTRAINT FK_USER_GRO_USER_GROU_SITE;
+
+ALTER TABLE "USER_ROLE"
+   DROP CONSTRAINT FK_USER_ROL_LOGICAL_G_LOGICAL_;
+
+ALTER TABLE "USER_ROLE"
+   DROP CONSTRAINT FK_USER_ROL_USER_GROU_USER_GRO;
+
+ALTER TABLE "USER_ROLE"
+   DROP CONSTRAINT FK_USER_ROL_USER_ROLE_ADMIN_RO;
+
+ALTER TABLE "USER_ROLE"
+   DROP CONSTRAINT FK_USER_ROL_USER_ROLE_ADMIN_PR;
+
+ALTER TABLE "USER_ROLE"
+   DROP CONSTRAINT FK_USER_ROL_USER_ROLE_SYS_USER;
+
+DROP TABLE "ADMIN_PRIVILEGE" CASCADE CONSTRAINTS;
+
+DROP TABLE "ADMIN_ROLE" CASCADE CONSTRAINTS;
+
+DROP TABLE "ADMIN_ROLE_XREF" CASCADE CONSTRAINTS;
+
+DROP TABLE "LOGICAL_GROUP" CASCADE CONSTRAINTS;
+
+DROP TABLE "SITE" CASCADE CONSTRAINTS;
+
+DROP TABLE "SYS_DICT" CASCADE CONSTRAINTS;
+
+DROP TABLE "SYS_MENU" CASCADE CONSTRAINTS;
+
+DROP TABLE "SYS_MENU_XREF" CASCADE CONSTRAINTS;
+
+DROP TABLE "SYS_USER" CASCADE CONSTRAINTS;
+
+DROP TABLE "USER_GROUP" CASCADE CONSTRAINTS;
+
+DROP TABLE "USER_ROLE" CASCADE CONSTRAINTS;
+
+/*==============================================================*/
+/* Table: "ADMIN_PRIVILEGE"                                     */
+/*==============================================================*/
+CREATE TABLE "ADMIN_PRIVILEGE" 
+(
+   "ID"                 NUMBER               NOT NULL,
+   "NAME"               VARCHAR2(255),
+   "IDENTIFIER"         VARCHAR2(255),
+   "DESCRIPTION"        CLOB,
+   "TARGETS"            VARCHAR2(50),
+   "USER_TYPE"          VARCHAR2(64),
+   "TYPE"               VARCHAR2(64),
+   CONSTRAINT PK_ADMIN_PRIVILEGE PRIMARY KEY ("ID")
+);
+
+COMMENT ON TABLE "ADMIN_PRIVILEGE" IS
+'管理权限';
+
+COMMENT ON COLUMN "ADMIN_PRIVILEGE"."ID" IS
+'管理权限编号';
+
+COMMENT ON COLUMN "ADMIN_PRIVILEGE"."NAME" IS
+'名称';
+
+COMMENT ON COLUMN "ADMIN_PRIVILEGE"."IDENTIFIER" IS
+'标识';
+
+COMMENT ON COLUMN "ADMIN_PRIVILEGE"."DESCRIPTION" IS
+'描述';
+
+COMMENT ON COLUMN "ADMIN_PRIVILEGE"."TARGETS" IS
+'范围';
+
+COMMENT ON COLUMN "ADMIN_PRIVILEGE"."USER_TYPE" IS
+'用户类型';
+
+COMMENT ON COLUMN "ADMIN_PRIVILEGE"."TYPE" IS
+'权限类型';
+
+/*==============================================================*/
+/* Table: "ADMIN_ROLE"                                          */
+/*==============================================================*/
+CREATE TABLE "ADMIN_ROLE" 
+(
+   "ID"                 NUMBER               NOT NULL,
+   "SITE_ID"            NUMBER               NOT NULL,
+   "NAME"               VARCHAR2(255),
+   "DESCRIPTION"        CLOB,
+   "IS_SUPPERUSER"      SMALLINT,
+   "TARGETS"            VARCHAR2(50),
+   "CREATED_BY"         NUMBER,
+   "CREATE_DATE"        DATE,
+   "LAST_UPDATED_BY"    NUMBER,
+   "LAST_UPDATE_DATE"   DATE,
+   CONSTRAINT PK_ADMIN_ROLE PRIMARY KEY ("ID")
+);
+
+COMMENT ON TABLE "ADMIN_ROLE" IS
+'管理角色';
+
+COMMENT ON COLUMN "ADMIN_ROLE"."ID" IS
+'管理角色编号';
+
+COMMENT ON COLUMN "ADMIN_ROLE"."SITE_ID" IS
+'站点编号';
+
+COMMENT ON COLUMN "ADMIN_ROLE"."NAME" IS
+'名称';
+
+COMMENT ON COLUMN "ADMIN_ROLE"."DESCRIPTION" IS
+'描述';
+
+COMMENT ON COLUMN "ADMIN_ROLE"."IS_SUPPERUSER" IS
+'是否超级管理员';
+
+COMMENT ON COLUMN "ADMIN_ROLE"."TARGETS" IS
+'那些对象能使用该角色，需要设计，暂时G和S，G代表组织，S代表站点';
+
+COMMENT ON COLUMN "ADMIN_ROLE"."CREATED_BY" IS
+'created_by';
+
+COMMENT ON COLUMN "ADMIN_ROLE"."CREATE_DATE" IS
+'create_date';
+
+COMMENT ON COLUMN "ADMIN_ROLE"."LAST_UPDATED_BY" IS
+'last_updated_by';
+
+COMMENT ON COLUMN "ADMIN_ROLE"."LAST_UPDATE_DATE" IS
+'last_update_date';
+
+/*==============================================================*/
+/* Table: "ADMIN_ROLE_XREF"                                     */
+/*==============================================================*/
+CREATE TABLE "ADMIN_ROLE_XREF" 
+(
+   "SITE_ID"            NUMBER               NOT NULL,
+   "PRIVILEGE_ID"       NUMBER               NOT NULL,
+   "ROLE_ID"            NUMBER               NOT NULL,
+   "CREATED_BY"         NUMBER,
+   "CREATE_DATE"        DATE,
+   CONSTRAINT PK_ADMIN_ROLE_XREF PRIMARY KEY ("PRIVILEGE_ID", "ROLE_ID")
+);
+
+COMMENT ON TABLE "ADMIN_ROLE_XREF" IS
+'admin_role_xref';
+
+COMMENT ON COLUMN "ADMIN_ROLE_XREF"."SITE_ID" IS
+'站点编号';
+
+COMMENT ON COLUMN "ADMIN_ROLE_XREF"."PRIVILEGE_ID" IS
+'管理权限编号';
+
+COMMENT ON COLUMN "ADMIN_ROLE_XREF"."ROLE_ID" IS
+'管理角色编号';
+
+COMMENT ON COLUMN "ADMIN_ROLE_XREF"."CREATED_BY" IS
+'创建人编号';
+
+COMMENT ON COLUMN "ADMIN_ROLE_XREF"."CREATE_DATE" IS
+'创建时间';
+
+/*==============================================================*/
+/* Table: "LOGICAL_GROUP"                                       */
+/*==============================================================*/
+CREATE TABLE "LOGICAL_GROUP" 
+(
+   "ID"                 NUMBER               NOT NULL,
+   "NAME"               VARCHAR2(255),
+   "DESCRIPTION"        CLOB,
+   "CREATED_BY"         NUMBER,
+   "CREATE_DATE"        DATE,
+   "LAST_UPDATED_BY"    NUMBER,
+   "LAST_UPDATE_DATE"   DATE,
+   CONSTRAINT PK_LOGICAL_GROUP PRIMARY KEY ("ID")
+);
+
+COMMENT ON TABLE "LOGICAL_GROUP" IS
+'逻辑组';
+
+COMMENT ON COLUMN "LOGICAL_GROUP"."ID" IS
+'逻辑组编号';
+
+COMMENT ON COLUMN "LOGICAL_GROUP"."NAME" IS
+'名称';
+
+COMMENT ON COLUMN "LOGICAL_GROUP"."DESCRIPTION" IS
+'描述';
+
+COMMENT ON COLUMN "LOGICAL_GROUP"."CREATED_BY" IS
+'created_by';
+
+COMMENT ON COLUMN "LOGICAL_GROUP"."CREATE_DATE" IS
+'create_date';
+
+COMMENT ON COLUMN "LOGICAL_GROUP"."LAST_UPDATED_BY" IS
+'last_updated_by';
+
+COMMENT ON COLUMN "LOGICAL_GROUP"."LAST_UPDATE_DATE" IS
+'last_update_date';
+
+/*==============================================================*/
+/* Table: "SITE"                                                */
+/*==============================================================*/
+CREATE TABLE "SITE" 
+(
+   "ID"                 NUMBER               NOT NULL,
+   "NAME"               VARCHAR2(255),
+   "SHORT_NAME"         VARCHAR2(50),
+   "DESCRIPTION"        CLOB,
+   "CREATED_BY"         NUMBER,
+   "CREATE_DATE"        DATE,
+   "LAST_UPDATED_BY"    NUMBER,
+   "LAST_UPDATE_DATE"   DATE,
+   CONSTRAINT PK_SITE PRIMARY KEY ("ID")
+);
+
+COMMENT ON TABLE "SITE" IS
+'站点';
+
+COMMENT ON COLUMN "SITE"."ID" IS
+'站点编号';
+
+COMMENT ON COLUMN "SITE"."NAME" IS
+'名称';
+
+COMMENT ON COLUMN "SITE"."SHORT_NAME" IS
+'短名称';
+
+COMMENT ON COLUMN "SITE"."DESCRIPTION" IS
+'描述';
+
+COMMENT ON COLUMN "SITE"."CREATED_BY" IS
+'created_by';
+
+COMMENT ON COLUMN "SITE"."CREATE_DATE" IS
+'create_date';
+
+COMMENT ON COLUMN "SITE"."LAST_UPDATED_BY" IS
+'last_updated_by';
+
+COMMENT ON COLUMN "SITE"."LAST_UPDATE_DATE" IS
+'last_update_date';
+
+/*==============================================================*/
+/* Table: "SYS_DICT"                                            */
+/*==============================================================*/
+CREATE TABLE "SYS_DICT" 
+(
+   "ID"                 NUMBER               NOT NULL,
+   "NAME"               VARCHAR2(255),
+   "IDENTIFIER"         VARCHAR2(50),
+   "GROUP_NAME"         VARCHAR2(255),
+   "GROUP_IDENTIFIER"   VARCHAR2(50),
+   "SORT"               INTEGER,
+   "CREATED_BY"         NUMBER,
+   "CREATE_DATE"        DATE,
+   "LAST_UPDATED_BY"    NUMBER,
+   "LAST_UPDATE_DATE"   DATE,
+   CONSTRAINT PK_SYS_DICT PRIMARY KEY ("ID")
+);
+
+COMMENT ON TABLE "SYS_DICT" IS
+'系统数据字典';
+
+COMMENT ON COLUMN "SYS_DICT"."ID" IS
+'系统数据字典编号';
+
+COMMENT ON COLUMN "SYS_DICT"."NAME" IS
+'名称';
+
+COMMENT ON COLUMN "SYS_DICT"."IDENTIFIER" IS
+'标识';
+
+COMMENT ON COLUMN "SYS_DICT"."GROUP_NAME" IS
+'分组名称';
+
+COMMENT ON COLUMN "SYS_DICT"."GROUP_IDENTIFIER" IS
+'分组标识';
+
+COMMENT ON COLUMN "SYS_DICT"."SORT" IS
+'排序';
+
+COMMENT ON COLUMN "SYS_DICT"."CREATED_BY" IS
+'created_by';
+
+COMMENT ON COLUMN "SYS_DICT"."CREATE_DATE" IS
+'create_date';
+
+COMMENT ON COLUMN "SYS_DICT"."LAST_UPDATED_BY" IS
+'last_updated_by';
+
+COMMENT ON COLUMN "SYS_DICT"."LAST_UPDATE_DATE" IS
+'last_update_date';
+
+/*==============================================================*/
+/* Table: "SYS_MENU"                                            */
+/*==============================================================*/
+CREATE TABLE "SYS_MENU" 
+(
+   "ID"                 NUMBER               NOT NULL,
+   "PARENT_ID"          NUMBER,
+   "NAME"               VARCHAR2(255),
+   "IDENTIFIER"         VARCHAR2(50),
+   "SORT"               INTEGER,
+   "URL"                VARCHAR2(255),
+   "TARGET"             VARCHAR2(255),
+   "ICON"               VARCHAR2(50),
+   "IS_SHOW"            SMALLINT,
+   "PERMISSION"         VARCHAR2(255),
+   CONSTRAINT PK_SYS_MENU PRIMARY KEY ("ID")
+);
+
+COMMENT ON TABLE "SYS_MENU" IS
+'系统菜单';
+
+COMMENT ON COLUMN "SYS_MENU"."ID" IS
+'系统菜单编号';
+
+COMMENT ON COLUMN "SYS_MENU"."PARENT_ID" IS
+'父级菜单编号';
+
+COMMENT ON COLUMN "SYS_MENU"."NAME" IS
+'名称';
+
+COMMENT ON COLUMN "SYS_MENU"."IDENTIFIER" IS
+'标识';
+
+COMMENT ON COLUMN "SYS_MENU"."SORT" IS
+'排序';
+
+COMMENT ON COLUMN "SYS_MENU"."URL" IS
+'URL';
+
+COMMENT ON COLUMN "SYS_MENU"."TARGET" IS
+'a标签的target属性可以的值';
+
+COMMENT ON COLUMN "SYS_MENU"."ICON" IS
+'图标的样式名称';
+
+COMMENT ON COLUMN "SYS_MENU"."IS_SHOW" IS
+'是否显示';
+
+COMMENT ON COLUMN "SYS_MENU"."PERMISSION" IS
+'权限检测';
+
+/*==============================================================*/
+/* Table: "SYS_MENU_XREF"                                       */
+/*==============================================================*/
+CREATE TABLE "SYS_MENU_XREF" 
+(
+   "SYS_MENU_ID"        NUMBER               NOT NULL,
+   "ADMIN_PRIVILEGE_ID" NUMBER               NOT NULL,
+   CONSTRAINT PK_SYS_MENU_XREF PRIMARY KEY ("SYS_MENU_ID", "ADMIN_PRIVILEGE_ID")
+);
+
+COMMENT ON TABLE "SYS_MENU_XREF" IS
+'sys_menu_xref';
+
+COMMENT ON COLUMN "SYS_MENU_XREF"."SYS_MENU_ID" IS
+'系统菜单编号';
+
+COMMENT ON COLUMN "SYS_MENU_XREF"."ADMIN_PRIVILEGE_ID" IS
+'管理权限编号';
+
+/*==============================================================*/
+/* Table: "SYS_USER"                                            */
+/*==============================================================*/
+CREATE TABLE "SYS_USER" 
+(
+   "ID"                 NUMBER               NOT NULL,
+   "SITE_ID"            NUMBER               NOT NULL,
+   "USER_GROUP_ID"      NUMBER,
+   "USERNAME"           VARCHAR2(255),
+   "EMAIL"              VARCHAR2(255),
+   "PHONE"              VARCHAR2(20),
+   "FIRST_NAME"         VARCHAR2(50),
+   "LAST_NAME"          VARCHAR2(50),
+   "PASSWORD"           VARCHAR2(64),
+   "SALT"               VARCHAR2(64),
+   "START_DATE"         DATE,
+   "END_DATE"           DATE,
+   "ALLOW_UPDATE"       SMALLINT,
+   "TOTAL_SESSION_COUNT" INTEGER,
+   "TOTAL_SESSION_TIME" INTEGER,
+   "CREATED_BY"         NUMBER,
+   "CREATE_DATE"        DATE,
+   "LAST_UPDATED_BY"    NUMBER,
+   "LAST_UPDATE_DATE"   DATE,
+   CONSTRAINT PK_SYS_USER PRIMARY KEY ("ID")
+);
+
+COMMENT ON TABLE "SYS_USER" IS
+'用户';
+
+COMMENT ON COLUMN "SYS_USER"."ID" IS
+'用户编号';
+
+COMMENT ON COLUMN "SYS_USER"."SITE_ID" IS
+'站点编号';
+
+COMMENT ON COLUMN "SYS_USER"."USER_GROUP_ID" IS
+'用户组编号';
+
+COMMENT ON COLUMN "SYS_USER"."USERNAME" IS
+'用户名';
+
+COMMENT ON COLUMN "SYS_USER"."EMAIL" IS
+'邮箱';
+
+COMMENT ON COLUMN "SYS_USER"."PHONE" IS
+'电话';
+
+COMMENT ON COLUMN "SYS_USER"."FIRST_NAME" IS
+'姓';
+
+COMMENT ON COLUMN "SYS_USER"."LAST_NAME" IS
+'名';
+
+COMMENT ON COLUMN "SYS_USER"."PASSWORD" IS
+'密码';
+
+COMMENT ON COLUMN "SYS_USER"."SALT" IS
+'密码加密秘钥';
+
+COMMENT ON COLUMN "SYS_USER"."START_DATE" IS
+'有效期开始';
+
+COMMENT ON COLUMN "SYS_USER"."END_DATE" IS
+'有效期结束';
+
+COMMENT ON COLUMN "SYS_USER"."ALLOW_UPDATE" IS
+'是否允许用户更新用户信息';
+
+COMMENT ON COLUMN "SYS_USER"."TOTAL_SESSION_COUNT" IS
+'登录次数';
+
+COMMENT ON COLUMN "SYS_USER"."TOTAL_SESSION_TIME" IS
+'计算单位为秒';
+
+COMMENT ON COLUMN "SYS_USER"."CREATED_BY" IS
+'created_by';
+
+COMMENT ON COLUMN "SYS_USER"."CREATE_DATE" IS
+'create_date';
+
+COMMENT ON COLUMN "SYS_USER"."LAST_UPDATED_BY" IS
+'last_updated_by';
+
+COMMENT ON COLUMN "SYS_USER"."LAST_UPDATE_DATE" IS
+'last_update_date';
+
+/*==============================================================*/
+/* Table: "USER_GROUP"                                          */
+/*==============================================================*/
+CREATE TABLE "USER_GROUP" 
+(
+   "ID"                 NUMBER               NOT NULL,
+   "SITE_ID"            NUMBER               NOT NULL,
+   "NAME"               VARCHAR2(255),
+   "SHORT_NAME"         VARCHAR2(50),
+   "DESCRIPTION"        CLOB,
+   "CREATED_BY"         NUMBER,
+   "CREATE_DATE"        DATE,
+   "LAST_UPDATED_BY"    NUMBER,
+   "LAST_UPDATE_DATE"   DATE,
+   CONSTRAINT PK_USER_GROUP PRIMARY KEY ("ID")
+);
+
+COMMENT ON TABLE "USER_GROUP" IS
+'用户组';
+
+COMMENT ON COLUMN "USER_GROUP"."ID" IS
+'用户组编号';
+
+COMMENT ON COLUMN "USER_GROUP"."SITE_ID" IS
+'站点编号';
+
+COMMENT ON COLUMN "USER_GROUP"."NAME" IS
+'名称';
+
+COMMENT ON COLUMN "USER_GROUP"."SHORT_NAME" IS
+'一般使用大写英文字母';
+
+COMMENT ON COLUMN "USER_GROUP"."DESCRIPTION" IS
+'描述';
+
+COMMENT ON COLUMN "USER_GROUP"."CREATED_BY" IS
+'created_by';
+
+COMMENT ON COLUMN "USER_GROUP"."CREATE_DATE" IS
+'create_date';
+
+COMMENT ON COLUMN "USER_GROUP"."LAST_UPDATED_BY" IS
+'last_updated_by';
+
+COMMENT ON COLUMN "USER_GROUP"."LAST_UPDATE_DATE" IS
+'last_update_date';
+
+/*==============================================================*/
+/* Table: "USER_ROLE"                                           */
+/*==============================================================*/
+CREATE TABLE "USER_ROLE" 
+(
+   "ID"                 NUMBER               NOT NULL,
+   "SITE_ID"            NUMBER,
+   "USER_ID"            NUMBER,
+   "USER_GROUP_ID"      NUMBER,
+   "LOGICAL_GROUP_ID"   NUMBER,
+   "ROLE_ID"            NUMBER,
+   "PRIVILEGE_ID"       NUMBER,
+   "TARGET"             VARCHAR2(64),
+   "TARGET_ID"          NUMBER,
+   "CREATED_BY"         NUMBER,
+   "CREATE_DATE"        DATE,
+   "LAST_UPDATED_BY"    NUMBER,
+   "LAST_UPDATE_DATE"   DATE,
+   CONSTRAINT PK_USER_ROLE PRIMARY KEY ("ID")
+);
+
+COMMENT ON TABLE "USER_ROLE" IS
+'user_role';
+
+COMMENT ON COLUMN "USER_ROLE"."ID" IS
+'用户授权编号';
+
+COMMENT ON COLUMN "USER_ROLE"."SITE_ID" IS
+'站点编号';
+
+COMMENT ON COLUMN "USER_ROLE"."USER_ID" IS
+'用户编号';
+
+COMMENT ON COLUMN "USER_ROLE"."USER_GROUP_ID" IS
+'用户组编号';
+
+COMMENT ON COLUMN "USER_ROLE"."LOGICAL_GROUP_ID" IS
+'逻辑组编号';
+
+COMMENT ON COLUMN "USER_ROLE"."ROLE_ID" IS
+'管理角色编号';
+
+COMMENT ON COLUMN "USER_ROLE"."PRIVILEGE_ID" IS
+'管理权限编号';
+
+COMMENT ON COLUMN "USER_ROLE"."TARGET" IS
+'管理对象类型';
+
+COMMENT ON COLUMN "USER_ROLE"."TARGET_ID" IS
+'管理对象编号';
+
+COMMENT ON COLUMN "USER_ROLE"."CREATED_BY" IS
+'created_by';
+
+COMMENT ON COLUMN "USER_ROLE"."CREATE_DATE" IS
+'create_date';
+
+COMMENT ON COLUMN "USER_ROLE"."LAST_UPDATED_BY" IS
+'last_updated_by';
+
+COMMENT ON COLUMN "USER_ROLE"."LAST_UPDATE_DATE" IS
+'last_update_date';
+
+ALTER TABLE "ADMIN_ROLE"
+   ADD CONSTRAINT FK_ADMIN_RO_ADMIN_ROL_SITE FOREIGN KEY ("SITE_ID")
+      REFERENCES "SITE" ("ID");
+
+ALTER TABLE "ADMIN_ROLE_XREF"
+   ADD CONSTRAINT FK_ADMIN_RO_ADMIN_ROL_ADMIN_PR FOREIGN KEY ("PRIVILEGE_ID")
+      REFERENCES "ADMIN_PRIVILEGE" ("ID");
+
+ALTER TABLE "ADMIN_ROLE_XREF"
+   ADD CONSTRAINT FK_ADMIN_RO_ADMIN_ROL_ADMIN_RO FOREIGN KEY ("ROLE_ID")
+      REFERENCES "ADMIN_ROLE" ("ID");
+
+ALTER TABLE "SYS_MENU"
+   ADD CONSTRAINT FK_SYS_MENU_MENU_TREE_SYS_MENU FOREIGN KEY ("PARENT_ID")
+      REFERENCES "SYS_MENU" ("ID");
+
+ALTER TABLE "SYS_MENU_XREF"
+   ADD CONSTRAINT FK_SYS_MENU_SYS_MENU__SYS_MENU FOREIGN KEY ("SYS_MENU_ID")
+      REFERENCES "SYS_MENU" ("ID");
+
+ALTER TABLE "SYS_MENU_XREF"
+   ADD CONSTRAINT FK_SYS_MENU_SYS_MENU__ADMIN_PR FOREIGN KEY ("ADMIN_PRIVILEGE_ID")
+      REFERENCES "ADMIN_PRIVILEGE" ("ID");
+
+ALTER TABLE "SYS_USER"
+   ADD CONSTRAINT FK_SYS_USER_USER_SITE_SITE FOREIGN KEY ("SITE_ID")
+      REFERENCES "SITE" ("ID");
+
+ALTER TABLE "SYS_USER"
+   ADD CONSTRAINT FK_SYS_USER_USER_USER_USER_GRO FOREIGN KEY ("USER_GROUP_ID")
+      REFERENCES "USER_GROUP" ("ID");
+
+ALTER TABLE "USER_GROUP"
+   ADD CONSTRAINT FK_USER_GRO_USER_GROU_SITE FOREIGN KEY ("SITE_ID")
+      REFERENCES "SITE" ("ID");
+
+ALTER TABLE "USER_ROLE"
+   ADD CONSTRAINT FK_USER_ROL_LOGICAL_G_LOGICAL_ FOREIGN KEY ("LOGICAL_GROUP_ID")
+      REFERENCES "LOGICAL_GROUP" ("ID");
+
+ALTER TABLE "USER_ROLE"
+   ADD CONSTRAINT FK_USER_ROL_USER_GROU_USER_GRO FOREIGN KEY ("USER_GROUP_ID")
+      REFERENCES "USER_GROUP" ("ID");
+
+ALTER TABLE "USER_ROLE"
+   ADD CONSTRAINT FK_USER_ROL_USER_ROLE_ADMIN_RO FOREIGN KEY ("ROLE_ID")
+      REFERENCES "ADMIN_ROLE" ("ID");
+
+ALTER TABLE "USER_ROLE"
+   ADD CONSTRAINT FK_USER_ROL_USER_ROLE_ADMIN_PR FOREIGN KEY ("PRIVILEGE_ID")
+      REFERENCES "ADMIN_PRIVILEGE" ("ID");
+
+ALTER TABLE "USER_ROLE"
+   ADD CONSTRAINT FK_USER_ROL_USER_ROLE_SYS_USER FOREIGN KEY ("USER_ID")
+      REFERENCES "SYS_USER" ("ID");
+
