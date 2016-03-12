@@ -2,3 +2,12 @@ stages:
   - build
   - test
   - deploy
+
+job_deploy_dev:
+  script:
+    - gradle clean build reference
+  stage: build
+  only:
+    - master
+  tags:
+    - parim-gitlab-runner-75
