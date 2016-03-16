@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="main-menu" content="devwork"/>
 <meta name="menu" content="menu-dev_project_releaseList_list"/>
-<title>开发者空间-项目列表</title>
+<title>开发者空间-项目发布列表</title>
 </head>
 <body>
 <div class="console-container">
@@ -19,7 +19,7 @@
           </div>
           <div class="console-title console-title-border clearfix">
             <div class="pull-left">
-              <h4>项目列表</h4>
+              <h4>项目发布列表</h4>
             </div>
             <div class="pull-right">
               <a class="btn btn-default" href="${ctxAdmin }/devwork/projectReleaseList/list">
@@ -57,6 +57,7 @@
                         <th>关联文档路径(refDocUrl)</th>
                         <th>发布状态(releaseStatus)</th>
                         <th>是否当前(isCurrent)</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,6 +76,9 @@
                             </c:if>
                             <c:if test="${projectReleaseList.isCurrent == false}">
                             <td>否</td>
+                            </c:if>
+                            <c:if test="${empty projectReleaseList.isCurrent}">
+                            <td></td>
                             </c:if>
                             <td class="text-right">
                             	<a href="${ctxAdmin }/devwork/projectReleaseList/properties/${projectReleaseList.id }">修改</a>｜ 

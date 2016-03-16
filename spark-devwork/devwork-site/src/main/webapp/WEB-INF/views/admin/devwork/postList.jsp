@@ -6,7 +6,7 @@
 <meta name="main-menu" content="devwork"/>
 <meta name="menu" content="menu-dev_post_list"/>
 
-<title>开发者空间-项目列表</title>
+<title>开发者空间-Post列表</title>
 </head>
 <body>
 <div class="console-container">
@@ -20,7 +20,7 @@
           </div>
           <div class="console-title console-title-border clearfix">
             <div class="pull-left">
-              <h4>项目列表</h4>
+              <h4>Post列表</h4>
             </div>
             <div class="pull-right">
               <a class="btn btn-default" href="${ctxAdmin }/devwork/post/list">
