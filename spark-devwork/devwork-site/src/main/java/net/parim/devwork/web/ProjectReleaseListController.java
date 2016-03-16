@@ -10,14 +10,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.parim.common.web.BaseController;
-import net.parim.devwork.entity.Post;
 import net.parim.devwork.entity.ProjectReleaseList;
 import net.parim.devwork.service.ProjectReleaseListService;
 
@@ -48,14 +44,7 @@ public class ProjectReleaseListController extends BaseController {
 		model.addAttribute(projectReleaseList);
 		return "admin/devwork/projectReleaseListProperties";
 	}
-	//设定前台传来的ID为long
-	@ModelAttribute
-	public void getThemeline(@RequestParam(value = "id", defaultValue = "-1") Long id, Model model){
-		if(id!=-1){
-			ProjectReleaseList projectReleaseList = projectReleaseListService.findOne(id);
-			model.addAttribute(projectReleaseList);
-		}
-	}
+	
 	//保存
 	@RequestMapping(value="save")
 	public String saveprojectReleaseListProperties(ProjectReleaseList projectReleaseList, Model model){

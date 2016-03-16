@@ -141,18 +141,21 @@
 								{
 								alert("所选项目已经处于发布状态，不可重复发布！");
 								return;
+								}else{
+									//执行发布
+									$.ajax({  
+						                 url: "${ctxAdmin }/devwork/post/ajax?id="+id,  
+						                 type: 'GET',  
+						                 dataType: 'json',  
+										    success: function(json) {
+										    	location.href = '${ctxAdmin }/devwork/post/list';
+										    	alert("发布成功！");
+										    }
+						             		})  
 								}
 						}
 					}) 
-				$.ajax({  
-                 url: "${ctxAdmin }/devwork/post/ajax?id="+id,  
-                 type: 'GET',  
-                 dataType: 'json',  
-				    success: function(json) {
-				    	location.href = '${ctxAdmin }/devwork/post/list';
-				    	alert("发布成功！");
-				    }
-             		})  
+				
 				} 
 		}) 
 </script>

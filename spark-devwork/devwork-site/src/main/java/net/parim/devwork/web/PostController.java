@@ -10,10 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.parim.common.web.BaseController;
@@ -64,13 +62,6 @@ public class PostController extends BaseController {
 		return posts;
 	}
 
-	@ModelAttribute
-	public void getThemeline(@RequestParam(value = "id", defaultValue = "-1") Long id, Model model){
-		if(id!=-1){
-			Post post = postService.findOne(id);
-			model.addAttribute(post);
-		}
-	}
 	//保存
 	@RequestMapping(value="save")
 	public String savePostProperties(Post post, Model model){

@@ -10,10 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import net.parim.common.web.BaseController;
 import net.parim.devwork.entity.Project;
@@ -48,14 +46,7 @@ public class PeojectController extends BaseController {
 		model.addAttribute(project);
 		return "admin/devwork/projectProperties";
 	}
-	//设定传来的id为Long
-	@ModelAttribute
-	public void getThemeline(@RequestParam(value = "id", defaultValue = "-1") Long id, Model model){
-		if(id!=-1){
-			Project project = projectService.findOne(id);
-			model.addAttribute(project);
-		}
-	}
+	
 	//保存
 	@RequestMapping(value="save")
 	public String saveProjectProperties(Project project, Model model){

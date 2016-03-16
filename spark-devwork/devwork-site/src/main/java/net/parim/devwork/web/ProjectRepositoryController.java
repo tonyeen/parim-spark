@@ -10,10 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import net.parim.common.web.BaseController;
 import net.parim.devwork.entity.ProjectRepository;
@@ -46,14 +44,7 @@ public class ProjectRepositoryController extends BaseController {
 		model.addAttribute(projectRepository);
 		return "admin/devwork/projectRepositoryProperties";
 	}
-	//设定前台传来的id为long
-	@ModelAttribute
-	public void getThemeline(@RequestParam(value = "id", defaultValue = "-1") Long id, @RequestParam(value = "ids", required = false) String ids,Model model){
-		if(id!=-1){
-			ProjectRepository projectRepository = projectRepositoryService.findOne(id);
-			model.addAttribute(projectRepository);
-		}
-	}
+	
 	//保存
 	@RequestMapping(value="save")
 	public String saveProjectRepositoryProperties(ProjectRepository projectRepository, Model model){
