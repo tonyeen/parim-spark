@@ -52,7 +52,7 @@
                         <th>名称(name)</th>
                         <th>路径(url)</th>
                         <th style="width:20%">快捷方式(snapshotsEnable)</th>
-                        <th style="text-align:center;">操作</th>
+                        <th class="text-right">操作</th>
                     </tr>
                 </thead>
                 <tbody>

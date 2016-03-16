@@ -57,7 +57,7 @@
                         <th>关联文档路径(refDocUrl)</th>
                         <th>发布状态(releaseStatus)</th>
                         <th>是否当前(isCurrent)</th>
-                        <th>操作</th>
+                        <th class="text-right">操作</th>
                     </tr>
                 </thead>
                 <tbody>

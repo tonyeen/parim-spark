@@ -59,8 +59,7 @@
                         <th>原材料(rawContent)</th>
                         <th>呈现出来的内容(renderedContent)</th>
                         <th>渲染概要(renderedSummary)</th>
-                        <!-- <th>创建时间(create_date)</th> -->
-                        <!-- <th class="text-right">操作</th> -->
+                        <th class="text-right">操作</th>
                     </tr>
                 </thead>
                 <tbody>

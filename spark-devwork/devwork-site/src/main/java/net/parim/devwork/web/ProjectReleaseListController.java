@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.parim.common.web.BaseController;
+import net.parim.devwork.entity.Post;
 import net.parim.devwork.entity.ProjectReleaseList;
 import net.parim.devwork.service.ProjectReleaseListService;
 
@@ -93,4 +95,5 @@ public class ProjectReleaseListController extends BaseController {
 		model.addAttribute("projectReleaseLists", projectReleaseLists);
 		return "admin/devwork/projectReleaseListList";
 	}
+	
 }
