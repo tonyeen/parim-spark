@@ -51,7 +51,8 @@
                         <th>选择</th>
                         <th>名称(name)</th>
                         <th>路径(url)</th>
-                        <th>快捷方式(snapshotsEnable)</th>
+                        <th style="width:20%">快捷方式(snapshotsEnable)</th>
+                        <th style="text-align:center;">操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,10 +64,13 @@
 							写.除此之外均为小写 -->
                             <td>${p.url }</td>
                             <c:if test="${p.snapshotsEnable == true}">
-                            <td>是</td>
+                            <td style="width:0.5%">是</td>
                             </c:if>
                             <c:if test="${p.snapshotsEnable == false}">
-                            <td>否</td>
+                            <td style="width:0.5%">否</td>
+                            </c:if>
+                            <c:if test="${empty p.snapshotsEnable }">
+                            <td style="width:0.5%"></td>
                             </c:if>
                             <td class="text-right">
                             	<a href="${ctxAdmin }/devwork/projectRepository/properties/${p.id }">修改</a>｜ 
@@ -76,7 +80,7 @@
                     </c:forEach>
                     <c:if test="${empty projectRepositories.content }">
                     <tr><td colspan="5"><div class="inf-blank text-center" style="height: 200px; line-height: 200px;">
-                        还没有项目，你可以点击“<a href="${ctxAdmin }/devwork/projectRepository/properties"></a>”。</div></td></tr>
+                        还没有项目，你可以点击“<a href="${ctxAdmin }/devwork/projectRepository/properties">添加项目库</a>”。</div></td></tr>
                     </c:if>
                 </tbody>
                 <c:if test="${not empty projectRepositories.content }">
