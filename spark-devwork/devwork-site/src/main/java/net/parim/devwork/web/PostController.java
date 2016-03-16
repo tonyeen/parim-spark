@@ -29,13 +29,14 @@ public class PostController extends BaseController {
 	@Autowired
 	private PostService postService;
 	
+	//列表显示
 	@RequestMapping("list")
 	public String postList(@PageableDefault Pageable pageable, Post post, Model model){
 		Page<Post> posts = postService.findAll(post, pageable);
 		model.addAttribute("posts", posts);
 		return "admin/devwork/postList";
 	}
-	
+	//增加、修改跳转方法
 	@RequestMapping(value={"properties", "properties/{id}"})
 	public String postProperties(Post post, Model model){
 		
@@ -47,7 +48,7 @@ public class PostController extends BaseController {
 		model.addAttribute(post);
 		return "admin/devwork/postProperties";
 	}
-	
+	//发布
 	@RequestMapping(value={"ajax"})
 	@ResponseBody
 	public Page<Post> ajaxProperties(Post post, Model model,@PageableDefault Pageable pageable)
@@ -70,15 +71,15 @@ public class PostController extends BaseController {
 			model.addAttribute(post);
 		}
 	}
-	
+	//保存
 	@RequestMapping(value="save")
 	public String savePostProperties(Post post, Model model){
 		model.addAttribute(post);
 		postService.save(post);
 		return "redirect:"+adminPath+"/devwork/post/list";
 	}
-	
-	@RequestMapping(value={"delete/{id}","deleteAll/{ids}"})
+	//单条、批量删除
+	@RequestMapping(value="deleteAll/{ids}")
 	public String deletePostProperties(Post post, Model model,@PathVariable(value="ids") String ids){
 		List<String> idList = new ArrayList<String>();
 		if("".equals(ids) || null == ids)
@@ -94,12 +95,15 @@ public class PostController extends BaseController {
 				{
 					idList.add(idString);
 				}
+				//如果单条删除
+			}else{
+				idList.add(ids);
 			}
 		}
 		postService.deleteAll(idList);
 		return "redirect:"+adminPath+"/devwork/post/list";
 	}
-	
+	//模糊查询
 	@RequestMapping(value="findone")
 	public String findPost(@PageableDefault Pageable pageable,Post post, Model model){
 		Page<Post> posts = postService.findAll(post, pageable);

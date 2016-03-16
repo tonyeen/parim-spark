@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="main-menu" content="devwork"/>
 <meta name="menu" content="menu-dev_post_list"/>
+
 <title>开发者空间-项目列表</title>
 </head>
 <body>
@@ -87,7 +88,7 @@
                             <td>${post.renderedSummary }</td>
                             <td class="text-right">
                             	<a href="${ctxAdmin }/devwork/post/properties/${post.id }">修改</a>｜ 
-                            	<a href="${ctxAdmin }/devwork/post/delete/${post.id }">删除</a> 
+                            	<a href="${ctxAdmin }/devwork/post/deleteAll/${post.id }">删除</a> 
                             	</td>
                         </tr>
                     </c:forEach>
@@ -105,7 +106,6 @@
                         <button class="btn btn-success" id="addBtn">新增</button>
                         <button class="btn btn-danger" id="deleteBtn">删除</button>
                         <button class="btn btn-primary" id="publishButton">发布</button>
-						<!-- <button class="btn btn-warning">取消发布</button> -->
                         </td>
                     </tr>
                 </tfoot>
@@ -114,98 +114,19 @@
         </div>
     </div>
 </div>
+
 <script type="text/javascript">
-		var id="";
-		var arrChk;
-		var count;
+	var path="post";
 		//删除
-		/* $("#deleteBtn").click(function(){
-			var info0="请先选择一条数据用于删除！";
-			var info1="请选择一条数据，不能同时删除多条！";
-			check(info0,info1);
-			if(count==1)
-			{
-				//取到被选中复选框的id
-				 $(arrChk).each(function(){
-				if($(this).attr("checked") == "checked")
-					{
-						id = $(this).val();
-					}
-				})
-				location.href = "${ctxAdmin }/devwork/post/delete/"+id;
-			return;
-			}
-		}) */
-		
-		//批量删除备份方法
-		 $("#deleteBtn").click(function(){
-			count = 0;
-			arrChk=$("input[name='chk_list']");
-			$(arrChk).each(function(){
-				if($(this).attr("checked") == "checked")
-					{
-					id=id+$(this).val()+",";
-					count++;
-					}
-			})
-			
-				if(count == 0)
-					{
-					alert("请选择至少一条记录!");
-					return;
-					}
-				if(count >= 1)
-					{
-					 if(confirm("确定要删除"+count+"条数据吗")){
-						 location.href = "${ctxAdmin }/devwork/post/deleteAll/"+id;
-					}
-					}
-		}) 
+		$("#deleteBtn").click(function(){
+			del(path);
+		})
+
 		//新增
 		$("#addBtn").click(function(){
-			location.href = "${ctxAdmin }/devwork/post/properties";
+			add(path);
 		})
-		
-		$("a[name='checkAll']").click(function(){
-			var flag = true;
-			var arrChk=$("input[name='chk_list']");
-		      $(arrChk).each(function(){
-		         if($(this).attr("checked") != "checked")
-		    	   {
-		    	   		flag = false;
-		    	   }
-		    });  
-		    //如果已经全部都被选中，则再次点击时取消全选
-		     if(flag)
-		    	{
-		    		$("input[name='chk_list']").attr("checked",false);
-		    	}else{
-		    		$("input[name='chk_list']").attr("checked",true);
-		    	}
-		});
-		
-		function check(info0,info1){
-			arrChk=$("input[name='chk_list']");
-			count = 0;
-			$(arrChk).each(function(){
-				if($(this).attr("checked") == "checked")
-					{
-					count++;
-					}
-			})
-			if(count>1)
-				{
-				alert(info1/* "请选中一个要发布的项目,不能同时发布多个项目！" */);
-				return;
-				}
-			if(count==0)
-				{
-				alert(info0/* "请先选中一个要发布的项目！" */);
-				return;
-				}
-		}
-		
-		//发布动作
+		//发布
 		  $("#publishButton").click(function(){
 			  var info0="请先选中一个要发布的项目！";
 			  var info1="请选中一个要发布的项目,不能同时发布多个项目！";
@@ -230,10 +151,12 @@
                  dataType: 'json',  
 				    success: function(json) {
 				    	location.href = '${ctxAdmin }/devwork/post/list';
+				    	alert("发布成功！");
 				    }
              		})  
 				} 
-		})  
+		}) 
 </script>
+<script src="${ctx }/commonjs/common.js" type="text/javascript"></script>
 </body>
 </html>

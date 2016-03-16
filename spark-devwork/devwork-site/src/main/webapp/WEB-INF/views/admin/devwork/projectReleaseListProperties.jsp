@@ -56,21 +56,21 @@
     				</div>
     			</div>
     			<div class="form-group">
-    				<label class="control-label col-sm-3">人造ID(artifactId)</label>
+    				<label class="control-label col-sm-3"><span class="red">*</span>人造ID(artifactId)</label>
     				<div class="col-sm-9 row">
     					<form:input path="artifactId" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
     			<div class="form-group">
-    				<label class="control-label col-sm-3">分组编号(groupId)</label>
+    				<label class="control-label col-sm-3"><span class="red">*</span>分组编号(groupId)</label>
     				<div class="col-sm-9 row">
     					<form:input path="groupId" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
     			<div class="form-group">
-    				<label class="control-label col-sm-3">关联文档路径(refDocUrl)</label>
+    				<label class="control-label col-sm-3"><span class="red">*</span>关联文档路径(refDocUrl)</label>
     				<div class="col-sm-9 row">
     					<form:input path="refDocUrl" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>

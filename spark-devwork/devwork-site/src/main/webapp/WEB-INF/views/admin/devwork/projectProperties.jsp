@@ -42,21 +42,21 @@
     				</div>
     			</div>
     			<div class="form-group">
-    				<label class="control-label col-sm-3">代码库路径</label>
+    				<label class="control-label col-sm-3"><span class="red">*</span>代码库路径</label>
     				<div class="col-sm-9 row">
     					<form:input path="repoUrl" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
     			<div class="form-group">
-    				<label class="control-label col-sm-3">项目站点路径</label>
+    				<label class="control-label col-sm-3"><span class="red">*</span>项目站点路径</label>
     				<div class="col-sm-9 row">
     					<form:input path="siteUrl" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
     			<div class="form-group">
-    				<label class="control-label col-sm-3">分组</label>
+    				<label class="control-label col-sm-3"><span class="red">*</span>分组</label>
     				<div class="col-sm-9 row">
     					<form:input path="category" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
@@ -64,7 +64,7 @@
     			</div>
     			
     			<div class="form-group">
-                    <label class="col-sm-4 control-label">聚合项目</label>
+                    <label class="col-sm-4 control-label"><span class="red">*</span>聚合项目</label>
                     <div class="col-sm-8 controls">
                         <form:radiobuttons path="isAggregator" items="${fns:getDictList('show_hide') }" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
                         <span class="help-inline"></span>
