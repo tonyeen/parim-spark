@@ -1,0 +1,14 @@
+= 已知问题
+
+== Eclipse使用问题
+
+. eclipse中运行项目，启动时报如下错误：
++
+----
+java.lang.ClassNotFoundException: org.springframework.test.context.ActiveProfiles
+    at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1858)
+    at org.apache.catalina.loader.WebappClassLoader.loadClass(WebappClassLoader.java:1709)
+    ...
+----
++
+这个错误是Eclipse不能分辨Test java代码导致的，不影响开发运行。在用gradle打包的时候不会打包test相关的代码，故不会出现类似问题。
