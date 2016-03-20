@@ -21,6 +21,7 @@ public class PageListAttrHandlerInterceptor extends HandlerInterceptorAdapter {
         return true;
     }
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void postHandle(HttpServletRequest request, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
         Enumeration<?> enumeration = request.getAttributeNames();
         while (enumeration.hasMoreElements()){

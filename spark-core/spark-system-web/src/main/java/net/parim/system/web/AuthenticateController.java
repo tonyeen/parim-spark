@@ -90,7 +90,7 @@ public class AuthenticateController {
                 return resultMap;
             }
         }
-        String host = StringUtils.getRemoteAddr((HttpServletRequest) request);
+        String host = StringUtils.getRemoteAddr(request);
         SecurityUtils.setSecurityManager(securityManager);
         Subject subject = SecurityUtils.getSubject();
         if (!subject.isAuthenticated()) {

@@ -122,7 +122,7 @@ public class OffsetLimitInterceptor implements Interceptor {
 			invocation.getArgs()[0] = newMs;
 			//org.springframework.data.domain.Page page2;
 			@SuppressWarnings("unchecked")
-			PageImpl<?> pageImpl = new PageImpl<Object>((List<Object>)invocation.proceed(), pageable, (long)page.getCount());
+			PageImpl<?> pageImpl = new PageImpl<Object>((List<Object>)invocation.proceed(), pageable, page.getCount());
 			return pageImpl;
 		}
 		
