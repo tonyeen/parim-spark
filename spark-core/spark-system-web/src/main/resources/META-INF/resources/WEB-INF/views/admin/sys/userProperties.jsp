@@ -21,8 +21,7 @@
             </div>
             <div class="pull-right">
               <a class="btn btn-default" href="${ctxAdmin }/sys/user/list?id=">
-                <i class="glyphicon glyphicon-refresh"></i>
-                返回组织机构列表
+                <i class="glyphicon glyphicon-refresh"></i> 返回用户列表
               </a>
             </div>
           </div>
@@ -45,7 +44,7 @@
     			<div class="form-group">
     				<label class="control-label col-sm-3">上级组织</label>
     				<div class="col-sm-3 row">
-    					<sys:treeselect id="orgselect" name="parent.id" type="parent.objectType" value="${user.userGroup.id}" labelName="parent.name" labelValue="${user.userGroup.name}" isAsync="true"
+    					<sys:treeselect id="orgselect" name="parent.id" type="parent.objectType" value="${user.userGroup.id}" typeValue="O" labelName="parent.name" labelValue="${user.userGroup.name}" isAsync="true"
 							title="站点" url="${ctxAdmin }/sys/userGroupTree/roots" asyncUrl="${ctxAdmin }/sys/userGroupTree/children" extId="${user.userGroup.id}" cssClass="required"/>
     				</div>
     			</div>

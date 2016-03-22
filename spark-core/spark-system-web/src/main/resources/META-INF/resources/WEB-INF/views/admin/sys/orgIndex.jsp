@@ -30,11 +30,11 @@
           for(var i =0; i < responseData.length; i++) {
               if(responseData[i].objectType == 'S'){
                   //responseData[i].iconSkin = "glyphicon glyphicon-home ";
-                  responseData[i].icon = "${ctxStatic}/admin/images/site.gif";
+                  responseData[i].icon = "${ctxStatic}/admin/images/site.png";
               }
               if(responseData[i].objectType == 'O'){
                   //responseData[i].iconSkin = "glyphicon glyphicon-folder-open ";
-                  responseData[i].icon = "${ctxStatic}/admin/images/org.gif";
+                  responseData[i].icon = "${ctxStatic}/admin/images/org.png";
               }
           }
         }

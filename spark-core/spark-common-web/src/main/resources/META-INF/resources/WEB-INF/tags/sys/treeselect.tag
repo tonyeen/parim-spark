@@ -5,6 +5,7 @@
 
 <%@ attribute name="id" type="java.lang.String" required="true" description="编号"%>
 <%@ attribute name="type" type="java.lang.String" required="false" description="类型"%>
+<%@ attribute name="typeValue" type="java.lang.String" required="false" description="类型值"%>
 <%@ attribute name="name" type="java.lang.String" required="true" description="隐藏域名称（ID）"%>
 <%@ attribute name="value" type="java.lang.String" required="true" description="隐藏域值（ID）"%>
 <%@ attribute name="labelName" type="java.lang.String" required="true" description="输入框名称（Name）"%>
@@ -32,7 +33,7 @@
 <%@ attribute name="required" type="java.lang.Boolean" required="false" description="是否是必填项验证"%>
 <div class="input-group">
 	<input id="${id}Id" name="${name}" class="${cssClass}" type="hidden" value="${value}"/>
-	<input id="${id}Type" name="${type }" class="${cssClass}" type="hidden" value="${value}"/>
+	<input id="${id}Type" name="${type }" class="${cssClass}" type="hidden" value="${typeValue}"/>
 	<input id="${id}Name" name="${labelName}" ${allowInput?'':'readonly="readonly"'} type="text" value="${labelValue}" data-msg-required="${dataMsgRequired}"
 		class="form-control ${cssClass}" style="${cssStyle}" ${not empty required && required ? 'required':'' }/>
 		<a id="${id}Button" href="javascript:void(0)" class="input-group-addon ${disabled} ${hideBtn ? 'hide' : ''}" >

@@ -4,7 +4,7 @@
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id"  parameterType="net.parim.system.entity.User">
 		<selectKey resultType="long" order="BEFORE" keyProperty="id">
-		select SYS_GUID as "id"
+		SELECT SEQ_GENERAL.NEXTVAL as "id" FROM DUAL
 		</selectKey>
 		INSERT INTO sys_user (
 			id,
@@ -27,7 +27,7 @@
 		)
 		VALUES
 			(
-				SEQ_GENERAL.NEXTVAL,
+				#{id},
 				#{email},
 				#{userGroup.id},
 				#{username},
@@ -53,8 +53,10 @@
 			email=#{email},
 			user_group_id=#{userGroup.id},
 			username=#{username},
-			<!-- password=#{password},
-			salt=#{salt}, -->
+			<if test="password != null and password != ''">
+			password=#{password},
+			salt=#{salt},
+			</if>
 			first_name=#{firstName},
 			last_name=#{lastName},
 			<!-- familiar_name=#{familiarName}, -->
@@ -110,6 +112,8 @@
 			u.username,
 			u.site_id as "site.id",
 			u.email,
+			u.first_name,
+			u.last_name,
 			u.user_group_id "userGroup.id",
 			s.name as "site.name",
 			g.name as "userGroup.name"
@@ -121,8 +125,19 @@
 			<if test="site != null and site.id != null">
 				and u.site_id = #{site.id}
 			</if>
-			<if test="userGroup != null and userGroup != null">
+			<if test="userGroup != null and userGroup.id != null">
 				and u.user_group_id = #{userGroup.id}
+			</if>
+			<if test="username != null">
+			    and (
+			     upper(u.username) like upper('%'||#{username}||'%')
+			     or
+			     upper(u.first_name) like upper('%'||#{username}||'%')
+			     or
+			     upper(u.last_name) like upper('%'||#{username}||'%')
+			     or
+			     upper(u.email) like upper('%'||#{username}||'%')
+			    )
 			</if>
 		</where>
 	</select>
