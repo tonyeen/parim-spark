@@ -22,8 +22,8 @@
 				if(count >= 1)
 					{
 					 if(confirm("确定要删除"+count+"条数据吗")){
-						 //location.href = "${ctxAdmin }/devwork/post/deleteAll/"+id;
-						 location.href = "http://localhost:8080/devwork-site/admin/devwork/"+path+"/deleteAll/"+id;
+						 //location.href = "http://localhost:8080/devwork-site/admin/devwork/"+path+"/deleteAll/"+id;
+						 location.href = "/devwork-site/admin/devwork/"+path+"/deleteAll/"+id;
 					}
 					}
 		}
@@ -31,7 +31,8 @@
 		//新增
 		function add(path)
 		{
-			location.href = "http://localhost:8080/devwork-site/admin/devwork/"+path+"/properties";
+			//location.href = "http://localhost:8080/devwork-site/admin/devwork/"+path+"/properties";
+			location.href = "/devwork-site/admin/devwork/"+path+"/properties";
 		}
 		//全选、取消
 		$("a[name='checkAll']").click(function(){
