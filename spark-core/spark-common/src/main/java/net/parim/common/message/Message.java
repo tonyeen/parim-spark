@@ -1,6 +1,10 @@
 package net.parim.common.message;
 
-public class Message {
+import java.io.Serializable;
+
+public class Message implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private String[] messages;
 	private Type type = Type.info;
 	private String separator = ";";
