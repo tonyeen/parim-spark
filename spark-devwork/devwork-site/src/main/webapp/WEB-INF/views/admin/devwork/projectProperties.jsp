@@ -64,7 +64,7 @@
     			</div>
     			
     			<div class="form-group">
-                    <label class="col-sm-4 control-label"><span class="red">*</span>聚合项目</label>
+                    <label class="col-sm-4 control-label"><!-- <span class="red">*</span> -->聚合项目</label>
                     <div class="col-sm-8 controls">
                         <form:radiobuttons path="isAggregator" items="${fns:getDictList('show_hide') }" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
                         <span class="help-inline"></span>

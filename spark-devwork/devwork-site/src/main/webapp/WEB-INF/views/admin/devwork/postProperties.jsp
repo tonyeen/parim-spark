@@ -77,14 +77,14 @@
     				</div>
     			</div>
     			<div class="form-group">
-                    <label class="col-sm-4 control-label"><span class="red">*</span> 广播信息(broadcast)</label>
+                    <label class="col-sm-4 control-label"><!-- <span class="red">*</span> --> 广播信息(broadcast)</label>
                     <div class="col-sm-8 controls">
                         <form:radiobuttons path="broadcast" items="${fns:getDictList('show_hide') }" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
                         <span class="help-inline"></span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label"><span class="red">*</span> 草稿(draft)</label>
+                    <label class="col-sm-4 control-label"><!-- <span class="red">*</span> --> 草稿(draft)</label>
                     <div class="col-sm-8 controls">
                         <form:radiobuttons path="draft" items="${fns:getDictList('show_hide') }" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
                         <span class="help-inline"></span>

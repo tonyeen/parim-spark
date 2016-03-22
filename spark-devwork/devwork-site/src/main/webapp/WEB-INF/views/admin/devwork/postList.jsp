@@ -59,7 +59,7 @@
                         <th>原材料(rawContent)</th>
                         <th>呈现出来的内容(renderedContent)</th>
                         <th>渲染概要(renderedSummary)</th>
-                        <th class="text-right">操作</th>
+                        <th class="text-right" style="width:100px;">操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,12 +75,18 @@
                             <c:if test="${post.broadcast == false}">
                             <td>否</td>
                             </c:if>
+                            <c:if test="${empty post.broadcast }">
+                            <td></td>
+　　							</c:if>
                             <c:if test="${post.draft == true}">
                             <td>是</td>
                             </c:if>
                             <c:if test="${post.draft == false}">
                             <td>否</td>
                             </c:if>
+                            <c:if test="${empty post.draft }">
+                            <td></td>
+　　							</c:if>
                             <td>${post.publishDate }</td>
                             <td>${post.rawContent }</td>
                             <td>${post.renderedContent }</td>
