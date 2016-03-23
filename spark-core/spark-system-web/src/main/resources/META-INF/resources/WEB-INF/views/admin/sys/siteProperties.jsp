@@ -8,7 +8,46 @@
 <title>站点属性</title>
 </head>
 <body>
-<div class="console-container">
+<div class="console-sidebar" style="width: 199px; height: 100%; background:#eee; border-right: #ccc 1px solid; position: fixed;">
+    <div style="line-height: 24px; font-size: 16px; background: #ddd; padding: 8px;">${site.name }</div>
+    <ul>
+        <li><a href="">安装和配置</a>
+            <ul>
+                <li><a href="">属性</a></li>
+                <li><a href="">快速链接</a></li>
+                <li><a href="">站点公告</a></li>
+                <li><a href="">站点功能</a></li>
+                <li><a href="">学员主页子选项卡顺序</a></li>
+                <li><a href="">可配置主题</a></li>
+                <li><a href="">可配置属性</a></li>
+                <li><a href="">自定义产品文本</a></li>
+                <li><a href="">密码选项</a></li>
+                <li><a href="">通知</a></li>
+                <li><a href="">可信URL</a></li>
+                <li><a href="">导入日志</a></li>
+            </ul>
+        </li>
+        <li><a href="">许可</a>
+            <ul>
+                <li><a href="">角色</a></li>
+                <li><a href="">许可</a></li>
+            </ul>
+        </li>
+        <li><a href="">管理用户</a></li>
+        <li><a href="">活动</a>
+            <ul>
+                <li><a href="">教程</a></li>
+                <li><a href="">教师教程</a></li>
+                <li><a href="">学习计划</a></li>
+            </ul>
+        </li>
+        <li><a href="">内容和课程</a></li>
+        <li><a href="">资格能力管理</a></li>
+        <li><a href="">资源管理</a></li>
+        <li><a href="">电子商务</a></li>
+    </ul>
+</div>
+<div class="console-container" style="position: absolute; left: 200px; top: 0; right: 0; bottom: 0;">
 	<div class="row">
       <div class="col-sm-12">
         <div class="console-global-notice">
@@ -32,6 +71,9 @@
     </div>
     <div class="row">
     	<div class="col-sm-12">
+    	   <div class="panel panel-default">
+            <div class="panel-heading"><h4>基本信息</h4></div>
+            <div class="panel-body">
     		<form:form id="inputForm" modelAttribute="site" action="${ctxAdmin }/sys/site/save" method="post" class="form-horizontal">
     			<form:hidden path="id"/>
     			<div class="form-group">
@@ -67,15 +109,35 @@
     			</div>
     			<div class="form-group">
     				<button type="submit" class="btn btn-primary col-sm-offset-3">保存</button>
-    				<c:if test="${not empty site.id }">
-    				<a href="${ctxAdmin }/sys/site/delete/${site.id }" class="btn btn-danger">删除</a>
-    				</c:if>
     				<c:if test="${empty site.id }">
     				<button type="button" click="" class="btn btn-info">保存并添加下一条</button>
     				</c:if>
     				<a href="${ctxAdmin }/sys/site/list?id=" class="btn btn-default"><i class="glyphicon glyphicon-refresh"></i>取消并返回列表</a>
     			</div>
-    		</form:form>
+    		  </form:form>
+    		  </div>
+    		</div>
+    		
+    		<div class="panel panel-default">
+	            <div class="panel-heading"><h4>站点菜单</h4></div>
+	            <div class="panel-body">
+	               <a href="#">主题管理</a>
+	               <a href="#">角色管理</a>
+	               <a href="#">功能管理</a>
+	               <a href="#">配置管理</a>
+	            </div>
+	        </div>
+	        
+	        <c:if test="${not empty site.id }">
+	        <div class="panel panel-default">
+                <div class="panel-heading"><h4>删除</h4></div>
+                <div class="panel-body">
+                   <p>删除站点会……</p>
+                   <a href="${ctxAdmin }/sys/site/delete/${site.id }" class="btn btn-danger">删除站点</a>
+                </div>
+            </div>
+            </c:if>
+            
     	</div>
     </div>
 </div>

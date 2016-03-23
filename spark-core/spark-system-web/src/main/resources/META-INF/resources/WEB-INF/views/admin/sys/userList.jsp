@@ -29,7 +29,6 @@
               <a href="${ctxAdmin }/sys/user/properties" class="btn btn-primary">添加用户</a>
               <a href="${ctxAdmin }/sys/user/properties" class="btn btn-primary">复制用户</a>
               <a href="${ctxAdmin }/sys/user/properties" class="btn btn-primary">批量导入</a>
-              <a href="${ctxAdmin }/sys/user/properties" class="btn btn-primary">导出列表</a>
             </div>
           </div>
         </div>
@@ -62,6 +61,10 @@
 				    </select>
 				</div>
 				<button type="submit" class="btn btn-default">搜索</button>
+				
+				<div class="pull-right">
+	              <a href="${ctxAdmin }/sys/user/properties" class="btn btn-default">导出列表</a>
+	            </div>
     		</form>
     	</div>
     </div>

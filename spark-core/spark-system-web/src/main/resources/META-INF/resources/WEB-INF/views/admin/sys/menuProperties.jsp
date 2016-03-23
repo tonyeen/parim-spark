@@ -42,7 +42,7 @@
 					<label class="col-sm-4 control-label">上级菜单:</label>
 					<div class="col-sm-4 controls">
 		                <sys:treeselect id="menu" name="parent.id" value="${empty menu.parent.id? 1:menu.parent.id}" labelName="parent.name" labelValue="${menu.parent.name}"
-							title="菜单" url="${ctxAdmin }/sys/menu/treeData" simpleData="true" extId="${menu.id}" cssClass="required" required="false"/>
+							title="菜单" url="${ctxAdmin }/sys/menu/treeData" simpleData="true" extId="${menu.id}" cssClass="required1" required="false"/>
 							<span class="error ${empty ERR_parentName ? 'hide':'' }">${ERR_parentName }</span>
 					</div>
 				</div>
