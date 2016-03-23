@@ -532,7 +532,7 @@ public class JedisUtils {
 			for (Map.Entry<String, Object> e : value.entrySet()){
 				map.put(getBytesKey(e.getKey()), toBytes(e.getValue()));
 			}
-			result = jedis.hmset(getBytesKey(key), (Map<byte[], byte[]>)map);
+			result = jedis.hmset(getBytesKey(key), map);
 			if (cacheSeconds != 0) {
 				jedis.expire(key, cacheSeconds);
 			}
@@ -581,7 +581,7 @@ public class JedisUtils {
 			for (Map.Entry<String, Object> e : value.entrySet()){
 				map.put(getBytesKey(e.getKey()), toBytes(e.getValue()));
 			}
-			result = jedis.hmset(getBytesKey(key), (Map<byte[], byte[]>)map);
+			result = jedis.hmset(getBytesKey(key), map);
 			logger.debug("mapObjectPut {} = {}", key, value);
 		} catch (Exception e) {
 			logger.warn("mapObjectPut {} = {}", key, value, e);

@@ -3,6 +3,7 @@ package net.parim.system.security;
 import net.parim.system.entity.User;
 
 public class UserToken extends User {
+	private static final long serialVersionUID = 1L;
 	User user ;
 
 	public UserToken(){}
