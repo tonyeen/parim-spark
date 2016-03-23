@@ -9,6 +9,7 @@ import net.parim.system.entity.Menu;
 import net.parim.system.repository.MenuRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -79,11 +80,13 @@ public class SystemService
 	}
 
 	@Override
+	@Cacheable(value="default", keyGenerator="wiselyKeyGenerator")
 	public List<?> getTopLevelMenus() {
 		return menuRepository.findAllRoots(null, null);
 	}
 
 	@Override
+	@Cacheable(value="default", keyGenerator="wiselyKeyGenerator")
 	public List<?> getMenuListByParentId(String parentId) {
 		Menu menu = menuRepository.findByIdentifier(parentId);
 		
@@ -91,6 +94,7 @@ public class SystemService
 	}
 	
 	@Override
+	@Cacheable(value="default", keyGenerator="wiselyKeyGenerator")
 	public List<?> getUserCustomMenus() {
 		Menu dashBoard = new Menu();
 		dashBoard.setId(100L);
