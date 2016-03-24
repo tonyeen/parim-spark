@@ -2,14 +2,10 @@ package net.parim.system.service;
 
 import java.util.List;
 
-import net.parim.common.service.CrudService;
-import net.parim.system.annotation.CurrentUser;
 import net.parim.system.entity.Site;
-import net.parim.system.entity.User;
 import net.parim.system.entity.UserGroup;
 import net.parim.system.repository.PermissionTargetRepository;
 import net.parim.system.repository.UserGroupRepository;
-import net.parim.system.utils.UserUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

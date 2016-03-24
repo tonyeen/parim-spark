@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SystemService 
-		extends CrudService<MenuRepository, Menu, Long> 
+		extends DataCrudService<MenuRepository, Menu, Long> 
 		implements MenuProvider {
 	
 	@Autowired

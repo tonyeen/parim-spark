@@ -11,7 +11,7 @@ import net.parim.system.entity.UserGroup;
 import net.parim.system.repository.SiteRepository;
 
 @Service
-public class SiteService {
+public class SiteService extends DataCrudService<SiteRepository, Site, Long> {
 	
 	@Autowired
 	private SiteRepository siteRepository;

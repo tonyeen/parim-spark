@@ -2,6 +2,7 @@ package net.parim.system.service;
 
 import java.util.List;
 
+import net.parim.common.service.CrudService;
 import net.parim.system.entity.Privilege;
 import net.parim.system.entity.User;
 import net.parim.system.repository.PrivilegeRepository;
@@ -12,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PrivilegeService {
+public class PrivilegeService extends CrudService<PrivilegeRepository, Privilege, Long> {
 	@Autowired
 	PrivilegeRepository privilegeRepository;
 	

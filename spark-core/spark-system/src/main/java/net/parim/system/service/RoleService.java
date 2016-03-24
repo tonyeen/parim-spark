@@ -12,7 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RoleService {
+public class RoleService extends DataCrudService<RoleRepository, Role, Long> {
 	@Autowired
 	RoleRepository roleRepository;
 	
