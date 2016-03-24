@@ -1,4 +1,4 @@
-package net.parim.common.persistence;
+package net.parim.system.persistent;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import net.parim.common.utils.Reflections;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-public abstract class TreeEntity<E extends BaseEntity<?>> 
-		extends BaseEntity<E> {
+public abstract class TreeEntity<E extends TreeEntity<?>> 
+		extends DataEntity<E> {
 	
 	private static final long serialVersionUID = 1L;
 	

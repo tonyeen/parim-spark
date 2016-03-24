@@ -3,17 +3,21 @@ package net.parim.system.service;
 import java.util.List;
 
 import net.parim.common.service.CrudService;
+import net.parim.system.annotation.CurrentUser;
 import net.parim.system.entity.Site;
 import net.parim.system.entity.User;
 import net.parim.system.entity.UserGroup;
 import net.parim.system.repository.PermissionTargetRepository;
 import net.parim.system.repository.UserGroupRepository;
+import net.parim.system.utils.UserUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserGroupService extends CrudService<UserGroupRepository, UserGroup, Long> {
+public class UserGroupService extends DataCrudService<UserGroupRepository, UserGroup, Long> {
+	
+	//
 	
 	@Autowired
 	UserGroupRepository userGroupRepository;
@@ -25,19 +29,11 @@ public class UserGroupService extends CrudService<UserGroupRepository, UserGroup
 	}
 	
 	public void save(UserGroup userGroup){
-		User user = new User();
-		user.setId(2L);
+		
 		if(userGroup.getParent() != null && !userGroup.getParent().isNewRecord()){
 			userGroup.setSite(findOne(userGroup.getParent().getId()).getSite());
 		}
-		if(userGroup.isNewRecord()){
-			userGroup.setCreatedBy(user);
-			userGroup.setLastUpdatedBy(user);
-			userGroupRepository.insert(userGroup);
-		}else{
-			userGroup.setLastUpdatedBy(user);
-			userGroupRepository.update(userGroup);
-		}
+		super.save(userGroup);
 	}
 	
 	public List<UserGroup> findAll(){

@@ -10,7 +10,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.parim.common.utils.Constants;
 import net.parim.common.utils.StringUtils;
+import net.parim.system.entity.User;
 import net.parim.system.utils.UserUtils;
 
 import org.apache.shiro.authc.AuthenticationException;
@@ -100,18 +102,18 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 		if (!"XMLHttpRequest".equalsIgnoreCase(httpServletRequest
 				.getHeader("X-Requested-With"))) {// 不是ajax请求
 			
-			//UserUtils user = (UserUtils) subject.getPrincipal();//获取封装的用户
+			User user = (User) subject.getPrincipal();//获取封装的用户
 			
-			//User currentUser = SpringContextHolder.getBean(AccountService.class).findUserByLoginName(user.username);
-			//subject.getSession().setAttribute(Constants.CURRENT_USER, currentUser);
+			User currentUser = UserUtils.getUser(user.getId());
+			subject.getSession().setAttribute(Constants.CURRENT_USER, currentUser);
 			//if(user.isAdmin){
 			
 			issueSuccessRedirect(request, response);
 			
 		} else {
-			UserUtils user = (UserUtils) subject.getPrincipal();//获取封装的用户
-			//User currentUser = SpringContextHolder.getBean(AccountService.class).findUserByLoginName(user.username);
-			//subject.getSession().setAttribute(Constants.CURRENT_USER, currentUser);
+			User user = (User) subject.getPrincipal();//获取封装的用户
+			User currentUser = UserUtils.getUser(user.getId());
+			subject.getSession().setAttribute(Constants.CURRENT_USER, currentUser);
 			httpServletResponse.setCharacterEncoding("UTF-8");
 			PrintWriter out = httpServletResponse.getWriter();
 			out.println("{success:true,message:'登入成功'}");

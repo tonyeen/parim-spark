@@ -3,6 +3,8 @@ package net.parim.system.entity;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAttribute;
 
+import net.parim.system.persistent.DataEntity;
+
 import org.hibernate.validator.constraints.Length;
 
 /**

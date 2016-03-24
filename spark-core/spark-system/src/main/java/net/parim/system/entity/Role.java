@@ -2,6 +2,8 @@ package net.parim.system.entity;
 
 import java.util.List;
 
+import net.parim.system.persistent.DataEntity;
+
 public class Role extends DataEntity<Role> {
 
 	private static final long serialVersionUID = 1L;

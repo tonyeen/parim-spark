@@ -1,5 +1,7 @@
 package net.parim.system.entity;
 
+import net.parim.system.persistent.DataEntity;
+
 
 public class UserRole extends DataEntity<UserRole> {
 	

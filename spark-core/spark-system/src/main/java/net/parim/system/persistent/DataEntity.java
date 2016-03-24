@@ -1,8 +1,9 @@
-package net.parim.system.entity;
+package net.parim.system.persistent;
 
 import java.util.Date;
 
 import net.parim.common.persistence.BaseEntity;
+import net.parim.system.entity.User;
 
 public class DataEntity<E extends BaseEntity<?>> 
 		extends BaseEntity<E> {

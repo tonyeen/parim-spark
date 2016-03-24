@@ -3,6 +3,7 @@ package net.parim.system.entity;
 import java.util.Date;
 
 import net.parim.common.persistence.OperateUser;
+import net.parim.system.persistent.DataEntity;
 
 public class User extends DataEntity<User> implements OperateUser {
 	

@@ -1,7 +1,10 @@
-package net.parim.common.persistence;
+package net.parim.system.persistent;
 
 import java.io.Serializable;
 import java.util.List;
+
+import net.parim.common.persistence.CrudRepository;
+import net.parim.common.persistence.OperateUser;
 
 public interface TreeRepository<E extends TreeEntity<?>, ID extends Serializable> 
 		extends CrudRepository<E, ID> {

@@ -2,8 +2,10 @@ package net.parim.system.entity;
 
 import java.util.List;
 
+import net.parim.system.persistent.TreeEntity;
 
-public class Site extends DataTreeEntity<Site> {
+
+public class Site extends TreeEntity<Site> {
 
 	private static final long serialVersionUID = 1L;
 	private String name;

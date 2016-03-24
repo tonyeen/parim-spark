@@ -1,6 +1,6 @@
 package net.parim.devwork.entity;
 
-import net.parim.system.entity.DataEntity;
+import net.parim.system.persistent.DataEntity;
 
 public class Project extends DataEntity<Project> {
 

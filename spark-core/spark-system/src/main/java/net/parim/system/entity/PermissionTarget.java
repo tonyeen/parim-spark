@@ -2,7 +2,7 @@ package net.parim.system.entity;
 
 import java.util.List;
 
-import net.parim.common.persistence.TreeEntity;
+import net.parim.system.persistent.TreeEntity;
 
 public class PermissionTarget extends TreeEntity<PermissionTarget>{
 	

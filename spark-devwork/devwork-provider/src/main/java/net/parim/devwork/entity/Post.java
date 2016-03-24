@@ -2,7 +2,7 @@ package net.parim.devwork.entity;
 
 import java.sql.Date;
 
-import net.parim.system.entity.DataEntity;
+import net.parim.system.persistent.DataEntity;
 
 public class Post extends DataEntity<Post> {
 

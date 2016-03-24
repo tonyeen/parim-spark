@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.validation.constraints.DecimalMin;
 
-import net.parim.common.persistence.TreeEntity;
+import net.parim.system.persistent.TreeEntity;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
