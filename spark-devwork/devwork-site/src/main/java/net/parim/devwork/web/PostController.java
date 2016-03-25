@@ -10,10 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import net.parim.common.web.BaseController;
@@ -29,13 +27,14 @@ public class PostController extends BaseController {
 	@Autowired
 	private PostService postService;
 	
+	//列表显示
 	@RequestMapping("list")
 	public String postList(@PageableDefault Pageable pageable, Post post, Model model){
 		Page<Post> posts = postService.findAll(post, pageable);
 		model.addAttribute("posts", posts);
 		return "admin/devwork/postList";
 	}
-	
+	//增加、修改跳转方法
 	@RequestMapping(value={"properties", "properties/{id}"})
 	public String postProperties(Post post, Model model){
 		
@@ -47,7 +46,7 @@ public class PostController extends BaseController {
 		model.addAttribute(post);
 		return "admin/devwork/postProperties";
 	}
-	
+	//发布
 	@RequestMapping(value={"ajax"})
 	@ResponseBody
 	public Page<Post> ajaxProperties(Post post, Model model,@PageableDefault Pageable pageable)
@@ -63,22 +62,15 @@ public class PostController extends BaseController {
 		return posts;
 	}
 
-	@ModelAttribute
-	public void getThemeline(@RequestParam(value = "id", defaultValue = "-1") Long id, Model model){
-		if(id!=-1){
-			Post post = postService.findOne(id);
-			model.addAttribute(post);
-		}
-	}
-	
+	//保存
 	@RequestMapping(value="save")
 	public String savePostProperties(Post post, Model model){
 		model.addAttribute(post);
 		postService.save(post);
 		return "redirect:"+adminPath+"/devwork/post/list";
 	}
-	
-	@RequestMapping(value={"delete/{id}","deleteAll/{ids}"})
+	//单条、批量删除
+	@RequestMapping(value="deleteAll/{ids}")
 	public String deletePostProperties(Post post, Model model,@PathVariable(value="ids") String ids){
 		List<String> idList = new ArrayList<String>();
 		if("".equals(ids) || null == ids)
@@ -94,12 +86,15 @@ public class PostController extends BaseController {
 				{
 					idList.add(idString);
 				}
+				//如果单条删除
+			}else{
+				idList.add(ids);
 			}
 		}
 		postService.deleteAll(idList);
 		return "redirect:"+adminPath+"/devwork/post/list";
 	}
-	
+	//模糊查询
 	@RequestMapping(value="findone")
 	public String findPost(@PageableDefault Pageable pageable,Post post, Model model){
 		Page<Post> posts = postService.findAll(post, pageable);

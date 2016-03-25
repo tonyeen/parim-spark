@@ -5,7 +5,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="main-menu" content="devwork"/>
 <meta name="menu" content="menu-dev_post_list"/>
-<title>开发者空间-项目列表</title>
+
+<title>开发者空间-Post列表</title>
 </head>
 <body>
 <div class="console-container">
@@ -19,7 +20,7 @@
           </div>
           <div class="console-title console-title-border clearfix">
             <div class="pull-left">
-              <h4>项目列表</h4>
+              <h4>Post列表</h4>
             </div>
             <div class="pull-right">
               <a class="btn btn-default" href="${ctxAdmin }/devwork/post/list">
@@ -58,8 +59,7 @@
                         <th>原材料(rawContent)</th>
                         <th>呈现出来的内容(renderedContent)</th>
                         <th>渲染概要(renderedSummary)</th>
-                        <!-- <th>创建时间(create_date)</th> -->
-                        <!-- <th class="text-right">操作</th> -->
+                        <th class="text-right" style="width:100px;">操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,19 +75,25 @@
                             <c:if test="${post.broadcast == false}">
                             <td>否</td>
                             </c:if>
+                            <c:if test="${empty post.broadcast }">
+                            <td></td>
+　　							</c:if>
                             <c:if test="${post.draft == true}">
                             <td>是</td>
                             </c:if>
                             <c:if test="${post.draft == false}">
                             <td>否</td>
                             </c:if>
+                            <c:if test="${empty post.draft }">
+                            <td></td>
+　　							</c:if>
                             <td>${post.publishDate }</td>
                             <td>${post.rawContent }</td>
                             <td>${post.renderedContent }</td>
                             <td>${post.renderedSummary }</td>
                             <td class="text-right">
                             	<a href="${ctxAdmin }/devwork/post/properties/${post.id }">修改</a>｜ 
-                            	<a href="${ctxAdmin }/devwork/post/delete/${post.id }">删除</a> 
+                            	<a href="${ctxAdmin }/devwork/post/deleteAll/${post.id }">删除</a> 
                             	</td>
                         </tr>
                     </c:forEach>
@@ -105,7 +111,6 @@
                         <button class="btn btn-success" id="addBtn">新增</button>
                         <button class="btn btn-danger" id="deleteBtn">删除</button>
                         <button class="btn btn-primary" id="publishButton">发布</button>
-						<!-- <button class="btn btn-warning">取消发布</button> -->
                         </td>
                     </tr>
                 </tfoot>
@@ -114,98 +119,19 @@
         </div>
     </div>
 </div>
+
 <script type="text/javascript">
-		var id="";
-		var arrChk;
-		var count;
+	var path="post";
 		//删除
-		/* $("#deleteBtn").click(function(){
-			var info0="请先选择一条数据用于删除！";
-			var info1="请选择一条数据，不能同时删除多条！";
-			check(info0,info1);
-			if(count==1)
-			{
-				//取到被选中复选框的id
-				 $(arrChk).each(function(){
-				if($(this).attr("checked") == "checked")
-					{
-						id = $(this).val();
-					}
-				})
-				location.href = "${ctxAdmin }/devwork/post/delete/"+id;
-			return;
-			}
-		}) */
-		
-		//批量删除备份方法
-		 $("#deleteBtn").click(function(){
-			count = 0;
-			arrChk=$("input[name='chk_list']");
-			$(arrChk).each(function(){
-				if($(this).attr("checked") == "checked")
-					{
-					id=id+$(this).val()+",";
-					count++;
-					}
-			})
-			
-				if(count == 0)
-					{
-					alert("请选择至少一条记录!");
-					return;
-					}
-				if(count >= 1)
-					{
-					 if(confirm("确定要删除"+count+"条数据吗")){
-						 location.href = "${ctxAdmin }/devwork/post/deleteAll/"+id;
-					}
-					}
-		}) 
+		$("#deleteBtn").click(function(){
+			del(path);
+		})
+
 		//新增
 		$("#addBtn").click(function(){
-			location.href = "${ctxAdmin }/devwork/post/properties";
+			add(path);
 		})
-		
-		$("a[name='checkAll']").click(function(){
-			var flag = true;
-			var arrChk=$("input[name='chk_list']");
-		      $(arrChk).each(function(){
-		         if($(this).attr("checked") != "checked")
-		    	   {
-		    	   		flag = false;
-		    	   }
-		    });  
-		    //如果已经全部都被选中，则再次点击时取消全选
-		     if(flag)
-		    	{
-		    		$("input[name='chk_list']").attr("checked",false);
-		    	}else{
-		    		$("input[name='chk_list']").attr("checked",true);
-		    	}
-		});
-		
-		function check(info0,info1){
-			arrChk=$("input[name='chk_list']");
-			count = 0;
-			$(arrChk).each(function(){
-				if($(this).attr("checked") == "checked")
-					{
-					count++;
-					}
-			})
-			if(count>1)
-				{
-				alert(info1/* "请选中一个要发布的项目,不能同时发布多个项目！" */);
-				return;
-				}
-			if(count==0)
-				{
-				alert(info0/* "请先选中一个要发布的项目！" */);
-				return;
-				}
-		}
-		
-		//发布动作
+		//发布
 		  $("#publishButton").click(function(){
 			  var info0="请先选中一个要发布的项目！";
 			  var info1="请选中一个要发布的项目,不能同时发布多个项目！";
@@ -221,19 +147,24 @@
 								{
 								alert("所选项目已经处于发布状态，不可重复发布！");
 								return;
+								}else{
+									//执行发布
+									$.ajax({  
+						                 url: "${ctxAdmin }/devwork/post/ajax?id="+id,  
+						                 type: 'GET',  
+						                 dataType: 'json',  
+										    success: function(json) {
+										    	location.href = '${ctxAdmin }/devwork/post/list';
+										    	alert("发布成功！");
+										    }
+						             		})  
 								}
 						}
 					}) 
-				$.ajax({  
-                 url: "${ctxAdmin }/devwork/post/ajax?id="+id,  
-                 type: 'GET',  
-                 dataType: 'json',  
-				    success: function(json) {
-				    	location.href = '${ctxAdmin }/devwork/post/list';
-				    }
-             		})  
+				
 				} 
-		})  
+		}) 
 </script>
+<script src="${ctx }/commonjs/common.js" type="text/javascript"></script>
 </body>
 </html>

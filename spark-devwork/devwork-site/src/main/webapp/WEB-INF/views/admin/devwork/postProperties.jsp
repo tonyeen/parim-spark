@@ -55,44 +55,36 @@
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
-    			
-    			<%-- <div class="form-group">
-    				<label class="control-label col-sm-3"><span class="red">*</span> 发布时间(publishDate)</label>
-    				<div class="col-sm-9 row">
-    					<form:input path="publishDate" class="col-lg-5 col-sm-5" required="true"/>
-    					<span class="help-inline col-lg-7 col-sm-7"></span>
-    				</div>
-    			</div> --%>
     			<div class="form-group">
-    				<label class="control-label col-sm-3">原材料(rawContent)</label>
+    				<label class="control-label col-sm-3"><span class="red">*</span>原材料(rawContent)</label>
     				<div class="col-sm-9 row">
     					<form:input path="rawContent" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
     			<div class="form-group">
-    				<label class="control-label col-sm-3">呈现出来的内容(renderedContent)</label>
+    				<label class="control-label col-sm-3"><span class="red">*</span>呈现出来的内容(renderedContent)</label>
     				<div class="col-sm-9 row">
     					<form:input path="renderedContent" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
     			<div class="form-group">
-    				<label class="control-label col-sm-3">渲染概要(renderedSummary)</label>
+    				<label class="control-label col-sm-3"><span class="red">*</span>渲染概要(renderedSummary)</label>
     				<div class="col-sm-9 row">
     					<form:input path="renderedSummary" class="col-lg-5 col-sm-5" required="true"/>
     					<span class="help-inline col-lg-7 col-sm-7"></span>
     				</div>
     			</div>
     			<div class="form-group">
-                    <label class="col-sm-4 control-label"><span class="red">*</span> 广播信息(broadcast)</label>
+                    <label class="col-sm-4 control-label"><!-- <span class="red">*</span> --> 广播信息(broadcast)</label>
                     <div class="col-sm-8 controls">
                         <form:radiobuttons path="broadcast" items="${fns:getDictList('show_hide') }" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
                         <span class="help-inline"></span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-4 control-label"><span class="red">*</span> 草稿(draft)</label>
+                    <label class="col-sm-4 control-label"><!-- <span class="red">*</span> --> 草稿(draft)</label>
                     <div class="col-sm-8 controls">
                         <form:radiobuttons path="draft" items="${fns:getDictList('show_hide') }" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
                         <span class="help-inline"></span>

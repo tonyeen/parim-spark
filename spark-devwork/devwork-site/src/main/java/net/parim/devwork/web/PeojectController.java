@@ -10,10 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import net.parim.common.web.BaseController;
 import net.parim.devwork.entity.Project;
@@ -28,6 +26,7 @@ public class PeojectController extends BaseController {
 	@Autowired
 	private ProjectService projectService;
 	
+	//列表数据显示
 	@RequestMapping("list")
 	public String projectList(@PageableDefault Pageable pageable, Project project, Model model){
 		Page<Project> projects = projectService.findAll(project, pageable);
@@ -35,6 +34,7 @@ public class PeojectController extends BaseController {
 		return "admin/devwork/projectList";
 	}
 	
+	//修改、增加的跳转方法
 	@RequestMapping(value={"properties", "properties/{id}"})
 	public String projectProperties(Project project, Model model){
 		
@@ -47,22 +47,15 @@ public class PeojectController extends BaseController {
 		return "admin/devwork/projectProperties";
 	}
 	
-	@ModelAttribute
-	public void getThemeline(@RequestParam(value = "id", defaultValue = "-1") Long id, Model model){
-		if(id!=-1){
-			Project project = projectService.findOne(id);
-			model.addAttribute(project);
-		}
-	}
-	
+	//保存
 	@RequestMapping(value="save")
 	public String saveProjectProperties(Project project, Model model){
 		model.addAttribute(project);
 		projectService.save(project);
 		return "redirect:"+adminPath+"/devwork/project/list";
 	}
-	
-	@RequestMapping(value={"delete/{id}","deleteAll/{ids}"})
+	//单条、批量删除
+	@RequestMapping(value="deleteAll/{ids}")
 	public String deleteProjectProperties(Project project, Model model,@PathVariable(value="ids") String ids){
 		List<String> idList = new ArrayList<String>();
 		if("".equals(ids) || null == ids)
@@ -78,12 +71,15 @@ public class PeojectController extends BaseController {
 				{
 					idList.add(idString);
 				}
+				//如果单条删除
+			}else{
+				idList.add(ids);
 			}
 		}
 		projectService.deleteAll(idList);
 		return "redirect:"+adminPath+"/devwork/project/list";
 	}
-	
+	//模糊查询
 	@RequestMapping(value="findone")
 	public String findProject(@PageableDefault Pageable pageable,Project project, Model model){
 		Page<Project> projects = projectService.findAll(project, pageable);

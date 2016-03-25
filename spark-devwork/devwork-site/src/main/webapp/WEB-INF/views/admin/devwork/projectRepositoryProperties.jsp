@@ -49,7 +49,7 @@
     				</div>
     			</div>
     			<div class="form-group">
-                    <label class="col-sm-4 control-label"><span class="red">*</span> 是否是快捷方式(snapshotsEnable)</label>
+                    <label class="col-sm-4 control-label"><!-- <span class="red">*</span> --> 是否是快捷方式(snapshotsEnable)</label>
                     <div class="col-sm-8 controls">
                         <form:radiobuttons path="snapshotsEnable" items="${fns:getDictList('show_hide') }" itemLabel="label" itemValue="value" htmlEscape="false" class="required"/>
                         <span class="help-inline"></span>

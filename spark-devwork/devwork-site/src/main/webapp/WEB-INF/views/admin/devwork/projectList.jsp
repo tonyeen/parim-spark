@@ -39,12 +39,6 @@
                     <label for="">名称</label>
                     <input type="text" class="form-control" name="name" value="${project.name }" placeholder="专区名称">
                 </div>
-                <!-- <div class="form-group">
-                    <label for="" class="sr-only">分类</label>
-                    <select class="form-control" id="">
-                        <option value="0">专区分类</option>
-                    </select>
-                </div> -->
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
         </div>
@@ -77,9 +71,12 @@
 							<c:if test="${project.isAggregator == false }">
                             <td>否</td>
 　　							</c:if>
+							<c:if test="${empty project.isAggregator }">
+                            <td></td>
+　　							</c:if>
                             <td class="text-right">
                             	<a href="${ctxAdmin }/devwork/project/properties/${project.id }">修改</a>｜ 
-                            	<a href="${ctxAdmin }/devwork/project/delete/${project.id }">删除</a> 
+                            	<a href="${ctxAdmin }/devwork/project/deleteAll/${project.id }">删除</a> 
                             	</td>
                         </tr>
                     </c:forEach>
@@ -105,77 +102,17 @@
     </div>
 </div>
 <script type="text/javascript">
-var id="";
-var arrChk;
-var count;
+	var path="project";
+		//删除
+		$("#deleteBtn").click(function(){
+			del(path);
+		})
 
-//批量删除备份方法
-$("#deleteBtn").click(function(){
-	count = 0;
-	arrChk=$("input[name='chk_list']");
-	$(arrChk).each(function(){
-		if($(this).attr("checked") == "checked")
-			{
-			id=id+$(this).val()+",";
-			count++;
-			}
-	})
-	
-		if(count == 0)
-			{
-			alert("请选择至少一条记录!");
-			return;
-			}
-		if(count >= 1)
-			{
-			 if(confirm("确定要删除"+count+"条数据吗")){
-				 location.href = "${ctxAdmin }/devwork/project/deleteAll/"+id;
-			}
-			}
-}) 
-
-//新增
-$("#addBtn").click(function(){
-	location.href = "${ctxAdmin }/devwork/project/properties";
-})
-
-function check(info0,info1){
-			arrChk=$("input[name='chk_list']");
-			count = 0;
-			$(arrChk).each(function(){
-				if($(this).attr("checked") == "checked")
-					{
-					count++;
-					}
-			})
-			if(count>1)
-				{
-				alert(info1);
-				return;
-				}
-			if(count==0)
-				{
-				alert(info0);
-				return;
-				}
-		}
-		$("a[name='checkAll']").click(function(){
-			var flag = true;
-			var arrChk=$("input[name='chk_list']");
-		      $(arrChk).each(function(){
-		         if($(this).attr("checked") != "checked")
-		    	   {
-		    	   		flag = false;
-		    	   }
-		    });  
-		    //如果已经全部都被选中，则再次点击时取消全选
-		     if(flag)
-		    	{
-		    		$("input[name='chk_list']").attr("checked",false);
-		    	}else{
-		    		$("input[name='chk_list']").attr("checked",true);
-		    	}
-		});
+		//新增
+		$("#addBtn").click(function(){
+			add(path);
+		})
 </script>
+<script src="${ctx }/commonjs/common.js" type="text/javascript"></script>
 </body>
 </html>
