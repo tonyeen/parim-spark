@@ -4,6 +4,7 @@ apply plugin: 'idea'
 apply plugin: 'maven'
 
 repositories {
+    maven { url "http://maven.parim.net/nexus/content/groups/public/" }
     maven { url 'https://repo.spring.io/libs-release' }
     mavenCentral()
 }
