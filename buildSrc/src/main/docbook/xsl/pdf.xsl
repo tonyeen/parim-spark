@@ -57,8 +57,8 @@ under the License.
 				<fo:table-body>
 					<fo:table-row>
 						<fo:table-cell text-align="center">
-							<fo:block width="240px" padding="30mm">
-								<fo:external-graphic src="images/logo.png" width="120px"
+							<fo:block>
+								<fo:external-graphic src="images/logo.png" width="240px"
 									height="auto" content-width="scale-to-fit"
 									content-height="scale-to-fit"
 									content-type="content-type:image/png" text-align="center"
