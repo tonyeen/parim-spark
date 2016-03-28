@@ -64,27 +64,27 @@ under the License.
 									content-type="content-type:image/png" text-align="center"
 								/>
 							</fo:block>
-							<fo:block font-family="SimSun" font-size="24pt" font-weight="bold" padding="10mm">
+							<fo:block font-family="Helvetica" font-size="20pt" font-weight="bold" padding="10mm">
 								<xsl:value-of select="bookinfo/title"/>
 							</fo:block>
-							<fo:block font-family="SimSun" font-size="14pt" padding-before="2mm">
+							<fo:block font-family="Helvetica" font-size="14pt" padding-before="2mm">
 								<xsl:value-of select="bookinfo/subtitle"/>
 							</fo:block>
-							<fo:block font-family="SimSun" font-size="14pt" padding="2mm">
+							<fo:block font-family="Helvetica" font-size="14pt" padding="2mm">
 								<xsl:value-of select="bookinfo/releaseinfo"/>
 							</fo:block>
 						</fo:table-cell>
 					</fo:table-row>
 					<fo:table-row>
 						<fo:table-cell text-align="center">
-							<fo:block font-family="SimSun" font-size="14pt" padding="5mm">
+							<fo:block font-family="Helvetica" font-size="14pt" padding="5mm">
 								<xsl:value-of select="bookinfo/pubdate"/>
 							</fo:block>
 						</fo:table-cell>
 					</fo:table-row>
 					<fo:table-row>
 						<fo:table-cell text-align="center">
-							<fo:block font-family="SimSun" font-size="10pt" padding="10mm">
+							<fo:block font-family="Helvetica" font-size="10pt" padding="10mm">
 								<xsl:for-each select="bookinfo/authorgroup/author">
 									<xsl:if test="position() > 1">
 										<xsl:text>, </xsl:text>
@@ -93,15 +93,15 @@ under the License.
 								</xsl:for-each>
 							</fo:block>
 
-							<fo:block font-family="SimSun" font-size="10pt" padding="5mm">
+							<fo:block font-family="Helvetica" font-size="10pt" padding="5mm">
 								<xsl:value-of select="bookinfo/pubdate"/>
 							</fo:block>
 
-							<fo:block font-family="SimSun" font-size="10pt" padding="5mm" padding-before="25em">
+							<fo:block font-family="Helvetica" font-size="10pt" padding="5mm" padding-before="25em">
 								<xsl:text>Copyright &#xA9; </xsl:text><xsl:value-of select="bookinfo/copyright"/>
 							</fo:block>
 
-							<fo:block font-family="SimSun" font-size="8pt" padding="1mm">
+							<fo:block font-family="Helvetica" font-size="8pt" padding="1mm">
 								<xsl:value-of select="bookinfo/legalnotice"/>
 							</fo:block>
 						</fo:table-cell>
@@ -276,10 +276,10 @@ under the License.
 	<xsl:param name="hyphenate">false</xsl:param>
 
 	<!-- Default Font size -->
-	<xsl:param name="body.font.family">SimSun</xsl:param>
+	<xsl:param name="body.font.family">Helvetica</xsl:param>
 	<xsl:param name="body.font.master">10</xsl:param>
 	<xsl:param name="body.font.small">8</xsl:param>
-	<xsl:param name="title.font.family">SimSun</xsl:param>
+	<xsl:param name="title.font.family">Helvetica</xsl:param>
 
 	<!-- Line height in body text -->
 	<xsl:param name="line-height">1.4</xsl:param>
@@ -483,7 +483,6 @@ under the License.
 	<xsl:param name="body.start.indent">0pt</xsl:param>
 
 	<!-- Remove "Chapter" from the Chapter titles... -->
-	<xsl:param name="l10n.gentext.language" select="'zh_cn'"/>
 	<xsl:param name="local.l10n.xml" select="document('')"/>
 	<l:i18n xmlns:l="http://docbook.sourceforge.net/xmlns/l10n/1.0">
 		<l:l10n language="en">

@@ -1,6 +1,8 @@
 [[environment]]
 = 开发环境
 
+
+////
 [partintro]
 --
 本项目是Java Web项目，为了方便协作，建议您根据以下工具列表搭建开发环境：
@@ -12,9 +14,13 @@
 * [可选] Gradle 2.6+
 * [可选] Navicat Premium、PL/SQL
 --
+////
 
 [[environment-introduce]]
 == 开发环境说明
+
+== 开发环境关系
+本地开发环境，服务器环境和访问方式
 
 [[environment-setup-manuals]]
 == 开发环境安装手册

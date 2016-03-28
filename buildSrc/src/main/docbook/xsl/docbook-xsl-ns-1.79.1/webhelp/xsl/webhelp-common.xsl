@@ -2,14 +2,14 @@
         xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
         xmlns:d="http://docbook.org/ns/docbook"
 xmlns:exsl="http://exslt.org/common"
-        xmlns:ng="http://docbook.org/docbook-ng" 
+        xmlns:ng="http://docbook.org/docbook-ng"
         xmlns:db="http://docbook.org/ns/docbook"
         version="1.0" xmlns="http://www.w3.org/1999/xhtml"
 	exclude-result-prefixes="exsl ng db d">
 
     <!-- ********************************************************************
      $Id$
-     ******************************************************************** 
+     ********************************************************************
 
      This file is part customization layer on top of the XSL DocBook
      Stylesheet distribution that generates webhelp output.
@@ -50,7 +50,7 @@ xmlns:exsl="http://exslt.org/common"
     <xsl:param name="appendix.autolabel" select="0"/>
     <xsl:param name="qandadiv.autolabel" select="0"/>
     <xsl:param name="reference.autolabel" select="0"/>
-    <xsl:param name="part.autolabel" select="0"/>    
+    <xsl:param name="part.autolabel" select="0"/>
     <xsl:param name="section.label.includes.component.label" select="1"/>
 
     <xsl:param name="generate.section.toc.level" select="5"/>
@@ -85,7 +85,7 @@ set       toc,title
     <!-- Localizations of webhelp specific words. Your contributions for other languages are appreciated.
 	Currently, only around 10 translations needed. -->
     <!-- Moved to files under 'gentext/locale/', search for WebHelp -->
-    
+
     <xsl:template name="user.head.title">
       <xsl:param name="node" select="."/>
       <xsl:param name="title">
@@ -98,14 +98,14 @@ set       toc,title
       <title>
 	        <xsl:copy-of select="$title"/> - <xsl:if test="parent::*"> - <xsl:copy-of select="$document-title"/></xsl:if>
        </title>
-        
+
     </xsl:template>
 
   <xsl:template name="system.head.content">
   <xsl:param name="node" select="."/>
 <xsl:text>
 </xsl:text>
-       <!-- 
+       <!--
 The meta tag tells the IE rendering engine that it should use the latest, or edge, version of the IE rendering environment;It prevents IE from entring compatibility mode.
  -->
        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -116,12 +116,12 @@ The meta tag tells the IE rendering engine that it should use the latest, or edg
 </xsl:text>
     </xsl:template>
 
-    <!-- HTML <head> section customizations -->	
+    <!-- HTML <head> section customizations -->
     <xsl:template name="user.head.content">
         <xsl:param name="title">
                 <xsl:apply-templates select="." mode="object.title.markup.textonly"/>
         </xsl:param>
-         <meta name="Section-title" content="{$title}"/>   
+         <meta name="Section-title" content="{$title}"/>
 
         <!--  <xsl:message>
             webhelp.tree.cookie.id = <xsl:value-of select="$webhelp.tree.cookie.id"/> +++ <xsl:value-of select="count(//node())"/>
@@ -155,7 +155,7 @@ The meta tag tells the IE rendering engine that it should use the latest, or edg
                 </xsl:call-template>";
         </script>
 
-<!-- kasunbg: Order is important between the in-html-file css and the linked css files. Some css declarations in jquery-ui-1.8.2.custom.css are over-ridden. 
+<!-- kasunbg: Order is important between the in-html-file css and the linked css files. Some css declarations in jquery-ui-1.8.2.custom.css are over-ridden.
      If that's a concern, just remove the additional css contents inside these default jquery css files. I thought of keeping them intact for easier maintenance! -->
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
         <link rel="stylesheet" type="text/css" href="{$webhelp.common.dir}css/positioning.css"/>
@@ -201,7 +201,7 @@ span.searchTab {
 .treeview ul {
     background-color: transparent;
     margin-top: 4px;
-}		
+}
 #webhelp-currentid {
     background-color: #D8D8D8 !important;
 }
@@ -210,9 +210,9 @@ span.searchTab {
 
 /* Override jquery-ui's default css customizations. These are supposed to take precedence over those.*/
 .ui-widget-content {
-    border: 0px; 
-    background: none; 
-    color: none;     
+    border: 0px;
+    background: none;
+    color: none;
 }
 .ui-widget-header {
     color: #e9e8e9;
@@ -223,24 +223,24 @@ span.searchTab {
     border: medium none;
     background: #F4F4F4; /* old browsers */
     background: -moz-linear-gradient(top, #F4F4F4 0%, #E6E4E5 100%); /* firefox */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */    
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F4F4F4), color-stop(100%,#E6E4E5)); /* webkit */
     font-weight: none;
 }
 .ui-widget-header a { color: none; }
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { 
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
 border: none; background: none; font-weight: none; color: none; }
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: black; text-decoration: none; }
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: none; background: none; font-weight: none; color: none; }
 
 .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: none; background: none; font-weight: none; color: none; }
-.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { 
-    color: black; text-decoration: none; 	
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited {
+    color: black; text-decoration: none;
     background: #C6C6C6; /* old browsers */
     background: -moz-linear-gradient(top, #C6C6C6 0%, #D8D8D8 100%); /* firefox */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C6C6C6), color-stop(100%,#D8D8D8)); /* webkit */
     -webkit-border-radius:15px; -moz-border-radius:10px;
     border: 1px solid #f1f1f1;
-}    
+}
 .ui-corner-all { border-radius: 0 0 0 0; }
 
 .ui-tabs { padding: .2em;}
@@ -248,33 +248,33 @@ border: none; background: none; font-weight: none; color: none; }
 .ui-tabs .ui-tabs-nav li a { padding: .25em 2em .25em 1em; margin: .5em; text-shadow: 0 1px 0 rgba(255,255,255,.5); }
        /**
 	 *	Basic Layout Theme
-	 * 
+	 *
 	 *	This theme uses the default layout class-names for all classes
 	 *	Add any 'custom class-names', from options: paneClass, resizerClass, togglerClass
 	 */
 
-	.ui-layout-pane { /* all 'panes' */ 
-		background: #FFF; 
-		border: 1px solid #BBB; 
-		padding: 05x; 
+	.ui-layout-pane { /* all 'panes' */
+		background: #FFF;
+		border: 1px solid #BBB;
+		padding: 05x;
 		overflow: auto;
-	} 
-        
-	.ui-layout-resizer { /* all 'resizer-bars' */ 
-		background: #DDD; 
-                top:100px
-	} 
+	}
 
-	.ui-layout-toggler { /* all 'toggler-buttons' */ 
-		background: #AAA; 
-	} 
-    
+	.ui-layout-resizer { /* all 'resizer-bars' */
+		background: #DDD;
+                top:100px
+	}
+
+	.ui-layout-toggler { /* all 'toggler-buttons' */
+		background: #AAA;
+	}
+
        </style>
         <xsl:comment><xsl:text>[if IE]>
 	&lt;link rel="stylesheet" type="text/css" href="../common/css/ie.css"/>
 	&lt;![endif]</xsl:text></xsl:comment>
 
-	<!-- 
+	<!--
 	     browserDetect is an Oxygen addition to warn the user if they're using chrome from the file system.
 	     This breaks the Oxygen search highlighting.
 	-->
@@ -298,7 +298,7 @@ border: none; background: none; font-weight: none; color: none; }
         </script>
         <xsl:if test="$webhelp.include.search.tab != '0'">
             <!--Scripts/css stylesheets for Search-->
-            <!-- TODO: Why THREE files? There's absolutely no need for having separate files. 
+            <!-- TODO: Why THREE files? There's absolutely no need for having separate files.
 		These should have been identified at the optimization phase! -->
             <script type="text/javascript" src="search/l10n.js">
 	    <xsl:comment/>
@@ -324,7 +324,7 @@ border: none; background: none; font-weight: none; color: none; }
 	      Index is broken in to three equal sized(number of index items) files. This is to help parallel downloading
 	      of files to make it faster.
 		TODO: Generate webhelp index for largest docbook document that can be find, and analyze the file sizes.
-		IF the file size is still around ~50KB for a given file, we should consider merging these files together. again.     	
+		IF the file size is still around ~50KB for a given file, we should consider merging these files together. again.
 	  -->
 	  <script type="text/javascript" src="search/index-1.js">
 	      <xsl:comment> </xsl:comment>
@@ -380,7 +380,7 @@ border: none; background: none; font-weight: none; color: none; }
 	  toss the namespace and continue.  Use the docbook5 namespaced
 	  stylesheets for DocBook5 if you don't want to use this feature.-->
 	  <!-- include extra test for Xalan quirk -->
-          <xsl:when test="$exsl.node.set.available != 0 and 
+          <xsl:when test="$exsl.node.set.available != 0 and
                   namespace-uri(/*) != 'http://docbook.org/ns/docbook'">
 		<xsl:call-template name="log.message">
 		  <xsl:with-param name="level">Note</xsl:with-param>
@@ -452,7 +452,7 @@ border: none; background: none; font-weight: none; color: none; }
 		</xsl:choose>
 	  </xsl:otherwise>
 	</xsl:choose>
-	
+
 
         <xsl:if test="$collect.xref.targets != 'only'">
           <xsl:call-template name="l10n.js"/>
@@ -464,16 +464,16 @@ border: none; background: none; font-weight: none; color: none; }
 	basic format:
 	<html>
 		<head> calls-appropriate-template </head>
-		<body> 
+		<body>
    		       some-generic-content
-		       <div id="content"> 
+		       <div id="content">
 		       		All your docbook document content goes here
 				....
 		       </div>
-		       some-other-generic-content-at-footer		
+		       some-other-generic-content-at-footer
 		</body>
 	</html>
-    -->	
+    -->
     <xsl:template name="chunk-element-content">
         <xsl:param name="prev"/>
         <xsl:param name="next"/>
@@ -534,7 +534,7 @@ border: none; background: none; font-weight: none; color: none; }
         <xsl:value-of select="$chunk.append"/>
     </xsl:template>
 
-    <!-- This is for the USERS. Users who want to customize webhelp may over-ride this template to add content to the footer of the content DIV. 
+    <!-- This is for the USERS. Users who want to customize webhelp may over-ride this template to add content to the footer of the content DIV.
   	 i.e. within <div id="content"> ... </div> -->
     <xsl:template name="user.webhelp.content.footer"/>
 
@@ -618,7 +618,7 @@ border: none; background: none; font-weight: none; color: none; }
                                     </xsl:when>
                                     <xsl:otherwise>&#160;</xsl:otherwise>
                                 </xsl:choose>
-                                
+
                                 <xsl:if test="count($next)>0">
                                     |
                                     <a accesskey="n" class="navLinkNext" tabindex="5">
@@ -753,20 +753,20 @@ border: none; background: none; font-weight: none; color: none; }
                                         <form onsubmit="Verifie(searchForm);return false"
                                             name="searchForm" class="searchForm">
                                             <div>
-                                                
+
 <!--                                                    <xsl:call-template name="gentext.template">
                                                         <xsl:with-param name="name" select="'Search'"/>
 							<xsl:with-param name="context" select="'webhelp'"/>
                                                     </xsl:call-template>-->
-                                                
-                                                
+
+
                                                     <input id="textToSearch" name="textToSearch" type="search" placeholder="Search"
                                                            class="searchText" tabindex="1"/>
                                                     <xsl:text disable-output-escaping="yes"> <![CDATA[&nbsp;]]> </xsl:text>
                                                     <input onclick="Verifie(searchForm)" type="button"
                                                            class="searchButton"
                                                            value="Go" id="doSearch" tabindex="1"/>
-                                                
+
                                             </div>
                                         </form>
                                     </div>
@@ -825,7 +825,7 @@ border: none; background: none; font-weight: none; color: none; }
                     <xsl:attribute name="id">webhelp-currentid</xsl:attribute>
                 </xsl:if>
                 <span class="file">
-                    <a href="{substring-after($href, $base.dir)}"  tabindex="1">
+                    <a href='{substring-after(substring-after($href, $base.dir), "/")}'  tabindex="1">
                         <xsl:value-of select="$title"/>
                     </a>
                 </span>
@@ -852,8 +852,8 @@ border: none; background: none; font-weight: none; color: none; }
             <xsl:comment> </xsl:comment>
         </script>
     </xsl:template>
- 
-    <!-- Generates index.html file at docs/. This is simply a redirection to content/$default.topic -->	
+
+    <!-- Generates index.html file at docs/. This is simply a redirection to content/$default.topic -->
     <xsl:template name="index.html">
         <xsl:variable name="default.topic">
             <xsl:choose>
@@ -930,8 +930,7 @@ border: none; background: none; font-weight: none; color: none; }
 		<xsl:with-param name="context" select="'webhelp'"/>
                 </xsl:call-template>";
             </xsl:with-param>
-        </xsl:call-template>    
+        </xsl:call-template>
     </xsl:template>
 
-</xsl:stylesheet> 
-
+</xsl:stylesheet>

@@ -54,7 +54,7 @@ class DocbookReferencePlugin implements Plugin<Project> {
         def reference = tasks.create("reference") {
             group = 'Documentation'
             description = "Generates HTML and PDF reference documentation."
-            dependsOn([multi, single, /*pdf, epub,*/webhelp])
+            dependsOn([multi, single, pdf, /*epub,*/webhelp])
 
             ext.sourceDir = null // e.g. new File('src/reference')
             ext.outputDir = new File(project.buildDir, "reference")

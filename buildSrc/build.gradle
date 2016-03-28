@@ -4,6 +4,7 @@ apply plugin: 'idea'
 apply plugin: 'maven'
 
 repositories {
+    maven { url "http://maven.parim.net/nexus/content/groups/public/" }
     maven { url 'https://repo.spring.io/libs-release' }
     mavenCentral()
 }
@@ -32,6 +33,7 @@ dependencies {
     compile 'org.apache.xmlgraphics:batik-dom:1.7'
     compile 'org.apache.xmlgraphics:batik-svg-dom:1.7@jar'
     compile 'org.apache.avalon.framework:avalon-framework-api:4.3.1'
+	compile 'org.apache.avalon.framework:avalon-framework-impl:4.3.1'
 }
 
 task copyDocbookResources {

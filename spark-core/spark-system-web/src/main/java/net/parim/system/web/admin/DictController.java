@@ -71,7 +71,7 @@ public class DictController {
 		Dict dict = dictService.findOne(id);
 		if(dict != null)
 		{
-			dictService.delete(id);
+			dictService.delete(dict);
 		}
 		return "redirect:" + adminPath + "/sys/dict/list";
 	}
