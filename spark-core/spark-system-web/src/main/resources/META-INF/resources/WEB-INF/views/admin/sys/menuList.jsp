@@ -62,11 +62,11 @@
     		<table id="treeTable" class="table table-hover">
 				<thead>
 					<tr>
-						<th>名称</th>
-						<th>标识</th>
-						<th>链接</th>
-						<th>排序</th>
-						<th>可见</th>
+						<th><spring:message code="menu.name"/></th>
+						<th><spring:message code="menu.identifier"/></th>
+						<th><spring:message code="menu.url"/></th>
+						<th><spring:message code="menu.sort"/></th>
+						<th><spring:message code="menu.show"/></th>
 						<th>权限标识</th>
 						<th class="text-right">操作</th>
 					</tr>
@@ -99,8 +99,8 @@
 				<td>{{row.isShow?"是"："否"}}</td>
 				<td>{{row.permission}}</td>
 				<td class="text-right">
-                   <a href="${ctxAdmin }/sys/menu/properties/{{row.id}}">修改</a> ｜ 
-                   <a href="${ctxAdmin }/sys/menu/delete/{{row.id}}">删除</a> ｜
+                   <a href="${ctxAdmin }/sys/menu/properties/{{row.id}}"><spring:message code="common.edit"/></a> ｜ 
+                   <a href="${ctxAdmin }/sys/menu/delete/{{row.id}}"><spring:message code="common.delete"/></a> ｜
                    <a href="${ctxAdmin }/sys/menu/addsub/{{row.id}}">添加下级菜单</a></td>
 			</tr>
 			</script>

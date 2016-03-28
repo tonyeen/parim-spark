@@ -28,7 +28,7 @@
               </a>
               <a href="${ctxAdmin }/sys/user/properties" class="btn btn-primary">添加用户</a>
               <a href="${ctxAdmin }/sys/user/properties" class="btn btn-primary">复制用户</a>
-              <a href="${ctxAdmin }/sys/user/properties" class="btn btn-primary">批量导入</a>
+              <a data-toggle="modal" href="#importContent" class="btn btn-success">批量导入</a>
             </div>
           </div>
         </div>
@@ -118,5 +118,41 @@
     	</div>
   	</div>
 </div>
+
+    <!-- 导入EXCEL标签样式 -->
+    <div class="modal fade" id="importContent">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">导入用户信息</h4>
+             </div>
+             <div class="modal-body">
+               <script type="text/javascript">
+                   function importUser() {
+                       if($.trim($("#uploadFile").val()) == "") {
+                           alert("导入文件不能为空。");
+                           return;
+                       }
+                       $("#importForm").submit();
+                       
+                       /* $("#importForm").ajaxSubmit({
+                       
+                       }); */
+                   }
+               </script>
+               <form id="importForm" action="${ctxAdmin }/sys/user/import" method="post" enctype="multipart/form-data"><br/>
+                   <input id="uploadFile" name="file" type="file" style="width:330px"/><br/><br/>　　
+                   <a href="${domain}/demo/admin/getTemplate">下载模板</a><br/>
+                   <p>导入文件不能超过5M，仅允许导入“xls”或“xlsx”格式文件</p>
+               </form>
+             </div>
+             <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" onclick="importUser()">导入</button>
+             </div>
+          </div><!-- <div class="modal-content"> -->
+        </div><!-- <div class="modal-dialog"> -->
+    </div>
 </body>
 </html>
